@@ -1,5 +1,6 @@
 package com.cloud.health.authorizationservice.service;
 
+import com.cloud.health.authorizationservice.model.TempUser;
 import com.cloud.health.authorizationservice.model.User;
 import com.cloud.health.authorizationservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,25 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private User user;
+
     @Override
     public User saveUser(User user) {
-        user.setPassword("{bcrypt}" + bCryptPasswordEncoder.encode(user.getPassword()));
+        return null;
+    }
+
+    @Override
+    public User saveUser(TempUser tempUser) {
+        user.setPassword("{bcrypt}" + bCryptPasswordEncoder.encode(tempUser.getPassword()));
+        user.setUsername(tempUser.getUsername());
+        user.setEmail(tempUser.getEmail());
+        user.setPhoneNumber(tempUser.getPhoneNumber());
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        user.setRoles(null);
         return userRepository.save(user);
     }
 }

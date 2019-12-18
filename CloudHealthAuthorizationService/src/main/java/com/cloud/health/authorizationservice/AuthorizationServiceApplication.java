@@ -1,5 +1,6 @@
 package com.cloud.health.authorizationservice;
 
+import com.cloud.health.authorizationservice.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,11 @@ public class AuthorizationServiceApplication {
     @Bean
     public BCryptPasswordEncoder getBCryptPwdEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public User getUser(){
+        return new User();
     }
 
 }
