@@ -94,8 +94,17 @@ ul, li {
 }
 
 .wrap-login100 {
-    width: 390px;
+    width: 500px;
     background: #fff;
+    display: flex;
+    display: -webkit-flex;
+    padding: 10px 60px 41px;
+    position: relative;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -o-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 }
 
 
