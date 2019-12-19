@@ -14,4 +14,5 @@ public class Constant {
 
     public static String BASE_URL="api/v1";
     public static final String API_VERSION ="http://localhost:8181";
+    public static final String PROFILE_PIC_STORAGE= "file_store\\profile_pic\\";
 }
