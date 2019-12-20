@@ -2,6 +2,7 @@ package com.cloud.health.mainservice.controller.healthPractionner;
 
 import com.cloud.health.mainservice.model.TempUser;
 import com.cloud.health.mainservice.model.entity.User;
+import com.cloud.health.mainservice.model.entity.UserProfile;
 import com.cloud.health.mainservice.service.filestorage.StorageServiceImpl;
 import com.cloud.health.mainservice.service.repositoryService.PractitionnerRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -46,7 +42,7 @@ public class HealthPractitionerController {
      * @param redirectAttributes to be contained in the redirect Url
      * @return
      */
-    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/register/client", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> registerClient(@RequestParam("file") MultipartFile file, @ModelAttribute TempUser tempUser, RedirectAttributes redirectAttributes) {
         boolean isProfileUploaded = storageService.store(file);
         if (!(tempUser == null)) {
@@ -65,7 +61,7 @@ public class HealthPractitionerController {
      * @param tempUser to be save in Json Format
      * @return Respose status
      */
-    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register/client", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registerClient(@RequestBody TempUser tempUser){
         if (!(tempUser == null)) {
             boolean userAdded =practitionnerRepositoryService.addClient(getCompleteUserObject(tempUser,null));
@@ -77,6 +73,11 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\":\"Empty User Information\"}");
     }
 
+    @PostMapping(value = "/create/clientprofile")
+    public ResponseEntity<Object> addClientProfile(@RequestBody UserProfile userProfile){
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     private User getCompleteUserObject(TempUser tempUser, String profileUrl) {
         User user = new User();
         user.setAccessContractsByUserId(null);
@@ -84,7 +85,7 @@ public class HealthPractitionerController {
         user.setEmergenciesByUserId(null);
         user.setPatientsByUserId(null);
         user.setPractionnersByUserId(null);
-        user.setUserProfileByProfileId(null);
+        user.setUserProfilesByUserId(null);
         user.setFirstName(tempUser.getFirstName());
         user.setMiddleName(tempUser.getMiddleName());
         user.setSirName(tempUser.getSirName());

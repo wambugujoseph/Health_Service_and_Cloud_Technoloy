@@ -6,27 +6,28 @@ import java.util.Objects;
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
- * Day: Wednesday
- * Date: 12/18/2019
- * Time: 1:25 PM
+ * Day: Friday
+ * Date: 12/20/2019
+ * Time: 12:48 AM
  * Project: cloudHealthMainService
  */
 @Entity
 @Table(name = "user_profile", schema = "smart_health_db", catalog = "")
 public class UserProfile {
-    private String profileId;
+    private int profileId;
     private String bloodGroup;
     private String specialNeeds;
     private String complication;
     private String insuranceInformation;
+    private User userByOwner;
 
     @Id
     @Column(name = "profile_id")
-    public String getProfileId() {
+    public int getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(String profileId) {
+    public void setProfileId(int profileId) {
         this.profileId = profileId;
     }
 
@@ -75,7 +76,7 @@ public class UserProfile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return Objects.equals(profileId, that.profileId) &&
+        return profileId == that.profileId &&
                 Objects.equals(bloodGroup, that.bloodGroup) &&
                 Objects.equals(specialNeeds, that.specialNeeds) &&
                 Objects.equals(complication, that.complication) &&
@@ -85,5 +86,15 @@ public class UserProfile {
     @Override
     public int hashCode() {
         return Objects.hash(profileId, bloodGroup, specialNeeds, complication, insuranceInformation);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "user_id", nullable = false)
+    public User getUserByOwner() {
+        return userByOwner;
+    }
+
+    public void setUserByOwner(User userByOwner) {
+        this.userByOwner = userByOwner;
     }
 }
