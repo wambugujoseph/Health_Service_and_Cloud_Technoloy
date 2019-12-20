@@ -6,9 +6,9 @@ import java.util.Objects;
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
- * Day: Wednesday
- * Date: 12/18/2019
- * Time: 1:24 PM
+ * Day: Friday
+ * Date: 12/20/2019
+ * Time: 12:48 AM
  * Project: cloudHealthMainService
  */
 @Entity

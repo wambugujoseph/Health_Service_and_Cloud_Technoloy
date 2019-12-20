@@ -8,9 +8,9 @@ import java.util.Objects;
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
- * Day: Wednesday
- * Date: 12/18/2019
- * Time: 1:24 PM
+ * Day: Friday
+ * Date: 12/20/2019
+ * Time: 12:48 AM
  * Project: cloudHealthMainService
  */
 @Entity
@@ -30,7 +30,7 @@ public class User {
     private Collection<Emergency> emergenciesByUserId;
     private Collection<Patient> patientsByUserId;
     private Collection<Practionner> practionnersByUserId;
-    private UserProfile userProfileByProfileId;
+    private Collection<UserProfile> userProfilesByUserId;
 
     @Id
     @Column(name = "user_id")
@@ -199,13 +199,12 @@ public class User {
         this.practionnersByUserId = practionnersByUserId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "profile_id", referencedColumnName = "profile_id")
-    public UserProfile getUserProfileByProfileId() {
-        return userProfileByProfileId;
+    @OneToMany(mappedBy = "userByOwner")
+    public Collection<UserProfile> getUserProfilesByUserId() {
+        return userProfilesByUserId;
     }
 
-    public void setUserProfileByProfileId(UserProfile userProfileByProfileId) {
-        this.userProfileByProfileId = userProfileByProfileId;
+    public void setUserProfilesByUserId(Collection<UserProfile> userProfilesByUserId) {
+        this.userProfilesByUserId = userProfilesByUserId;
     }
 }
