@@ -1,4 +1,4 @@
-package com.cloud.health.authorizationservice.resources;
+package com.cloud.health.authorizationservice.controller;
 
 import com.cloud.health.authorizationservice.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

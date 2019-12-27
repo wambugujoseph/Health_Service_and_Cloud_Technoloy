@@ -1,8 +1,8 @@
 server:
-  port: 9191
+  port: 8080
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/oAuthDB #?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/smart_health_db #?createDatabaseIfNotExist=true
     username: root
     password: cryptic
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,17 +15,13 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        #        show_sql: true
-        #        format_sql: true
         dialect: org.hibernate.dialect.MySQL5Dialect
   #dev tools
   devtools:
-    add-properties: true
+    add-properties: false
 
-#logging:
-#  level:
-#    org:
-#      hibernate:
-#        type: trace
-
-check-user-scopes: false
+  servlet:
+    multipart:
+      max-request-size: 15MB
+      max-file-size: 15MB
+      enabled: true

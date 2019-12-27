@@ -1,4 +1,4 @@
-package com.cloud.health.authorizationservice.resources;
+package com.cloud.health.authorizationservice.controller;
 
 import com.cloud.health.authorizationservice.model.TempUser;
 import com.cloud.health.authorizationservice.model.User;
