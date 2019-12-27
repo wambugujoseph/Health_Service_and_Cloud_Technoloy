@@ -20,7 +20,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   #dev tools
   devtools:
-    add-properties: false
+    add-properties: true
 
 #logging:
 #  level:
