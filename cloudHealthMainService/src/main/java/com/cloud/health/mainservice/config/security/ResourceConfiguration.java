@@ -17,6 +17,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.io.IOException;
 
+import static com.cloud.health.mainservice.util.Constant.API_V_1;
+
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -28,7 +30,7 @@ public class ResourceConfiguration extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers(API_V_1+"/",API_V_1+"/userName").permitAll()
                 .and()
                 .authorizeRequests()
                 .anyRequest()

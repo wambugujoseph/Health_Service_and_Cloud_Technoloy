@@ -13,6 +13,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
+
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -35,7 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests().antMatchers(
-                "/login", "/register", "/user/**", "/health", "/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**", "/ten"
+                "/login", "/register","/api/v1/register", "/user/**", "/health", "/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**", "/ten"
         )
                 .permitAll()
                 .anyRequest().authenticated()

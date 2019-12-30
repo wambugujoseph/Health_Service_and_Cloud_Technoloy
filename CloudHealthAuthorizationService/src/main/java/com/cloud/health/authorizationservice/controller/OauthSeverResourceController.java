@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
+
 @Controller
-public class OauthSeverController {
+@RequestMapping(API_V_1)
+public class OauthSeverResourceController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
@@ -26,19 +29,4 @@ public class OauthSeverController {
         return "register";
     }
 
-//    @PostMapping("/register")
-//    public User registerUser(@ModelAttribute User user){
-//
-//        user.setAccountNonExpired(true);
-//        user.setAccountNonLocked(true);
-//        user.setCredentialsNonExpired(true);
-//        user.setEnabled(true);
-//
-//        try {
-//            return userServiceImpl.saveUser(user);
-//        } catch (Exception e) {
-//            System.out.println(e.getStackTrace());
-//            return new User();
-//        }
-//    }
 }

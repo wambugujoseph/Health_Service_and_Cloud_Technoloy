@@ -3,6 +3,7 @@ package com.cloud.health.authorizationservice.service;
 import com.cloud.health.authorizationservice.model.TempUser;
 import com.cloud.health.authorizationservice.model.User;
 import com.cloud.health.authorizationservice.repository.UserRepository;
+import com.cloud.health.authorizationservice.util.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
