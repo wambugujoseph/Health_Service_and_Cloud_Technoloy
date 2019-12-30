@@ -8,6 +8,7 @@ package com.cloud.health.authorizationservice.model;
  * Time: 8:58 PM
  * Project: CloudHealthAuthorizationService
  */
+
 public class TempUser {
     private String username;
     private String email;

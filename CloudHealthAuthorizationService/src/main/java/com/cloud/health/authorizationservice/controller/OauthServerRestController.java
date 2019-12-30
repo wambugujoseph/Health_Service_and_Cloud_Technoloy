@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
 
 @RestController
@@ -24,13 +26,20 @@ public class OauthServerRestController {
     private OauthClientDetailsServiceImpl oauthClientDetailsServiceImpl;
 
     @PostMapping(value = "/register")
-    public User registerUser(@RequestBody TempUser tempUser) {
-        try {
-            return userServiceImpl.saveUser(tempUser);
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            return new User();
-        }
+    public ResponseEntity<Object> registerUser(@RequestBody TempUser tempUser) {
+        if (!tempUser.getEmail().equals("") && !tempUser.getPassword().equals("") && !tempUser.getPhoneNumber().equals("") &&
+        !tempUser.getUsername().equals("")) {
+            try {
+                User user = userServiceImpl.saveUser(tempUser);
+                user.setPassword(null);
+                return ResponseEntity.status(HttpStatus.CREATED).body(user);
+            } catch (Exception e) {
+                System.out.println(Arrays.toString(e.getStackTrace()));
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }else
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).build();
     }
 
     @RequestMapping(value = "/application/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -8,6 +8,7 @@ import com.cloud.health.mainservice.model.entity.PersonalDoctorEntity;
 import com.cloud.health.mainservice.model.entity.RealTimeDataEntity;
 import com.cloud.health.mainservice.model.entity.UserEntity;
 import com.cloud.health.mainservice.service.repositoryService.ClientService;
+import com.cloud.health.mainservice.util.auth.UserAuthenticationDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,13 @@ public class UserResourceController {
 
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private UserAuthenticationDetails userAuthenticationDetails;
 
+    @RequestMapping(value = "/username")
+    public String getUserName(){
+        return userAuthenticationDetails.getUserEmail();
+    }
     @GetMapping(value = "/userinfo/{id}")
     public UserEntity getUserDetail(@PathVariable String id){
         return clientService.getUserInfo(id);
