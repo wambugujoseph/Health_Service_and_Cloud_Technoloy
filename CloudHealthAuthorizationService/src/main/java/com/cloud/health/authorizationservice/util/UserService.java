@@ -1,4 +1,4 @@
-package com.cloud.health.authorizationservice.service;
+package com.cloud.health.authorizationservice.util;
 
 
 import com.cloud.health.authorizationservice.model.TempUser;
