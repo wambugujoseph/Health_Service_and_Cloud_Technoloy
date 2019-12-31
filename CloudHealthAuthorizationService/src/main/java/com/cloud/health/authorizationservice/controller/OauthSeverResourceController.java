@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
 
 @Controller
-@RequestMapping(API_V_1)
+//@RequestMapping(API_V_1)
 public class OauthSeverResourceController {
 
     @Autowired

@@ -17,7 +17,7 @@ import java.util.Arrays;
 import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
 
 @RestController
-@RequestMapping(API_V_1)
+//@RequestMapping(API_V_1)
 public class OauthServerRestController {
 
     @Autowired
