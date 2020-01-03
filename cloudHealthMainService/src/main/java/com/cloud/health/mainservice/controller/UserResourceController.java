@@ -36,7 +36,7 @@ public class UserResourceController {
 
     @RequestMapping(value = "/username")
     public String getUserName(){
-        return userAuthenticationDetails.getUserEmail();
+        return "++++--->>"+userAuthenticationDetails.getUserEmail();
     }
     @GetMapping(value = "/userinfo/{id}")
     public UserEntity getUserDetail(@PathVariable String id){

@@ -11,11 +11,12 @@ import com.cloud.health.mainservice.service.repositoryService.PractitionerReposi
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 
 @SpringBootApplication
+@EnableResourceServer
 public class MainServiceApplication {
-
 
     public static void main(String[] args) {
 

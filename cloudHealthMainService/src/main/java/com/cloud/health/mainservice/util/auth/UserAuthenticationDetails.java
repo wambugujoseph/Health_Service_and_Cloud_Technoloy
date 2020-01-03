@@ -1,9 +1,8 @@
 package com.cloud.health.mainservice.util.auth;
 
 import com.cloud.health.mainservice.model.CustomPrincipal;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,12 +16,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserAuthenticationDetails {
+
     public String getUserEmail(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)){
-            CustomPrincipal user = (CustomPrincipal) authentication.getPrincipal();
-            return "+++" + user.getEmail();
-        }
-        return "";
+        OAuth2Authentication authentication = (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
+//        if (!(authentication instanceof AnonymousAuthenticationToken)){
+//
+//        }
+        CustomPrincipal user = (CustomPrincipal) authentication.getPrincipal();
+        return "+++" + user.getEmail();
+        //return "";
     }
 }
