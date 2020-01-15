@@ -6,6 +6,14 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 @Entity
 @Table(name = "permission")
 @Data

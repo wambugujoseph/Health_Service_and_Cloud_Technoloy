@@ -17,6 +17,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import java.io.IOException;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Monday
+ * Date: 12/23/2019
+ * Time: 1:23 PM
+ * Project: cloudHealthMainService
+ */
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceConfiguration extends ResourceServerConfigurerAdapter {

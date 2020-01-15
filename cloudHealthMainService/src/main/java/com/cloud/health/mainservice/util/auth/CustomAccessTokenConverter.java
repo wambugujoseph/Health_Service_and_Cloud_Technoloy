@@ -15,6 +15,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Monday
+ * Date: 12/23/2019
+ * Time: 1:23 PM
+ * Project: cloudHealthMainService
+ */
+
 @Component
 public class CustomAccessTokenConverter implements AccessTokenConverter, JwtAccessTokenConverterConfigurer {
 

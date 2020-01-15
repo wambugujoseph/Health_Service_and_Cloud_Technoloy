@@ -7,6 +7,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 @Entity
 @Table(name = "user")
 @Data

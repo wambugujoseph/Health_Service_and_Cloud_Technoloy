@@ -14,6 +14,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
 
 @Service(value = "userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
