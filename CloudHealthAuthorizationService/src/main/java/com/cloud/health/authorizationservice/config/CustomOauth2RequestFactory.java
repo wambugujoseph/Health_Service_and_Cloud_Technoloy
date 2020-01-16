@@ -13,6 +13,14 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import java.util.Map;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 public class CustomOauth2RequestFactory extends DefaultOAuth2RequestFactory {
 
     @Autowired

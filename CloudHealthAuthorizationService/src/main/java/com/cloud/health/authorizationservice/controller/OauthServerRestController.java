@@ -16,6 +16,14 @@ import java.util.Arrays;
 
 import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 @RestController
 //@RequestMapping(API_V_1)
 public class OauthServerRestController {

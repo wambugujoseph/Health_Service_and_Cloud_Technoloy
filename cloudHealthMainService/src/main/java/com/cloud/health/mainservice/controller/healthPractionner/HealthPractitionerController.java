@@ -23,7 +23,7 @@ import static com.cloud.health.mainservice.util.Constant.*;
  * Day: Wednesday
  * Date: 12/18/2019
  * Time: 4:31 AM
- * Project: cloudHealthMainService
+* Project: cloudHealthMainService
  */
 
 @RestController
@@ -41,7 +41,7 @@ public class HealthPractitionerController {
 
 
     /**
-     * @param file profile picture of client
+     * @param file               profile picture of client
      * @param redirectAttributes to be contained in the redirect Url
      * @return ResponseEntity
      */
@@ -50,9 +50,9 @@ public class HealthPractitionerController {
 
         if (!(user == null)) {
             String isUploadedPicName = profileFileStorageService.store(file);
-            if(isUploadedPicName != null){
-                boolean userAdded = practitionerRepositoryService.addClient(user,isUploadedPicName);
-                if(userAdded){
+            if (isUploadedPicName != null) {
+                boolean userAdded = practitionerRepositoryService.addClient(user, isUploadedPicName);
+                if (userAdded) {
                     return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\":\"Created\"}");
                 }
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("{\"message\":\"Not Created\"}");
@@ -66,10 +66,10 @@ public class HealthPractitionerController {
      * @return Respose status
      */
     @PostMapping(value = "/register/client", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> registerClient(@RequestBody User user){
+    public ResponseEntity<Object> registerClient(@RequestBody User user) {
         if (!(user == null)) {
-            boolean userAdded = practitionerRepositoryService.addClient(user,null);
-            if(userAdded){
+            boolean userAdded = practitionerRepositoryService.addClient(user, null);
+            if (userAdded) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\":\"Created\"}");
             }
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("{\"message\":\"Not Created\"}");
@@ -78,10 +78,10 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/create/clientprofile")
-    public ResponseEntity<Object> addClientProfile(@RequestBody UserProfile userProfile){
+    public ResponseEntity<Object> addClientProfile(@RequestBody UserProfile userProfile) {
         if (!(userProfile == null)) {
             boolean isProfileCreated = practitionerRepositoryService.addClientProfile(userProfile);
-            if (isProfileCreated){
+            if (isProfileCreated) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("{\"Profile\":\"Created\"}");
             }
         }
@@ -89,7 +89,7 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/create/medicalrecord")
-    public ResponseEntity<Object> createMedicalRecord(@RequestBody HealthRecord healthRecord){
+    public ResponseEntity<Object> createMedicalRecord(@RequestBody HealthRecord healthRecord) {
         if (!(healthRecord == null)) {
             try {
                 MedicalRecordEntity medicalRecordEntity = practitionerMedicalRecordService.createMedicalRecord(healthRecord);
@@ -103,11 +103,11 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/add/patient/consultation")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Consultation consultation){
-        if (consultation != null){
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody Consultation consultation) {
+        if (consultation != null) {
             try {
                 ConsultationEntity consultationEntity = practitionerMedicalRecordService.addMedicalConsultation(consultation);
-                if (consultationEntity != null){
+                if (consultationEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(consultationEntity);
                 }
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(INVALID_REQUEST_OBJECT);
@@ -121,11 +121,11 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/add/patient/ailment")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Ailment ailment){
-        if (ailment != null){
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody Ailment ailment) {
+        if (ailment != null) {
             try {
                 AilmentEntity ailmentEntity = practitionerMedicalRecordService.addMedicalAilment(ailment);
-                if (ailmentEntity != null){
+                if (ailmentEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(ailmentEntity);
                 }
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(INVALID_REQUEST_OBJECT);
@@ -139,11 +139,11 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/add/patient/medicalfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> addHealthConsultation(@ModelAttribute MedicalFile medicalFile){
-        if (medicalFile != null){
+    public ResponseEntity<Object> addHealthConsultation(@ModelAttribute MedicalFile medicalFile) {
+        if (medicalFile != null) {
             try {
                 MedicalFileEntity medicalFileEntity = practitionerMedicalRecordService.addMedicalFile(medicalFile);
-                if (medicalFileEntity != null){
+                if (medicalFileEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(medicalFileEntity);
                 }
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(INVALID_REQUEST_OBJECT);
@@ -157,11 +157,11 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/add/patient/surgery")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Surgery surgery){
-        if (surgery != null){
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody Surgery surgery) {
+        if (surgery != null) {
             try {
                 SurgeryEntity surgeryEntity = practitionerMedicalRecordService.addMedicalSurgery(surgery);
-                if (surgeryEntity != null){
+                if (surgeryEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(surgeryEntity);
                 }
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(INVALID_REQUEST_OBJECT);
@@ -175,11 +175,11 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/add/patient/prescription")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Prescription prescription){
-        if (prescription != null){
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody Prescription prescription) {
+        if (prescription != null) {
             try {
                 PrescriptionEntity prescriptionEntity = practitionerMedicalRecordService.addMedicalPrescription(prescription);
-                if (prescriptionEntity != null){
+                if (prescriptionEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(prescriptionEntity);
                 }
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(INVALID_REQUEST_OBJECT);
@@ -194,8 +194,8 @@ public class HealthPractitionerController {
 
     @RequestMapping(value = "/practitioner/accept/request/{token}/{practitionerId}/{clientId}", method = RequestMethod.PUT)
     public ResponseEntity<Object> acceptPersonalHealthPractitioner(@PathVariable String token, @PathVariable String practitionerId,
-                                                                   @PathVariable String clientId){
-        if ( !(token.isEmpty() || practitionerId.isEmpty() || clientId.isEmpty() ) ) {
+                                                                   @PathVariable String clientId) {
+        if (!(token.isEmpty() || practitionerId.isEmpty() || clientId.isEmpty())) {
             try {
                 PersonalDoctorEntity personalDoctorEntity = practitionerRepositoryService.acceptClientPersonalDoctor(token, practitionerId, clientId);
                 if (personalDoctorEntity != null) {
@@ -206,7 +206,7 @@ public class HealthPractitionerController {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
             }
-        }else
+        } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 }

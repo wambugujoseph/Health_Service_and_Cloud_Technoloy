@@ -13,6 +13,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Monday
+ * Date: 12/23/2019
+ * Time: 1:23 PM
+ * Project: cloudHealthMainService
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebMvcConfiguration implements WebMvcConfigurer {
