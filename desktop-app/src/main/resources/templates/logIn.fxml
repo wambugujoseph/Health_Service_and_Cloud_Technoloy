@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator layoutX="25.0" layoutY="163.0" prefHeight="5.0" prefWidth="126.0" />
+      <Separator layoutX="273.0" layoutY="163.0" prefHeight="5.0" prefWidth="126.0" />
+      <JFXTextField fx:id="userName" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="256.0" prefHeight="25.0" prefWidth="261.0" promptText="Username" unFocusColor="#4059a9" />
+      <JFXPasswordField fx:id="password" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="316.0" prefHeight="25.0" prefWidth="261.0" promptText="password" unFocusColor="#4059a9" />
+      <JFXButton fx:id="LogInsubmitBtn" buttonType="RAISED" layoutX="82.0" layoutY="373.0" prefHeight="33.0" prefWidth="261.0" ripplerFill="#312bf0" style="-fx-background-color: #57b846; -fx-background-radius: 20;" text="LOG IN" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <Text layoutX="108.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot" wrappingWidth="42.13671875" />
+      <Text layoutX="108.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don’t have an account?" wrappingWidth="132.13671875" />
+      <Circle fill="#111111" layoutX="97.0" layoutY="457.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#0d0d0d" layoutX="97.0" layoutY="480.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
+      <JFXCheckBox fx:id="rememberMe" layoutX="129.0" layoutY="418.0" prefHeight="18.0" prefWidth="126.0" text="Remember me" />
+      <Hyperlink fx:id="ForgetPwdLink" ellipsisString="" layoutX="143.0" layoutY="446.0" text="Username / Password? " textFill="#65acee" />
+      <Hyperlink fx:id="signUpLink" layoutX="235.0" layoutY="469.0" text="Sign Up" textFill="#61a8d7" />
+      <JFXProgressBar disable="true" layoutX="2.0" layoutY="521.0" opacity="0.88" prefHeight="5.0" prefWidth="420.0" secondaryProgress="0.0" style="-fx-background-color: black;">
+         <effect>
+            <Blend mode="MULTIPLY" />
+         </effect>
+      </JFXProgressBar>
+      <Label layoutX="151.0" layoutY="107.0" prefHeight="120.0" prefWidth="120.0" style="-fx-border-color: grey; -fx-border-radius: 150;">
+         <graphic>
+            <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Label>
+      <Label layoutX="62.0" prefHeight="106.0" prefWidth="301.0" text="SmartHealth Cloud Log In" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
