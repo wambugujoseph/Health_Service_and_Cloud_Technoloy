@@ -1,0 +1,30 @@
+#workSpaceSplitPane{
+    -fx-background-color: rgba(252, 252, 252, 0.98);
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: rgba(97, 97, 97, 0.52);
+}
+
+#activityTreeView{
+    -fx-border-color: none;
+    -fx-border-width: 0px 0px 0px 0px;
+}
+#activityText{
+    -fx-font-size: 26px;
+    -fx-fill-width: bold;
+    -fx-alignment: center;
+    -fx-padding: 10px 0px 3px 0px;
+}
+
+#activityMediumText{
+    -fx-font-size: 20px;
+    -fx-fill-width: bold;
+    -fx-alignment: center;
+    -fx-padding: 10px 0px 3px 0px;
+}
+#activitySmallText{
+    -fx-font-size: 14px;
+    -fx-fill-width: bold;
+    -fx-alignment: center;
+    -fx-padding: 10px 0px 3px 0px;
+}
