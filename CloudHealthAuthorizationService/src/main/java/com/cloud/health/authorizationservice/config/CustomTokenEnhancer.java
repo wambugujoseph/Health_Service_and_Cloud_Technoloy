@@ -9,6 +9,14 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 public class CustomTokenEnhancer extends JwtAccessTokenConverter {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {

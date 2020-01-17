@@ -16,6 +16,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
