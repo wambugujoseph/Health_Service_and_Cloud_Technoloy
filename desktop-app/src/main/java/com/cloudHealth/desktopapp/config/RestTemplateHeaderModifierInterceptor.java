@@ -1,6 +1,9 @@
 package com.cloudHealth.desktopapp.config;
 
+import com.cloudHealth.desktopapp.service.AuthorizeUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -17,12 +20,17 @@ import java.io.IOException;
  */
 
 public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestInterceptor {
+
+    private AuthorizeUserService authorizeUserService = new AuthorizeUserService();
+
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest,
                                         byte[] body,
                                         ClientHttpRequestExecution execution) throws IOException {
         ClientHttpResponse response = execution.execute(httpRequest,body);
-        response.getHeaders().add("foo","Bar");
+
+        response.getHeaders().add("Authorization","Bearer "+ authorizeUserService.getUserAccessToken());
         return response;
     }
+
 }
