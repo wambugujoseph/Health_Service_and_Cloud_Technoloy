@@ -21,14 +21,14 @@ import java.io.IOException;
 
 public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestInterceptor {
 
-    @Autowired
-    AuthorizeUserService authorizeUserService;
+    private AuthorizeUserService authorizeUserService = new AuthorizeUserService();
 
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest,
                                         byte[] body,
                                         ClientHttpRequestExecution execution) throws IOException {
         ClientHttpResponse response = execution.execute(httpRequest,body);
+
         response.getHeaders().add("Authorization","Bearer "+ authorizeUserService.getUserAccessToken());
         return response;
     }

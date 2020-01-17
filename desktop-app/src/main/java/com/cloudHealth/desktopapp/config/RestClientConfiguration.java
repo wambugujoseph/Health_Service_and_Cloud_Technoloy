@@ -1,7 +1,5 @@
 package com.cloudHealth.desktopapp.config;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.springframework.boot.json.JsonParser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
@@ -23,19 +21,20 @@ import java.util.List;
  */
 
 @Configuration
-public class RestClientConfiguration  {
+public class RestClientConfiguration {
 
     @Bean
-    public RestTemplate getRestTemplate(){
-        RestTemplate restTemplate =  new RestTemplate(
+    public RestTemplate getRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate(
                 new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
 
         List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
-        if(CollectionUtils.isEmpty(interceptors)){
+        if (CollectionUtils.isEmpty(interceptors)) {
             interceptors = new ArrayList<>();
         }
         interceptors.add(new RestTemplateHeaderModifierInterceptor());
         restTemplate.setInterceptors(interceptors);
         return restTemplate;
     }
+
 }

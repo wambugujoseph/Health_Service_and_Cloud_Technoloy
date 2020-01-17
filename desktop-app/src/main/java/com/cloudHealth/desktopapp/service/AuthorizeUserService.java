@@ -1,25 +1,22 @@
 package com.cloudHealth.desktopapp.service;
 
 import com.cloudHealth.desktopapp.model.UserAccessToken;
-import org.apache.catalina.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -38,12 +35,11 @@ import static com.cloudHealth.desktopapp.config.Constant.*;
 @Service
 public class AuthorizeUserService {
 
-    @Autowired RestTemplate restTemplate;
-    @Autowired UserAccessToken userAccessToken;
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private UserAccessToken userAccessToken;
 
-
-    @Value("${access-token-json-file}")
-    String fileName;
 
     public Boolean userLogin(String username, String password){
 
@@ -58,16 +54,18 @@ public class AuthorizeUserService {
             body.add("password", password);
 
             HttpEntity<MultiValueMap<String, Object>> requestBody = new HttpEntity<>(body,httpHeaders);
-            RestTemplate tokenRestTemplate = new RestTemplate();
-            ResponseEntity<UserAccessToken> response = tokenRestTemplate
-                    .postForEntity(ACCESS_TOKEN_URL, requestBody, UserAccessToken.class);
-
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
-            storeUserAccessToken(Objects.requireNonNull(response.getBody()));
-            return true;
-        }else
+        ResponseEntity<Object> response;
+        try {
+            response = restTemplate
+                    .postForEntity(ACCESS_TOKEN_URL, requestBody, Object.class);
+            if (response.getStatusCode().equals(HttpStatus.OK)) {
+                return true;
+            }else
+                return false;
+        } catch (RestClientException e) {
+            System.out.println(e.getMessage());
             return false;
-
+        }
     }
 
     private void storeUserAccessToken(UserAccessToken accessToken){
@@ -81,7 +79,7 @@ public class AuthorizeUserService {
         token.put("jti", accessToken.getJti());
         jsonObject.putAll(token);
         try {
-            Files.write(Paths.get(fileName), jsonObject.toJSONString().getBytes());
+            Files.write(Paths.get(ACCESS_TOKEN_FILE), jsonObject.toJSONString().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +87,7 @@ public class AuthorizeUserService {
 
     public String getUserAccessToken(){
         try {
-            FileReader reader = new FileReader(fileName);
+            FileReader reader = new FileReader(ACCESS_TOKEN_FILE);
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             return jsonObject.get("access_token").toString();
@@ -101,7 +99,7 @@ public class AuthorizeUserService {
 
     private  String getUserRefreshToken(){
         try {
-            FileReader reader = new FileReader(fileName);
+            FileReader reader = new FileReader(ACCESS_TOKEN_FILE);
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             return jsonObject.get("refresh_token").toString();
@@ -110,5 +108,4 @@ public class AuthorizeUserService {
             return null;
         }
     }
-
 }
