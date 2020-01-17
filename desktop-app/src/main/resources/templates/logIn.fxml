@@ -11,29 +11,30 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="526.0" prefWidth="419.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.LoginController">
    <children>
       <Separator layoutX="25.0" layoutY="163.0" prefHeight="5.0" prefWidth="126.0" />
       <Separator layoutX="273.0" layoutY="163.0" prefHeight="5.0" prefWidth="126.0" />
-      <JFXTextField fx:id="userName" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="256.0" prefHeight="25.0" prefWidth="261.0" promptText="Username" unFocusColor="#4059a9" />
-      <JFXPasswordField fx:id="password" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="316.0" prefHeight="25.0" prefWidth="261.0" promptText="password" unFocusColor="#4059a9" />
-      <JFXButton fx:id="LogInsubmitBtn" buttonType="RAISED" layoutX="82.0" layoutY="373.0" prefHeight="33.0" prefWidth="261.0" ripplerFill="#312bf0" style="-fx-background-color: #57b846; -fx-background-radius: 20;" text="LOG IN" textFill="WHITE">
+      <JFXTextField fx:id="userName" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="254.0" prefHeight="25.0" prefWidth="261.0" promptText="Username" unFocusColor="#4059a9" />
+      <JFXPasswordField fx:id="password" focusColor="#57b846" labelFloat="true" layoutX="82.0" layoutY="315.0" prefHeight="25.0" prefWidth="261.0" promptText="password" unFocusColor="#4059a9" />
+      <JFXButton fx:id="LogInSubmitBtn" buttonType="RAISED" layoutX="82.0" layoutY="372.0" prefHeight="33.0" prefWidth="261.0" ripplerFill="#312bf0" style="-fx-background-color: #57b846; -fx-background-radius: 20;" text="LOG IN" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <Text layoutX="108.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot" wrappingWidth="42.13671875" />
-      <Text layoutX="108.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don’t have an account?" wrappingWidth="132.13671875" />
-      <Circle fill="#111111" layoutX="97.0" layoutY="457.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="108.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot" wrappingWidth="42.13671875" />
+      <Text layoutX="108.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don’t have an account?" wrappingWidth="132.13671875" />
+      <Circle fill="#111111" layoutX="97.0" layoutY="456.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="#0d0d0d" layoutX="97.0" layoutY="480.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-      <JFXCheckBox fx:id="rememberMe" layoutX="129.0" layoutY="418.0" prefHeight="18.0" prefWidth="126.0" text="Remember me" />
-      <Hyperlink fx:id="ForgetPwdLink" ellipsisString="" layoutX="143.0" layoutY="446.0" text="Username / Password? " textFill="#65acee" />
-      <Hyperlink fx:id="signUpLink" layoutX="235.0" layoutY="469.0" text="Sign Up" textFill="#61a8d7" />
-      <JFXProgressBar disable="true" layoutX="2.0" layoutY="521.0" opacity="0.88" prefHeight="5.0" prefWidth="420.0" secondaryProgress="0.0" style="-fx-background-color: black;">
+      <JFXCheckBox fx:id="rememberMe" layoutX="129.0" layoutY="417.0" prefHeight="18.0" prefWidth="126.0" text="Remember me" />
+      <Hyperlink fx:id="ForgetPwdLink" ellipsisString="" layoutX="143.0" layoutY="445.0" text="Username / Password? " textFill="#65acee" />
+      <Hyperlink fx:id="signUpLink" layoutX="234.0" layoutY="468.0" text="Sign Up" textFill="#61a8d7" />
+      <JFXProgressBar disable="true" layoutX="-1.0" layoutY="514.0" opacity="0.88" prefHeight="5.0" prefWidth="420.0" secondaryProgress="0.0" style="-fx-background-color: black;">
          <effect>
             <Blend mode="MULTIPLY" />
          </effect>
@@ -48,5 +49,6 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
+      <StackPane fx:id="dial" layoutX="82.0" layoutY="229.0" prefHeight="17.0" prefWidth="261.0" />
    </children>
 </AnchorPane>
