@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 import static com.cloud.health.mainservice.util.Constant.*;
 
 /**
@@ -77,7 +79,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(OBJECT_IS_EMPTY);
     }
 
-    @PostMapping(value = "/create/clientprofile")
+    @PostMapping(value = "/create/clientProfile")
     public ResponseEntity<Object> addClientProfile(@RequestBody UserProfile userProfile) {
         if (!(userProfile == null)) {
             boolean isProfileCreated = practitionerRepositoryService.addClientProfile(userProfile);
@@ -88,7 +90,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping(value = "/create/medicalrecord")
+    @PostMapping(value = "/create/medicalRecord")
     public ResponseEntity<Object> createMedicalRecord(@RequestBody HealthRecord healthRecord) {
         if (!(healthRecord == null)) {
             try {
@@ -102,7 +104,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "/add/patient/consultation")
+    @PostMapping(value = "/patient/consultation")
     public ResponseEntity<Object> addHealthConsultation(@RequestBody Consultation consultation) {
         if (consultation != null) {
             try {
@@ -120,7 +122,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "/add/patient/ailment")
+    @PostMapping(value = "/patient/ailment")
     public ResponseEntity<Object> addHealthConsultation(@RequestBody Ailment ailment) {
         if (ailment != null) {
             try {
@@ -138,7 +140,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "/add/patient/medicalfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/patient/medicalFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> addHealthConsultation(@ModelAttribute MedicalFile medicalFile) {
         if (medicalFile != null) {
             try {
@@ -156,7 +158,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "/add/patient/surgery")
+    @PostMapping(value = "/patient/surgery")
     public ResponseEntity<Object> addHealthConsultation(@RequestBody Surgery surgery) {
         if (surgery != null) {
             try {
@@ -174,7 +176,7 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "/add/patient/prescription")
+    @PostMapping(value = "/patient/prescription")
     public ResponseEntity<Object> addHealthConsultation(@RequestBody Prescription prescription) {
         if (prescription != null) {
             try {
@@ -208,5 +210,21 @@ public class HealthPractitionerController {
             }
         } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
+    }
+    @RequestMapping(value = "/patient/MedicalRecords/{patientID}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getMedicalRecord(@PathVariable String patientID){
+            if (!patientID.isEmpty()){
+                try {
+                    List<MedicalRecordEntity> medicalRecordEntities =  practitionerMedicalRecordService.getListMedicalRecord(patientID);
+                    if (medicalRecordEntities != null){
+                        return ResponseEntity.status(HttpStatus.OK).body(medicalRecordEntities);
+                    }
+                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+                }
+            }else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 }

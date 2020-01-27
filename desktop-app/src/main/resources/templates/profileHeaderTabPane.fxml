@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="profileHeaderAndTab" prefHeight="400.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.PatientProfileController">
+   <children>
+      <Separator layoutY="46.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+      <JFXButton fx:id="newProfile" buttonType="RAISED" layoutX="13.0" layoutY="3.0" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="New" AnchorPane.leftAnchor="13.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#171003" fontSmoothingType="LCD" glyphName="PLUS_SQUARE" size="20" />
+         </graphic>
+      </JFXButton>
+      <TextField fx:id="searchTxtField" layoutX="246.0" layoutY="7.0" prefHeight="25.0" prefWidth="316.0" promptText="Username/Email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="246.0" />
+      <FontAwesomeIconView fill="#0909eb" glyphName="SEARCH" layoutX="539.0" layoutY="24.0" size="15" AnchorPane.leftAnchor="539.0" />
+      <JFXButton fx:id="editProfile" buttonType="RAISED" layoutX="114.0" layoutY="2.0" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="Edit" AnchorPane.leftAnchor="114.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#171003" fontSmoothingType="LCD" glyphName="PENCIL_SQUARE" size="20" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="uploadProfile" buttonType="RAISED" layoutX="586.0" layoutY="2.0" onAction="#setUploadProfile" prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #f49d06;" text="Upload" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#4f33ff" glyphName="CLOUD_UPLOAD" size="22" />
+         </graphic>
+      </JFXButton>
+      <JFXTabPane fx:id="profileTabPane" layoutX="29.0" layoutY="59.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+   </children>
+</AnchorPane>

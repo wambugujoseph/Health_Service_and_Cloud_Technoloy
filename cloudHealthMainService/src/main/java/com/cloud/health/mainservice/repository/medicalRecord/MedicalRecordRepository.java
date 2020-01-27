@@ -3,6 +3,7 @@ package com.cloud.health.mainservice.repository.medicalRecord;
 import com.cloud.health.mainservice.model.entity.MedicalRecordEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -17,5 +18,6 @@ import java.util.Optional;
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecordEntity, Integer> {
 
     Optional<MedicalRecordEntity> findByPatientId(int patientId);
+    List<MedicalRecordEntity> findAllByPatientId(int patientId);
 }
 

@@ -1,9 +1,7 @@
 package com.cloudHealth.desktopapp.config;
 
 import com.cloudHealth.desktopapp.service.AuthorizeUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;

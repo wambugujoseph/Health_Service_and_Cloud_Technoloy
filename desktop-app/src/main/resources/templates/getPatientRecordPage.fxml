@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="657.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.FindPatientMedicalRecordController">
+
+   <children>
+      <AnchorPane prefHeight="35.0" prefWidth="1025.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXHamburger fx:id="medicalRecordHamburger" alignment="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="30.0" prefWidth="34.0" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Separator layoutY="32.0" prefHeight="0.0" prefWidth="1025.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0" />
+            <TextField fx:id="medicalRecordSearch" layoutX="274.0" layoutY="5.0" prefHeight="25.0" prefWidth="310.0" promptText="Username/email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="274.0" />
+            <FontAwesomeIconView fill="#1d0eeb" glyphName="SEARCH" layoutX="567.0" layoutY="22.0" size="15" AnchorPane.leftAnchor="567.0" />
+         </children></AnchorPane>
+      <JFXTabPane layoutX="1.0" layoutY="34.0" prefHeight="623.0" prefWidth="1025.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+         <tabs>
+            <Tab text="Consultation">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="635.0" prefWidth="1022.0">
+                     <children>
+                        <AnchorPane layoutY="3.0" prefHeight="585.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="3.0">
+                           <children>
+                              <Separator layoutY="-1.0" prefHeight="3.0" prefWidth="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                              <JFXButton fx:id="newConsultation" layoutX="3.0" layoutY="206.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="206.0">
+                                 <graphic>
+                                    <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="New Consultation Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Text>
+                                 </graphic>
+                              </JFXButton>
+                              <FontAwesomeIconView fill="#1255d0" glyphName="PLUS_SQUARE" layoutX="14.0" layoutY="233.0" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="215.8571434020996" />
+                              <JFXButton fx:id="newMedicalRecordConsultation" layoutX="3.0" layoutY="251.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="251.0">
+                                 <graphic>
+                                    <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Start New Medical Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Text>
+                                 </graphic>
+                              </JFXButton>
+                              <Label alignment="CENTER" layoutY="12.0" prefHeight="35.0" prefWidth="229.0" text="Patinent Information" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="231.0" style="-fx-background-color: #141414;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                              <Label layoutX="2.0" layoutY="54.0" prefHeight="17.0" prefWidth="41.0" text="Name:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="54.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientConsultationName" layoutX="41.0" layoutY="55.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="55.0" />
+                              <Label layoutX="4.0" layoutY="78.0" text="Email:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="78.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="2.0" layoutY="102.0" text="Phone:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="102.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientConsultationEmail" layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                              <Label fx:id="patientConsultationPhone" layoutX="43.0" layoutY="102.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0" />
+                              <Label layoutX="7.0" layoutY="125.0" text="ID:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="125.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="patientConsultationID" layoutX="41.0" layoutY="125.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
+                              <FontAwesomeIconView fill="#1255d0" glyphName="FILE" layoutX="13.0" layoutY="278.8571424484253" size="20" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="261.7142858505249" />
+                           </children></AnchorPane>
+                        <ScrollPane fx:id="consultationScrollPane" fitToHeight="true" fitToWidth="true" layoutX="231.0" layoutY="2.0" prefHeight="200.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="675.0" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <JFXListView layoutX="49.0" layoutY="1.0" prefHeight="582.0" prefWidth="742.0" style="-fx-border-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.topAnchor="1.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content></ScrollPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Medical  Files">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <AnchorPane layoutY="4.0" prefHeight="584.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
+                             <children>
+                             <Separator layoutY="-1.0" prefHeight="3.0" prefWidth="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                             <JFXButton fx:id="newMedicalFileRecord" layoutX="3.0" layoutY="206.0" prefHeight="42.0" prefWidth="170.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="206.0">
+                                 <graphic>
+                                     <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="New File Record" textAlignment="CENTER" wrappingWidth="122.59375">
+                                         <font>
+                                             <Font name="System Bold" size="13.0" />
+                                         </font>
+                                     </Text>
+                                 </graphic>
+                             </JFXButton>
+                             <FontAwesomeIconView fill="#1255d0" glyphName="PLUS_SQUARE" layoutX="14.0" layoutY="233.0" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="215.8571434020996" />
+                             <JFXButton fx:id="newMedicalRecordFile" layoutX="3.0" layoutY="251.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="251.0">
+                                 <graphic>
+                                     <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Start New Medical Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                         <font>
+                                             <Font name="System Bold" size="13.0" />
+                                         </font>
+                                     </Text>
+                                 </graphic>
+                             </JFXButton>
+                             <Label alignment="CENTER" layoutY="12.0" prefHeight="35.0" prefWidth="229.0" text="Patinent Information" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                                 <font>
+                                     <Font name="System Bold" size="13.0" />
+                                 </font>
+                             </Label>
+                             <Separator layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="231.0" style="-fx-background-color: #141414;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                             <Label layoutX="2.0" layoutY="54.0" prefHeight="17.0" prefWidth="41.0" text="Name:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="54.0">
+                                 <font>
+                                     <Font name="System Bold" size="12.0" />
+                                 </font>
+                             </Label>
+                             <Label fx:id="medicalFilePatientName" layoutX="39.0" layoutY="55.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
+                             <Label layoutX="4.0" layoutY="78.0" text="Email:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="78.0">
+                                 <font>
+                                     <Font name="System Bold" size="12.0" />
+                                 </font>
+                             </Label>
+                             <Label layoutX="2.0" layoutY="102.0" text="Phone:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="102.0">
+                                 <font>
+                                     <Font name="System Bold" size="12.0" />
+                                 </font>
+                             </Label>
+                             <Label fx:id="medicalFilePatientEmail" layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="194.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                             <Label fx:id="medicalFilePatientPhone" layoutX="43.0" layoutY="102.0" prefHeight="17.0" prefWidth="187.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0" />
+                             <Label layoutX="7.0" layoutY="125.0" text="ID:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="125.0">
+                                 <font>
+                                     <Font name="System Bold" size="12.0" />
+                                 </font>
+                             </Label>
+                             <Label fx:id="medicalFilePatientID" layoutX="41.0" layoutY="125.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
+                             <FontAwesomeIconView fill="#1255d0" glyphName="FILE" layoutX="13.0" layoutY="278.8571424484253" size="20" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="261.7142858505249" />
+                             </children>
+                         </AnchorPane>
+                        <ScrollPane fx:id="medicalFileScrollPane" layoutX="231.0" layoutY="5.0" prefHeight="206.0" prefWidth="127.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                     </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Ailment">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <AnchorPane prefHeight="584.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
+                             <children>
+                                 <Separator layoutY="-1.0" prefHeight="3.0" prefWidth="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                                 <JFXButton fx:id="newAilment" layoutX="3.0" layoutY="206.0" prefHeight="42.0" prefWidth="152.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="206.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Ailment " textAlignment="CENTER" wrappingWidth="102.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="PLUS_SQUARE" layoutX="14.0" layoutY="233.0" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="215.8571434020996" />
+                                 <JFXButton fx:id="newMedicalRecordAilment" layoutX="3.0" layoutY="251.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="251.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Start New Medical Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <Label alignment="CENTER" layoutY="12.0" prefHeight="35.0" prefWidth="229.0" text="Patinent Information" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                                     <font>
+                                         <Font name="System Bold" size="13.0" />
+                                     </font>
+                                 </Label>
+                                 <Separator layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="231.0" style="-fx-background-color: #141414;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                                 <Label layoutX="2.0" layoutY="54.0" prefHeight="17.0" prefWidth="41.0" text="Name:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="54.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientAilmentName" layoutX="39.0" layoutY="55.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
+                                 <Label layoutX="4.0" layoutY="78.0" text="Email:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="78.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label layoutX="2.0" layoutY="102.0" text="Phone:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="102.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientAilmentEmail" layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                                 <Label fx:id="patientAilmentPhone" layoutX="43.0" layoutY="102.0" prefHeight="17.0" prefWidth="188.0" AnchorPane.topAnchor="102.0" />
+                                 <Label layoutX="7.0" layoutY="125.0" text="ID:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="125.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientAilmentID" layoutX="41.0" layoutY="125.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="FILE" layoutX="13.0" layoutY="278.8571424484253" size="20" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="261.7142858505249" />
+                             </children>
+                         </AnchorPane>
+                        <ScrollPane fx:id="ailmentScrollPane" prefHeight="206.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Prescription">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <AnchorPane prefHeight="584.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
+                             <children>
+                                 <Separator layoutY="-1.0" prefHeight="3.0" prefWidth="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                                 <JFXButton fx:id="newPrescription" layoutX="3.0" layoutY="206.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="206.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Prescription Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="PLUS_SQUARE" layoutX="14.0" layoutY="233.0" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="215.8571434020996" />
+                                 <JFXButton fx:id="newMedicalRecordPrescription" layoutX="3.0" layoutY="251.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="251.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Start New Medical Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <Label alignment="CENTER" layoutY="12.0" prefHeight="35.0" prefWidth="229.0" text="Patinent Information" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                                     <font>
+                                         <Font name="System Bold" size="13.0" />
+                                     </font>
+                                 </Label>
+                                 <Separator layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="231.0" style="-fx-background-color: #141414;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                                 <Label layoutX="2.0" layoutY="54.0" prefHeight="17.0" prefWidth="41.0" text="Name:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="54.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="PatientPrescriptionName" layoutX="39.0" layoutY="55.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
+                                 <Label layoutX="4.0" layoutY="78.0" text="Email:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="78.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label layoutX="2.0" layoutY="102.0" text="Phone:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="102.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="PatientPrescriptionEmail" layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                                 <Label fx:id="PatientPrescriptionPhone" layoutX="43.0" layoutY="102.0" prefHeight="17.0" prefWidth="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0" />
+                                 <Label layoutX="7.0" layoutY="125.0" text="ID:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="125.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="PatientPrescriptionID" layoutX="41.0" layoutY="125.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="FILE" layoutX="13.0" layoutY="278.8571424484253" size="20" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="261.7142858505249" />
+                             </children>
+                         </AnchorPane>
+                        <ScrollPane fx:id="prescriptionScrollPane" prefHeight="206.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Surgery">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <AnchorPane prefHeight="584.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
+                             <children>
+                                 <Separator layoutY="-1.0" prefHeight="3.0" prefWidth="231.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                                 <JFXButton fx:id="newSurgeryRecord" layoutX="3.0" layoutY="206.0" prefHeight="42.0" prefWidth="198.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="206.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="New Surgery Record" textAlignment="CENTER" wrappingWidth="130.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="PLUS_SQUARE" layoutX="14.0" layoutY="233.0" size="20" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="215.8571434020996" />
+                                 <JFXButton fx:id="newMedicalRecordSurgery" layoutX="3.0" layoutY="251.0" prefHeight="42.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" " AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="251.0">
+                                     <graphic>
+                                         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Start New Medical Record" textAlignment="CENTER" wrappingWidth="168.59375">
+                                             <font>
+                                                 <Font name="System Bold" size="13.0" />
+                                             </font>
+                                         </Text>
+                                     </graphic>
+                                 </JFXButton>
+                                 <Label alignment="CENTER" layoutY="12.0" prefHeight="35.0" prefWidth="229.0" text="Patinent Information" textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                                     <font>
+                                         <Font name="System Bold" size="13.0" />
+                                     </font>
+                                 </Label>
+                                 <Separator layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="231.0" style="-fx-background-color: #141414;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0" />
+                                 <Label layoutX="2.0" layoutY="54.0" prefHeight="17.0" prefWidth="41.0" text="Name:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="54.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientSurgeryName" layoutX="39.0" layoutY="55.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
+                                 <Label layoutX="4.0" layoutY="78.0" text="Email:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="78.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label layoutX="2.0" layoutY="102.0" text="Phone:" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="102.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientSurgeryEmail" layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="195.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                                 <Label fx:id="patientSurgeryPhone" layoutX="43.0" layoutY="102.0" prefHeight="17.0" prefWidth="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0" />
+                                 <Label layoutX="7.0" layoutY="125.0" text="ID:" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="125.0">
+                                     <font>
+                                         <Font name="System Bold" size="12.0" />
+                                     </font>
+                                 </Label>
+                                 <Label fx:id="patientSurgeryID" layoutX="41.0" layoutY="125.0" prefHeight="17.0" prefWidth="189.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
+                                 <FontAwesomeIconView fill="#1255d0" glyphName="FILE" layoutX="13.0" layoutY="278.8571424484253" size="20" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="261.7142858505249" />
+                             </children>
+                         </AnchorPane>
+                        <ScrollPane fx:id="surgeryScrollPane" layoutX="231.0" layoutY="4.0" prefHeight="206.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="RealTime Records">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXDrawer fx:id="medicalRecordDrawer" defaultDrawerSize="292.0" layoutY="70.0" prefHeight="572.0" prefWidth="292.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0" />
+   </children>
+</AnchorPane>

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -44,7 +47,9 @@ public class PractitionerMedicalRecordService {
     @Autowired
     private SurgeryRepository surgeryRepository;
     @Autowired
-    private  PrescriptionRepository prescriptionRepository;
+    private PrescriptionRepository prescriptionRepository;
+    @Autowired
+    private ClientService clientService;
 
     public MedicalRecordEntity createMedicalRecord(HealthRecord healthRecord) {
         MedicalRecordEntity medicalRecordEntity = new MedicalRecordEntity();
@@ -107,7 +112,7 @@ public class PractitionerMedicalRecordService {
         surgeryEntity.setMedicalRecordByRecordId(getMedicalRecord(surgery.getUserId()));
         surgeryEntity.setType(surgery.getType());
         surgeryEntity.setRecordId(getMedicalRecord(surgery.getUserId()).getRecordId());
-        surgeryEntity  = surgeryRepository.save(surgeryEntity);
+        surgeryEntity = surgeryRepository.save(surgeryEntity);
         surgeryEntity.setMedicalRecordByRecordId(null);
 
         return surgeryEntity;
@@ -143,6 +148,77 @@ public class PractitionerMedicalRecordService {
         ).orElse(null);
 
         return medicalRecordEntity;
+    }
+
+    public List<MedicalRecordEntity> getListMedicalRecord(String userIdOrEmail) {
+
+        try {
+            PatientEntity patientEntity = patientRepository.findByUser(clientService.getUserInfo(userIdOrEmail).getUserId()).orElse(null);
+
+            assert patientEntity != null;
+            List<MedicalRecordEntity> medicalRecordEntities = medicalRecordRepository.findAllByPatientId(patientEntity.getPatientId());
+            List<MedicalRecordEntity> medicalRecordEntityList = new ArrayList<>();
+
+            for (MedicalRecordEntity medicalRecordEntity : medicalRecordEntities) {
+
+                MedicalRecordEntity recordEntity = new MedicalRecordEntity();
+
+                recordEntity.setRecordId(medicalRecordEntity.getRecordId());
+                recordEntity.setCreated(medicalRecordEntity.getCreated());
+                recordEntity.setDescription(medicalRecordEntity.getDescription());
+                recordEntity.setPatientId(medicalRecordEntity.getPatientId());
+                recordEntity.setPractitionerId(medicalRecordEntity.getPractitionerId());
+                recordEntity.setHealthUnitId(medicalRecordEntity.getHealthUnitId());
+                recordEntity.setHealthPractitioner(medicalRecordEntity.getHealthPractitioner());
+
+                Collection<PrescriptionEntity> prescriptionEntityCollection = medicalRecordEntity.getPrescriptionsByRecordId();
+                Collection<PrescriptionEntity> tempPrescriptionCollection = new ArrayList<>();
+                for (PrescriptionEntity prescriptionEntity : prescriptionEntityCollection) {
+                    prescriptionEntity.setMedicalRecordByRecordId(null);
+                    tempPrescriptionCollection.add(prescriptionEntity);
+                }
+                recordEntity.setPrescriptionsByRecordId(tempPrescriptionCollection);
+
+                Collection<AilmentEntity> ailmentEntityCollection = medicalRecordEntity.getAilmentsByRecordId();
+                Collection<AilmentEntity> tempAilmentCollection = new ArrayList<>();
+                for (AilmentEntity ailmentEntity : ailmentEntityCollection) {
+                    ailmentEntity.setMedicalRecordByRecordId(null);
+                    tempAilmentCollection.add(ailmentEntity);
+                }
+                recordEntity.setAilmentsByRecordId(tempAilmentCollection);
+
+                Collection<ConsultationEntity> consultationEntityCollection = medicalRecordEntity.getConsultationsByRecordId();
+                Collection<ConsultationEntity> tempConsultationEntityCollection = new ArrayList<>();
+                for (ConsultationEntity consultationEntity : consultationEntityCollection) {
+                    consultationEntity.setMedicalRecordByRecordId(null);
+                    tempConsultationEntityCollection.add(consultationEntity);
+                }
+                recordEntity.setConsultationsByRecordId(tempConsultationEntityCollection);
+
+                Collection<SurgeryEntity> surgeryEntityCollection = medicalRecordEntity.getSurgeriesByRecordId();
+                Collection<SurgeryEntity> tempSurgeryEntityCollection = new ArrayList<>();
+                for (SurgeryEntity surgeryEntity : surgeryEntityCollection) {
+                    surgeryEntity.setMedicalRecordByRecordId(null);
+                    tempSurgeryEntityCollection.add(surgeryEntity);
+                }
+                recordEntity.setSurgeriesByRecordId(tempSurgeryEntityCollection);
+
+                Collection<MedicalFileEntity> medicalFileEntityCollection = medicalRecordEntity.getMedicalFilesByRecordId();
+                Collection<MedicalFileEntity> tempMedicalFileEntityCollection = new ArrayList<>();
+                for (MedicalFileEntity medicalFileEntity : medicalFileEntityCollection) {
+                    medicalFileEntity.setMedicalRecordByRecordId(null);
+                    tempMedicalFileEntityCollection.add(medicalFileEntity);
+                }
+                recordEntity.setMedicalFilesByRecordId(tempMedicalFileEntityCollection);
+
+                medicalRecordEntityList.add(recordEntity);
+            }
+
+            return medicalRecordEntityList;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<>();
     }
 
 }

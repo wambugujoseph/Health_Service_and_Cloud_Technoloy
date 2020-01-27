@@ -1,6 +1,7 @@
 package com.cloudHealth.desktopapp.service;
 
 import com.cloudHealth.desktopapp.model.UserAccessToken;
+import com.cloudHealth.desktopapp.util.auth.JwtAuthUtil;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,7 +20,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.cloudHealth.desktopapp.config.Constant.*;
 
@@ -39,6 +39,9 @@ public class AuthorizeUserService {
     private RestTemplate restTemplate;
     @Autowired
     private UserAccessToken userAccessToken;
+    @Autowired
+    private JwtAuthUtil jwtAuthUtil;
+
 
 
     public Boolean userLogin(String username, String password){
@@ -54,11 +57,15 @@ public class AuthorizeUserService {
             body.add("password", password);
 
             HttpEntity<MultiValueMap<String, Object>> requestBody = new HttpEntity<>(body,httpHeaders);
-        ResponseEntity<Object> response;
+        ResponseEntity<UserAccessToken> response;
         try {
             response = restTemplate
-                    .postForEntity(ACCESS_TOKEN_URL, requestBody, Object.class);
+                    .postForEntity(ACCESS_TOKEN_URL, requestBody, UserAccessToken.class);
+
             if (response.getStatusCode().equals(HttpStatus.OK)) {
+                UserAccessToken userAccessToken = response.getBody();
+                assert userAccessToken != null;
+                storeUserAccessToken(userAccessToken);
                 return true;
             }else
                 return false;
@@ -93,8 +100,12 @@ public class AuthorizeUserService {
             return jsonObject.get("access_token").toString();
         } catch (IOException | ParseException e) {
             e.printStackTrace();
-            return null;
+            return "null";
         }
+    }
+
+    public boolean checkIsUserTokenExpired(){
+        return jwtAuthUtil.isTokenExpired(getUserAccessToken());
     }
 
     private  String getUserRefreshToken(){
@@ -107,5 +118,32 @@ public class AuthorizeUserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean logout(){
+        try {
+            Map<Object, Object> token = new HashMap<>();
+            FileReader reader = new FileReader(ACCESS_TOKEN_FILE);
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+            UserAccessToken userAccessToken = jsonObjectToUserAccessTokenConverter(jsonObject);
+            userAccessToken.setAccess_token("");
+            userAccessToken.setRefresh_token("");
+            storeUserAccessToken(userAccessToken);
+            return true;
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    private UserAccessToken jsonObjectToUserAccessTokenConverter(JSONObject jsonObject){
+        UserAccessToken accessToken = new UserAccessToken();
+        accessToken.setAccess_token(jsonObject.get("access_token").toString());
+        accessToken.setRefresh_token(jsonObject.get("refresh_token").toString());
+        accessToken.setToken_type(jsonObject.get("token_type").toString());
+        accessToken.setExpires_in(Integer.parseInt(jsonObject.get("expires_in").toString()));
+        accessToken.setEmail(jsonObject.get("email").toString());
+        accessToken.setJti(jsonObject.get("jti").toString());
+        return accessToken;
     }
 }

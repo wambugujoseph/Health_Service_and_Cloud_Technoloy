@@ -43,4 +43,8 @@ public class DesktopAppApplication extends Application {
         this.context.stop();
         Platform.exit();
     }
+
+    private void checkIsUserAuthorised(){
+
+    }
 }
