@@ -20,7 +20,7 @@ public class AilmentEntity {
     private Date created;
     private String description;
     private int ailmentId;
-    private MedicalRecordEntity medicalRecordByRecordId;
+    private MedicalRecordEntity medicalRecord;
 
     @Basic
     @Column(name = "record_id", insertable = false, updatable = false)
@@ -93,11 +93,11 @@ public class AilmentEntity {
 
     @ManyToOne
     @JoinColumn(name = "record_id", referencedColumnName = "record_id", nullable = false)
-    public MedicalRecordEntity getMedicalRecordByRecordId() {
-        return medicalRecordByRecordId;
+    public MedicalRecordEntity getMedicalRecord() {
+        return medicalRecord;
     }
 
-    public void setMedicalRecordByRecordId(MedicalRecordEntity medicalRecordByRecordId) {
-        this.medicalRecordByRecordId = medicalRecordByRecordId;
+    public void setMedicalRecord(MedicalRecordEntity medicalRecordByRecordId) {
+        this.medicalRecord = medicalRecordByRecordId;
     }
 }

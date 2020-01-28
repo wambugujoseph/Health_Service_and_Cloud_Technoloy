@@ -15,4 +15,11 @@ import java.util.List;
 @Data
 public class MedicalRecordList {
     private List<MedicalRecord> medicalRecords;
+
+    public MedicalRecordList() {
+    }
+
+    public MedicalRecordList(List<MedicalRecord> medicalRecords) {
+        this.medicalRecords = medicalRecords;
+    }
 }

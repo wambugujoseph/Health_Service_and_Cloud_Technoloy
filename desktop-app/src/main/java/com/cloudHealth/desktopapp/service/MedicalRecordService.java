@@ -18,5 +18,5 @@ import java.util.List;
 
 public interface MedicalRecordService {
 
-     Object getAllPatientMedicalRecords(String userIdOrEmail);
+     MedicalRecord[] getAllPatientMedicalRecords(String userIdOrEmail);
 }

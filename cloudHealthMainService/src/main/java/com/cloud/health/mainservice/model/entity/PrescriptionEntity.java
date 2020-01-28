@@ -20,7 +20,7 @@ public class PrescriptionEntity {
     private String medication;
     private Date created;
     private String descrption;
-    private MedicalRecordEntity medicalRecordByRecordId;
+    private MedicalRecordEntity medicalRecord;
 
     @Id
     @Column(name = "precription_id")
@@ -92,11 +92,11 @@ public class PrescriptionEntity {
 
     @ManyToOne
     @JoinColumn(name = "record_id", referencedColumnName = "record_id", nullable = false)
-    public MedicalRecordEntity getMedicalRecordByRecordId() {
-        return medicalRecordByRecordId;
+    public MedicalRecordEntity getMedicalRecord() {
+        return medicalRecord;
     }
 
-    public void setMedicalRecordByRecordId(MedicalRecordEntity medicalRecordByRecordId) {
-        this.medicalRecordByRecordId = medicalRecordByRecordId;
+    public void setMedicalRecord(MedicalRecordEntity medicalRecordByRecordId) {
+        this.medicalRecord = medicalRecordByRecordId;
     }
 }

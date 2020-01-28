@@ -68,7 +68,7 @@ public class StageLauncher implements ApplicationListener<StageReadyEvent> {
             stage.setTitle(this.applicationTitle);
             stage.show();
 
-            if (/*false*/authorizeUserService.checkIsUserTokenExpired()){
+            if (authorizeUserService.checkIsUserTokenExpired()){
                 LaunchLoginPage(stage);
             }
         } catch (IOException e) {

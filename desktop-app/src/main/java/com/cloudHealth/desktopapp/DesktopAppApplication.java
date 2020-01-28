@@ -20,13 +20,6 @@ public class DesktopAppApplication extends Application {
     @Override
     public void init() throws Exception {
 
-        ApplicationContextInitializer<GenericApplicationContext> initializer =
-                ac -> {
-                    ac.registerBean(Application.class, () -> DesktopAppApplication.this);
-                    ac.registerBean(Parameters.class, this::getParameters);
-                    ac.registerBean(HostServices.class, this::getHostServices);
-                };
-
         this.context = new SpringApplicationBuilder()
                 .sources(BootfulApplication.class)
                 .initializers()
@@ -44,7 +37,4 @@ public class DesktopAppApplication extends Application {
         Platform.exit();
     }
 
-    private void checkIsUserAuthorised(){
-
-    }
 }
