@@ -1,5 +1,6 @@
 package com.cloudHealth.desktopapp.service;
 
+import com.cloudHealth.desktopapp.model.Patient;
 import com.cloudHealth.desktopapp.model.User;
 import com.cloudHealth.desktopapp.model.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
-import static com.cloudHealth.desktopapp.config.Constant.CLIENT_PROFILE_URL;
-import static com.cloudHealth.desktopapp.config.Constant.CLIENT_REGISTER_URL;
+import static com.cloudHealth.desktopapp.config.Constant.*;
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -51,5 +52,22 @@ public class PatientProfileServiceImpl implements PatientProfileService  {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public Patient getPatient(int patientId) {
+        String tempPatientId = patientId+"";
+        try {
+            ResponseEntity<Patient> responseEntity;
+            HttpEntity<String> patientRequestBody = new HttpEntity<>("",requestHttpHeaders.getHTTPRequestHeaders());
+            responseEntity= restTemplate.exchange(PATIENT_DETAILS+tempPatientId,HttpMethod.GET,patientRequestBody,Patient.class);
+            if (responseEntity.getStatusCode().equals(HttpStatus.OK)){
+                return responseEntity.getBody();
+            }
+            return new Patient();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Patient();
     }
 }

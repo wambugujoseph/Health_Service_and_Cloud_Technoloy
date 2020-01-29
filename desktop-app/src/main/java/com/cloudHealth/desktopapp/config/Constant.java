@@ -19,4 +19,5 @@ public class Constant {
     public static final String CLIENT_REGISTER_URL = MAIN_SERVICE_BASE_URL+"/register/client";
     public static final String CLIENT_PROFILE_URL = MAIN_SERVICE_BASE_URL+"/create/clientProfile";
     public static final String PATIENT_RECORD_URL = MAIN_SERVICE_BASE_URL+"/patient/MedicalRecords/";
+    public static final String PATIENT_DETAILS = MAIN_SERVICE_BASE_URL+"/patient/";
 }

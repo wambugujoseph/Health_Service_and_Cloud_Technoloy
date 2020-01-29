@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="718.0" style="-fx-background-color: #ffffff; -fx-border-color: none" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.uiHelper.PrescriptionDisplayController">
+   <children>
+      <AnchorPane layoutX="71.0" layoutY="40.0" prefHeight="97.0" prefWidth="625.0" style="-fx-border-color: #f4f4f4; -fx-background-color: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
+         <effect>
+            <DropShadow color="#aea8a8" height="27.0" radius="13.25" width="28.0" />
+         </effect>
+         <children>
+            <AnchorPane layoutX="11.0" layoutY="4.0" prefHeight="29.0" prefWidth="606.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="3.0">
+               <children>
+                  <Label layoutX="5.0" layoutY="2.0" text="Type:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="2.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="prescriptonTypeDisplay" layoutX="69.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="522.1367279291153" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="12.0" layoutY="33.0" prefHeight="55.0" prefWidth="604.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="33.0">
+               <children>
+                  <Label layoutY="6.0" text="Descritpion:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="6.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="precriptionDescriptionDisplay" layoutX="77.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="522.1367263793945" AnchorPane.bottomAnchor="39.98828125" AnchorPane.rightAnchor="0.8632736206054688" AnchorPane.topAnchor="5.05078125" />
+                  <JFXButton fx:id="ailmentDelBtn" contentDisplay="CENTER" layoutX="504.0" layoutY="37.0" style="-fx-background-color: #0067CE;" text=" " textAlignment="CENTER" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="60.0">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="DELETE" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ailmentEditBtn" contentDisplay="CENTER" layoutX="559.0" layoutY="34.0" style="-fx-background-color: #0067CE;" text=" " AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="10.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" wrappingWidth="15.0" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label fx:id="prescriptionDateLabel" layoutX="71.0" prefHeight="28.0" prefWidth="233.0" style="-fx-background-color: #ffffff" textFill="#141313" />
+   </children>
+</AnchorPane>

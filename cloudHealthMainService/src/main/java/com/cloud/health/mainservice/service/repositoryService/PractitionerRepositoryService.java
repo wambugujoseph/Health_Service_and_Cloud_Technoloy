@@ -4,6 +4,7 @@ import com.cloud.health.mainservice.model.User;
 import com.cloud.health.mainservice.model.UserProfile;
 import com.cloud.health.mainservice.model.entity.*;
 import com.cloud.health.mainservice.repository.*;
+import com.cloud.health.mainservice.repository.medicalRecord.PatientRepository;
 import com.cloud.health.mainservice.service.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,8 @@ public class PractitionerRepositoryService {
     private Notifications notifications;
     @Autowired
     private HealthPractitionerRepository healthPractitionerRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
 
     /**
@@ -122,6 +125,12 @@ public class PractitionerRepositoryService {
         userEntity.setDob(getSqlDate(user.getDob()));
         return userEntity;
     }
+
+    public PatientEntity getPatient(String patientID){
+        int tempPatientID = Integer.parseInt(patientID);
+        return patientRepository.findByPatientId(tempPatientID).orElse(new PatientEntity());
+    }
+
 
     private Date getSqlDate(String date){
         try {
