@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="646.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="31.0" layoutY="24.0" prefHeight="211.0" prefWidth="204.0" style="-fx-background-color: #ffffff; -fx-background-radius: 100; -fx-border-radius: 100;" AnchorPane.leftAnchor="31.0">
+         <children>
+            <ImageView fx:id="profileImage" fitHeight="212.0" fitWidth="204.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+         <effect>
+            <DropShadow color="#b9acac" radius="10.025" width="21.1" />
+         </effect>
+      </AnchorPane>
+      <Label layoutX="2.0" layoutY="281.0" prefHeight="17.0" prefWidth="83.0" text="ID :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="1.0" layoutY="313.0" prefHeight="19.0" prefWidth="91.0" text="First Name :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="340.0" prefHeight="19.0" prefWidth="91.0" text="Middle Name :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="368.0" prefHeight="19.0" prefWidth="91.0" text="Sir Name :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="395.0" prefHeight="19.0" prefWidth="91.0" text="Gender :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="423.0" prefHeight="19.0" prefWidth="91.0" text="Date of Birth :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="2.0" layoutY="449.0" prefHeight="19.0" prefWidth="91.0" text="Phone No :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="479.0" prefHeight="19.0" prefWidth="91.0" text="Email :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutY="510.0" prefHeight="19.0" prefWidth="91.0" text="Nationality :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="76.0" layoutY="5.0" prefHeight="17.0" prefWidth="127.0" text="Profile Image" underline="true" AnchorPane.rightAnchor="106.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="536.0" prefHeight="19.0" prefWidth="91.0" text="Patient ID :" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="userId" layoutX="93.0" layoutY="282.0" prefHeight="17.0" prefWidth="195.0" text="id" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="fName" layoutX="93.0" layoutY="314.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="mName" layoutX="93.0" layoutY="341.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="sName" layoutX="93.0" layoutY="369.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="gender" layoutX="93.0" layoutY="396.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="dob" layoutX="93.0" layoutY="424.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="phoneNo" layoutX="93.0" layoutY="450.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="email" layoutX="93.0" layoutY="480.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="nationality" layoutX="93.0" layoutY="511.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="patientId" layoutX="93.0" layoutY="537.0" prefHeight="17.0" prefWidth="195.0" text="Label" AnchorPane.rightAnchor="21.0">
+         <font>
+            <Font name="Arial Italic" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="113.0" layoutY="582.0" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #0067CE;" text="Profile" textFill="#f5f2f2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="113.0">
+         <graphic>
+            <FontAwesomeIconView fill="#ebe5e5" glyphName="USER" size="20" />
+         </graphic>
+      </JFXButton>
+      <Label layoutY="571.0" prefHeight="17.0" prefWidth="91.0" text="Record Id :" textFill="#2115cd" underline="true" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="571.0" prefHeight="17.0" prefWidth="195.0" text="Label" textFill="#4a17b9">
+         <font>
+            <Font name="Arial Bold Italic" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

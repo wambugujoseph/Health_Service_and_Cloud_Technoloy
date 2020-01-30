@@ -6,6 +6,8 @@ import com.cloud.health.mainservice.model.entity.*;
 import com.cloud.health.mainservice.repository.*;
 import com.cloud.health.mainservice.repository.medicalRecord.PatientRepository;
 import com.cloud.health.mainservice.service.Notifications;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,8 @@ public class PractitionerRepositoryService {
     @Autowired
     private PatientRepository patientRepository;
 
+    Logger logger = LoggerFactory.getLogger(PractitionerRepositoryService.class);
+
 
     /**
      * @param user to be persisted
@@ -71,7 +75,7 @@ public class PractitionerRepositoryService {
 
     public UserEntity getClientInfo(String userId){
        Optional<UserEntity> user = clientRepository.findByUserIdOrEmail(userId,userId);
-        return user.get();
+        return user.orElse(new UserEntity());
     }
 
     public HealthUnitEntity getHealthUnitEntity(String healthUnitName){
@@ -127,8 +131,14 @@ public class PractitionerRepositoryService {
     }
 
     public PatientEntity getPatient(String patientID){
-        int tempPatientID = Integer.parseInt(patientID);
-        return patientRepository.findByPatientId(tempPatientID).orElse(new PatientEntity());
+        int tempPatientID = 0;
+        try {
+            tempPatientID = Integer.parseInt(patientID);
+        } catch (NumberFormatException e) {
+           logger.info(e.getMessage());
+        }
+        UserEntity userEntity = getClientInfo(patientID);
+        return patientRepository.findByPatientIdOrUser(tempPatientID,userEntity.getUserId()).orElse(new PatientEntity());
     }
 
 

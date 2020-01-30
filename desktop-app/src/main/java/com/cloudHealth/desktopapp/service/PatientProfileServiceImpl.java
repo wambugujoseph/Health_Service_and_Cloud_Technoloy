@@ -57,11 +57,21 @@ public class PatientProfileServiceImpl implements PatientProfileService  {
     @Override
     public Patient getPatient(int patientId) {
         String tempPatientId = patientId+"";
+        return findPatient(tempPatientId);
+    }
+
+    @Override
+    public Patient getPatient(String userIdOrEmail) {
+
+        return findPatient(userIdOrEmail);
+    }
+
+    private Patient findPatient(String tempPatientId) {
         try {
             ResponseEntity<Patient> responseEntity;
-            HttpEntity<String> patientRequestBody = new HttpEntity<>("",requestHttpHeaders.getHTTPRequestHeaders());
-            responseEntity= restTemplate.exchange(PATIENT_DETAILS+tempPatientId,HttpMethod.GET,patientRequestBody,Patient.class);
-            if (responseEntity.getStatusCode().equals(HttpStatus.OK)){
+            HttpEntity<String> patientRequestBody = new HttpEntity<>("", requestHttpHeaders.getHTTPRequestHeaders());
+            responseEntity = restTemplate.exchange(PATIENT_DETAILS + tempPatientId, HttpMethod.GET, patientRequestBody, Patient.class);
+            if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                 return responseEntity.getBody();
             }
             return new Patient();

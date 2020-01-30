@@ -2,25 +2,32 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="657.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.AddPatientMedicalRecordController">
     <children>
         <AnchorPane prefHeight="35.0" prefWidth="1025.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Separator layoutY="32.0" prefHeight="0.0" prefWidth="1025.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0" />
-                <TextField layoutX="14.0" layoutY="5.0" prefHeight="25.0" prefWidth="310.0" promptText="     UserID/email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="14.0">
+                <TextField fx:id="userSearchTextField" layoutX="14.0" layoutY="5.0" prefHeight="25.0" prefWidth="310.0" promptText="     UserID/email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="14.0">
                <padding>
                   <Insets left="25.0" />
                </padding></TextField>
                 <FontAwesomeIconView fill="#4c7ec6" glyphName="SEARCH" layoutX="21.0" layoutY="23.0" size="15" AnchorPane.leftAnchor="21.0" />
-            <JFXButton layoutX="349.0" layoutY="5.0" style="-fx-background-color: #428bca; -fx-background-radius: 15;" text="Verify Patient Cloud Availability" textAlignment="CENTER">
+            <JFXButton fx:id="userSearchBtn" layoutX="349.0" layoutY="5.0" onAction="#isPatientCloudAvailable" style="-fx-background-color: #428bca; -fx-background-radius: 15;" text="Verify Patient Cloud Availability" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -30,27 +37,240 @@
             <tabs>
                 <Tab text="Consultation">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="635.0" prefWidth="1022.0" style="-fx-background-radius: 10;" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="635.0" prefWidth="1025.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <AnchorPane fx:id="consultationPatientDetailsPane" layoutX="14.0" layoutY="3.0" prefHeight="585.0" prefWidth="310.0" style="-fx-border-width: 0 0.5 0 0; -fx-border-color: #EBEBEB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <JFXTextArea fx:id="consultationDescription" layoutX="372.0" layoutY="266.0" prefHeight="210.0" prefWidth="575.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <JFXTextArea fx:id="consultationType" layoutX="373.0" layoutY="178.0" prefHeight="35.0" prefWidth="571.0" style="-fx-border-width: 0.5 0.5 0  0.5; -fx-border-color: green;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <Text layoutX="372.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultation Description" wrappingWidth="243.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="373.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultation Type" wrappingWidth="226.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="consultationDate" disable="true" labelFloat="true" layoutX="429.0" layoutY="79.0" prefHeight="30.0" prefWidth="262.0" promptText="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="consultationClearBtn" layoutX="715.0" layoutY="518.0" style="-fx-background-color: #0067CE;" text="Clear" textFill="#f8f5f5">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="consultationUploadBtn" layoutX="857.0" layoutY="518.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="391.0" layoutY="104.0" size="30" />
+                        <ButtonBar fx:id="btnBar1" layoutX="872.0" layoutY="3.0" prefHeight="35.0" prefWidth="144.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="3.0" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Document File">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <AnchorPane fx:id="filePatientDetailsPane" layoutX="30.0" layoutY="2.0" prefHeight="585.0" prefWidth="310.0" style="-fx-border-width: 0 0.5 0 0; -fx-border-color: #EBEBEB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <JFXTextField fx:id="fileDate" disable="true" labelFloat="true" layoutX="464.0" layoutY="76.0" prefHeight="30.0" prefWidth="262.0" promptText="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="423.0" layoutY="101.0" size="30" />
+                        <CheckBox fx:id="renameFileCheckBox" layoutX="423.0" layoutY="220.0" mnemonicParsing="false" text="Rename the file">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <JFXTextField fx:id="fileLocationUri" layoutX="423.0" layoutY="168.0" prefHeight="25.0" prefWidth="398.0" style="-fx-border-color: black; -fx-border-width: 0.5 0.5 0 0.5;" />
+                        <Button fx:id="chooseFileBtn" layoutX="821.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 0.5;" text="..." />
+                        <Label layoutX="424.0" layoutY="145.0" prefHeight="17.0" prefWidth="132.0" text="Choose a file to upload">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="newFileName" labelFloat="true" layoutX="565.0" layoutY="217.0" prefHeight="25.0" prefWidth="256.0" promptText="New file name" />
+                        <JFXTextArea fx:id="fileDescription" layoutX="424.0" layoutY="369.0" prefHeight="147.0" prefWidth="567.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <JFXTextArea fx:id="fileType" layoutX="423.0" layoutY="286.0" prefHeight="35.0" prefWidth="571.0" style="-fx-border-width: 0.5 0.5 0  0.5; -fx-border-color: green;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <Text layoutX="424.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File Description" wrappingWidth="243.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="424.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File Type" wrappingWidth="226.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXButton fx:id="fileClearFieldsBtn" layoutX="818.0" layoutY="531.0" style="-fx-background-color: #0067CE;" text="Clear" textFill="#f8f5f5">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="fileUploadBtn" layoutX="911.0" layoutY="531.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <ButtonBar fx:id="btnBar2" layoutX="867.0" layoutY="3.0" prefHeight="35.0" prefWidth="144.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Surgery">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <AnchorPane fx:id="surgeryPatientDetailsPane" prefHeight="585.0" prefWidth="310.0" style="-fx-border-color: #EBEBEB; -fx-border-width: 0 0.5 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <JFXTextArea fx:id="surgeryDescription" layoutX="350.0" layoutY="264.0" prefHeight="210.0" prefWidth="575.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <JFXTextArea fx:id="surgeryType" layoutX="352.0" layoutY="161.0" prefHeight="35.0" prefWidth="571.0" style="-fx-border-width: 0.5 0.5 0  0.5; -fx-border-color: green;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <Text layoutX="352.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surgery Description" wrappingWidth="243.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="352.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surgery Type" wrappingWidth="226.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="surgeryDate" disable="true" labelFloat="true" layoutX="389.0" layoutY="81.0" prefHeight="30.0" prefWidth="262.0" promptText="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="surgeryClearFieldsBtn" layoutX="722.0" layoutY="516.0" style="-fx-background-color: #0067CE;" text="Clear" textFill="#f8f5f5">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="surgeryUploadBtn" layoutX="845.0" layoutY="516.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="350.0" layoutY="106.0" size="30" AnchorPane.topAnchor="80.28571510314941" />
+                        <ButtonBar fx:id="btnBar3" layoutX="874.0" layoutY="3.0" prefHeight="35.0" prefWidth="144.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="3.0" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Ailment">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <AnchorPane fx:id="ailmentPatientDetailsPane" prefHeight="585.0" prefWidth="310.0" style="-fx-border-color: #EBEBEB; -fx-border-width: 0 0.5 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <JFXTextArea fx:id="ailmentDescription" layoutX="369.0" layoutY="253.0" prefHeight="210.0" prefWidth="575.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <JFXTextArea fx:id="ailmentType" layoutX="369.0" layoutY="163.0" prefHeight="35.0" prefWidth="571.0" style="-fx-border-width: 0.5 0.5 0  0.5; -fx-border-color: green;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <Text layoutX="369.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ailment Description" wrappingWidth="243.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="369.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ailment Type" wrappingWidth="226.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="ailmentDate" disable="true" labelFloat="true" layoutX="401.0" layoutY="90.0" prefHeight="30.0" prefWidth="262.0" promptText="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="ailmentClearFieldsBtn" layoutX="738.0" layoutY="498.0" style="-fx-background-color: #0067CE;" text="Clear" textFill="#f8f5f5">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="ailmentUploadBtn" layoutX="860.0" layoutY="498.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="361.0" layoutY="115.0" size="30" />
+                        <ButtonBar fx:id="btnBar4" layoutX="872.0" layoutY="3.0" prefHeight="35.0" prefWidth="144.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="3.0" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Prescription">
+                <Tab fx:id="prescriptionPatientDetailsPane" text="Prescription">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1025.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <AnchorPane prefHeight="585.0" prefWidth="310.0" style="-fx-border-color: #EBEBEB; -fx-border-width: 0 0.5 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <JFXTextArea fx:id="prescriptionDescription" layoutX="369.0" layoutY="264.0" prefHeight="210.0" prefWidth="575.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <JFXTextArea fx:id="prescriptionType" layoutX="371.0" layoutY="180.0" prefHeight="35.0" prefWidth="571.0" style="-fx-border-width: 0.5 0.5 0  0.5; -fx-border-color: green;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextArea>
+                        <Text layoutX="369.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Description" wrappingWidth="243.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="371.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prescription Type" wrappingWidth="226.13671875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="prescriptionDate" disable="true" labelFloat="true" layoutX="414.0" layoutY="104.0" prefHeight="30.0" prefWidth="262.0" promptText="Date">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="prescriptionClearFieldsBtn" layoutX="755.0" layoutY="495.0" style="-fx-background-color: #0067CE;" text="Clear" textFill="#f8f5f5">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="prescriptionUploadBtn" layoutX="864.0" layoutY="495.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="371.0" layoutY="129.0" size="30" />
+                        <ButtonBar fx:id="btnBar5" layoutX="872.0" layoutY="3.0" prefHeight="35.0" prefWidth="144.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="3.0" />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
             </tabs>
