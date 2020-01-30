@@ -33,7 +33,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Text fx:id="descriptionDisplay" layoutX="70.0" layoutY="12.94921875" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="522.1367263793945" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="0.0" />
+                  <Text fx:id="descriptionDisplay" layoutX="85.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="522.1367263793945" AnchorPane.bottomAnchor="55.98828125" AnchorPane.rightAnchor="0.8632736206054688" AnchorPane.topAnchor="0.05078125" />
                   <JFXButton fx:id="delBtn" contentDisplay="CENTER" layoutX="511.0" layoutY="42.0" style="-fx-background-color: #0067CE;" text=" " textAlignment="CENTER" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="60.0">
                      <graphic>
                         <MaterialDesignIconView fill="WHITE" glyphName="DELETE" size="20" />

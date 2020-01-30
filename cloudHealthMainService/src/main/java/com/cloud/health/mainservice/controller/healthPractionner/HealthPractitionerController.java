@@ -227,4 +227,14 @@ public class HealthPractitionerController {
             }else
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
+
+    @RequestMapping(value = "/patient/{patientID}")
+    public ResponseEntity<Object> getPatient(@PathVariable String patientID){
+       PatientEntity patientEntity =  practitionerRepositoryService.getPatient(patientID);
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(patientEntity);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }

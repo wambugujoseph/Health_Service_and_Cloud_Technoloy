@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UiAlertsAndPopUp {
 
-    public Alert showAlert(Alert.AlertType alertType, String contentText, String title, String headerText, Node graphic){
+    public  Alert showAlert(Alert.AlertType alertType, String contentText, String title, String headerText, Node graphic){
         Alert alert = new Alert(alertType);
         alert.setContentText(contentText);
         alert.setTitle(title);

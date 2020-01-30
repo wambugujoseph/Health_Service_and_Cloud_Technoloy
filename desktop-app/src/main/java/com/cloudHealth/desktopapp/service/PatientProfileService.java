@@ -1,5 +1,6 @@
 package com.cloudHealth.desktopapp.service;
 
+import com.cloudHealth.desktopapp.model.Patient;
 import com.cloudHealth.desktopapp.model.User;
 import com.cloudHealth.desktopapp.model.UserProfile;
 
@@ -16,5 +17,7 @@ public interface PatientProfileService {
 
     boolean createProfile(User user, UserProfile userProfile);
     //boolean creatUserProfile(UserProfile userProfile);
+    Patient getPatient(int patientId);
+    Patient getPatient(String userIdOrEmail);
 
 }

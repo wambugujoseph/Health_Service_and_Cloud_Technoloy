@@ -1,13 +1,15 @@
 package com.cloudHealth.desktopapp.uiControls;
 
-import com.cloudHealth.desktopapp.model.Consultation;
-import com.cloudHealth.desktopapp.model.MedicalRecord;
+import com.cloudHealth.desktopapp.model.*;
 import com.cloudHealth.desktopapp.service.MedicalRecordServiceImpl;
+import com.cloudHealth.desktopapp.service.PatientProfileServiceImpl;
+import com.cloudHealth.desktopapp.util.StringFormatter;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -87,20 +89,31 @@ public class FindPatientMedicalRecordController implements Initializable {
     @FXML private Label patientSurgeryID;
     @FXML private ScrollPane surgeryScrollPane;
     @FXML private VBox consultationVBoxView;
+    @FXML private VBox ailmentVBoxView;
+    @FXML private VBox prescriptionVBoxView;
+    @FXML private VBox surgeryVBoxView;
 
 
 
     @Autowired
     private MedicalRecordServiceImpl medicalRecordService;
-    private Resource consultationContentDisplay;
+    @Autowired
+    private PatientProfileServiceImpl patientProfileService;
+    private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay, surgeryContentDisplay;
     private ApplicationContext ac;
 
 
     private Collection<MedicalRecord> medicalRecordCollection = new ArrayList<>();
 
-    FindPatientMedicalRecordController(@Value("${classpath:/templates/helperLayout/display.fxml}") Resource consultationContentDisplay,
+    FindPatientMedicalRecordController(@Value("${classpath:/templates/helperLayout/ailmentDisplay.fxml}") Resource ailmentContentDisplay,
+                                       @Value("${classpath:/templates/helperLayout/consultationDisplay.fxml}") Resource consultationContentDisplay,
+                                       @Value("${classpath:/templates/helperLayout/prescriptionDisplay.fxml}") Resource prescriptionContentDisplay,
+                                       @Value("${classpath:/templates/helperLayout/surgeryDisplay.fxml}") Resource surgeryContentDisplay,
                                        ApplicationContext ac) {
         this.consultationContentDisplay = consultationContentDisplay;
+        this.ailmentContentDisplay = ailmentContentDisplay;
+        this.prescriptionContentDisplay = prescriptionContentDisplay;
+        this.surgeryContentDisplay = surgeryContentDisplay;
         this.ac = ac;
 
     }
@@ -139,7 +152,6 @@ public class FindPatientMedicalRecordController implements Initializable {
                     for (MedicalRecord medicalRecord : medicalRecords) {
                         populatedDrawerContent(medicalRecord);
                         displayMedicalRecord(medicalRecord);
-                        Collection<Consultation> consultations = medicalRecord.getConsultations();
                     }
                 }
             }
@@ -159,6 +171,19 @@ public class FindPatientMedicalRecordController implements Initializable {
     private void displayMedicalRecord(MedicalRecord medicalRecord){
         //get display Areas
         Collection<Consultation> consultations = medicalRecord.getConsultations();
+        displayMedicalConsultation(consultations);
+        Collection<Ailment> ailments = medicalRecord.getAilments();
+        displayMedicalAilment(ailments);
+        Collection<Prescription> prescriptions = medicalRecord.getPrescriptions();
+        displayMedicalPrescription(prescriptions);
+        Collection<Surgery> surgeries = medicalRecord.getSurgeries();
+        displayMedicalSurgery(surgeries);
+
+        displayPatientDetails(medicalRecord.getPatientId());
+
+    }
+
+    private void displayMedicalConsultation(Collection<Consultation> consultations) {
         ObservableList<AnchorPane> consultationAnchorPanes = FXCollections.observableArrayList();
 
         for (Consultation consultation: consultations) {
@@ -172,10 +197,89 @@ public class FindPatientMedicalRecordController implements Initializable {
             consultationAnchorPanes.add(displayAnchorPane);
         }
         consultationVBoxView.getChildren().addAll(consultationAnchorPanes);
+    }
+
+    private void displayMedicalAilment(Collection<Ailment> ailments){
+
+        ObservableList<AnchorPane> ailmentAnchorPanes = FXCollections.observableArrayList();
+
+        for (Ailment ailment: ailments) {
+            AnchorPane displayAnchorPane = getAilmentDisplayHolder();
+            Label dateLabel = (Label) displayAnchorPane.lookup("#ailmentDateLabel");
+            Text typeTextDisplay = (Text) displayAnchorPane.lookup("#ailmentTypeDisplay");
+            Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#ailmentDescriptionDisplay");
+            dateLabel.setText(String.valueOf(ailment.getCreated().toLocalDate()));
+            typeTextDisplay.setText(ailment.getType());
+            descriptionTxtDisplay.setText(ailment.getDescription());
+            ailmentAnchorPanes.add(displayAnchorPane);
+        }
+        ailmentVBoxView.getChildren().addAll(ailmentAnchorPanes);
 
     }
 
-    private void displayPatientDetails(String patientId){
+    private void displayMedicalPrescription(Collection<Prescription> prescriptions){
+
+        ObservableList<AnchorPane> prescriptionAnchorPanes = FXCollections.observableArrayList();
+        for (Prescription prescription: prescriptions) {
+            AnchorPane displayAnchorPane = getPrescriptionDisplayHolder();
+            Label dateLabel = (Label) displayAnchorPane.lookup("#prescriptionDateLabel");
+            Text typeTextDisplay = (Text) displayAnchorPane.lookup("#prescriptonTypeDisplay");
+            Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#precriptionDescriptionDisplay");
+            dateLabel.setText(String.valueOf(prescription.getCreated().toLocalDate()));
+            typeTextDisplay.setText(prescription.getMedication());
+            descriptionTxtDisplay.setText(prescription.getDescrption());
+            prescriptionAnchorPanes.add(displayAnchorPane);
+        }
+        prescriptionVBoxView.getChildren().addAll(prescriptionAnchorPanes);
+
+    }
+
+    private void displayMedicalSurgery(Collection<Surgery> surgeries){
+
+        ObservableList<AnchorPane> surgeryAnchorPanes = FXCollections.observableArrayList();
+        for (Surgery surgery: surgeries) {
+            AnchorPane displayAnchorPane = getSurgeryDisplayHolder();
+            Label dateLabel = (Label) displayAnchorPane.lookup("#surgeryDateLabel");
+            Text typeTextDisplay = (Text) displayAnchorPane.lookup("#surgeryTypeDisplay");
+            Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#surgeryDescriptionDisplay");
+            dateLabel.setText(String.valueOf(surgery.getCreated().toLocalDate()));
+            typeTextDisplay.setText(surgery.getDescrption());
+            descriptionTxtDisplay.setText(surgery.getDescrption());
+            surgeryAnchorPanes.add(displayAnchorPane);
+        }
+        surgeryVBoxView.getChildren().addAll(surgeryAnchorPanes);
+
+    }
+
+    private void displayPatientDetails(int patientId) {
+        Platform.runLater(() -> {
+            Patient patient = patientProfileService.getPatient(patientId);
+            User user = patient.getUserByUser();
+            String name = StringFormatter.capitalizeWord(user.getFirstName() + " " + user.getSirName());
+            patientConsultationName.setText(name);
+            medicalFilePatientName.setText(name);
+            patientSurgeryName.setText(name);
+            PatientPrescriptionName.setText(name);
+            patientAilmentName.setText(name);
+
+            patientConsultationEmail.setText(user.getEmail());
+            medicalFilePatientEmail.setText(user.getEmail());
+            patientSurgeryEmail.setText(user.getEmail());
+            PatientPrescriptionEmail.setText(user.getEmail());
+            patientAilmentEmail.setText(user.getEmail());
+
+            patientConsultationPhone.setText(user.getPhoneNumber());
+            medicalFilePatientPhone.setText(user.getPhoneNumber());
+            patientSurgeryPhone.setText(user.getPhoneNumber());
+            PatientPrescriptionPhone.setText(user.getPhoneNumber());
+            patientAilmentPhone.setText(user.getPhoneNumber());
+
+            patientConsultationID.setText(user.getUserId());
+            medicalFilePatientID.setText(user.getUserId());
+            patientSurgeryID.setText(user.getUserId());
+            PatientPrescriptionID.setText(user.getUserId());
+            patientAilmentID.setText(user.getUserId());
+        });
 
     }
 
@@ -192,5 +296,48 @@ public class FindPatientMedicalRecordController implements Initializable {
         }
         return new AnchorPane();
     }
+
+    private AnchorPane getAilmentDisplayHolder(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.ailmentContentDisplay.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            return anchorPane;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new AnchorPane();
+    }
+
+    private AnchorPane getPrescriptionDisplayHolder(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.prescriptionContentDisplay .getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            return anchorPane;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new AnchorPane();
+    }
+
+    private AnchorPane getSurgeryDisplayHolder(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.surgeryContentDisplay .getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            return anchorPane;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new AnchorPane();
+    }
+
 
 }
