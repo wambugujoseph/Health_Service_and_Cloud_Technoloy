@@ -21,7 +21,7 @@ public class PractitionerEntity {
     private String skill;
     private String description;
     private int healthUnitId;
-    private UserEntity userInfo;
+    private UserEntity user;
     private HealthUnitEntity healthUnit;
 
     @Basic
@@ -102,12 +102,12 @@ public class PractitionerEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-    public UserEntity getUserInfo() {
-        return userInfo;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserInfo(UserEntity userByUserId) {
-        this.userInfo = userByUserId;
+    public void setUser(UserEntity userByUserId) {
+        this.user = userByUserId;
     }
 
     @ManyToOne

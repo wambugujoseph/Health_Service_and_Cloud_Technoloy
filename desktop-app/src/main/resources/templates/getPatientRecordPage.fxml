@@ -27,7 +27,7 @@
          </children></AnchorPane>
       <JFXTabPane layoutX="1.0" layoutY="34.0" prefHeight="623.0" prefWidth="1025.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
          <tabs>
-            <Tab text="Consultation">
+            <Tab text="Consultation And Progress Notes">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="635.0" prefWidth="1022.0">
                      <children>
@@ -96,7 +96,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Medical  Files">
+            <Tab text="Patient Medical  Files">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -237,7 +237,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Prescription">
+            <Tab text="Prescription and Medications">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

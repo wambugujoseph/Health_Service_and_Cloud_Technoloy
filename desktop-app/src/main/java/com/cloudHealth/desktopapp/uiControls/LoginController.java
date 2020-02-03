@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -55,24 +57,21 @@ public class LoginController implements Initializable {
     @Autowired
     RequestHttpHeaders requestHttpHeaders;
 
+    Logger logger = LoggerFactory.getLogger(LoginController.class);
     private JFXDialog dialog;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LogInSubmitBtn.setOnAction(event -> {
             Platform.runLater(this::logIn);
-//            ResponseEntity<String> response;
-//            try {
-//                HttpEntity<String> requestBody = new HttpEntity<>("", requestHttpHeaders.getHTTPRequestHeaders());
-//                response = restTemplate.
-//                        exchange("http://localhost:8080/api/v1/username", HttpMethod.GET, requestBody, String.class);
-//                System.out.println(response.getBody());
-//            } catch (HttpClientErrorException e) {
-//                System.out.println(e.getMessage());
-//            }
+
         });
 
-        loginPage.setOnMouseClicked(event -> dialog.close());
+        try {
+            loginPage.setOnMouseClicked(event -> dialog.close());
+        } catch (Exception e) {
+            logger.error("Login Fail dialogue is not Open :"+ e.getMessage());
+        }
 
     }
 

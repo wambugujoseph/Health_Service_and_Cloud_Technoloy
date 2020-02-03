@@ -62,7 +62,7 @@ public class SuperUserRepositoryService {
         practitionerEntity.setTitle(healthPractitioner.getTitle());
         practitionerEntity.setSkill(healthPractitioner.getSkill());
         practitionerEntity.setDescription(healthPractitioner.getDescription());
-        practitionerEntity.setUserInfo(practitionerRepositoryService.getClientInfo(healthPractitioner.getUserId()));
+        practitionerEntity.setUser(practitionerRepositoryService.getClientInfo(healthPractitioner.getUserId()));
         practitionerEntity.setHealthUnit(healthUnitEntity);
         practitionerEntity.setHealthUnitId(healthUnitEntity.getHealthUnitId());
         return practitionerRepository.save(practitionerEntity);

@@ -2,6 +2,7 @@ package com.cloudHealth.desktopapp.config;
 
 import com.cloudHealth.desktopapp.service.AuthorizeUserService;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -28,6 +29,10 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
         ClientHttpResponse response = execution.execute(httpRequest,body);
 
         response.getHeaders().add("Authorization","Bearer "+ authorizeUserService.getUserAccessToken());
+        //invoke open Login page if unauthorised
+        if (response.getStatusCode().equals(HttpStatus.UNAUTHORIZED)){
+            System.out.println("Unauthorised ++++++++++++++++++++++");
+        }
         return response;
     }
 

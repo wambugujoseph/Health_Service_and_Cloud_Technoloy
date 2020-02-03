@@ -120,6 +120,11 @@ public class AuthorizeUserService {
         }
     }
 
+    public  String getUserEmail(){
+
+        return (String) jwtAuthUtil.extractAllClaims(getUserAccessToken()).get("email");
+    }
+
     public boolean logout(){
         try {
             Map<Object, Object> token = new HashMap<>();

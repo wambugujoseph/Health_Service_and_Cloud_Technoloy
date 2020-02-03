@@ -3,10 +3,13 @@ package com.cloud.health.mainservice.controller.healthPractionner;
 import com.cloud.health.mainservice.model.User;
 import com.cloud.health.mainservice.model.UserProfile;
 import com.cloud.health.mainservice.model.entity.*;
-import com.cloud.health.mainservice.model.medicalRecord.*;
+import com.cloud.health.mainservice.model.medicalRecord.HealthRecord;
+import com.cloud.health.mainservice.model.medicalRecord.MedicalFile;
 import com.cloud.health.mainservice.service.filestorage.ProfileFileStorageService;
 import com.cloud.health.mainservice.service.repositoryService.PractitionerMedicalRecordService;
 import com.cloud.health.mainservice.service.repositoryService.PractitionerRepositoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,14 +37,11 @@ public class HealthPractitionerController {
 
     @Autowired
     private ProfileFileStorageService profileFileStorageService;
-
     @Autowired
     private PractitionerRepositoryService practitionerRepositoryService;
-
     @Autowired
     private PractitionerMedicalRecordService practitionerMedicalRecordService;
-
-
+    Logger logger = LoggerFactory.getLogger(HealthPractitionerController.class);
     /**
      * @param file               profile picture of client
      * @param redirectAttributes to be contained in the redirect Url
@@ -79,18 +79,32 @@ public class HealthPractitionerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(OBJECT_IS_EMPTY);
     }
 
-    @PostMapping(value = "/create/clientProfile")
+    @PostMapping(value = "/clientProfile")
     public ResponseEntity<Object> addClientProfile(@RequestBody UserProfile userProfile) {
         if (!(userProfile == null)) {
-            boolean isProfileCreated = practitionerRepositoryService.addClientProfile(userProfile);
-            if (isProfileCreated) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("{\"Profile\":\"Created\"}");
+            try {
+                UserProfileEntity isProfileCreated = practitionerRepositoryService.addClientProfile(userProfile);
+                return ResponseEntity.status(HttpStatus.CREATED).body(isProfileCreated);
+            } catch (Exception e) {
+                logger.error("Failed to upload the profile === "+  e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
             }
         }
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-    @PostMapping(value = "/create/medicalRecord")
+    @RequestMapping(value = "/clientProfile/{userEmailOrId}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getClientProfile(@PathVariable String userEmailOrId){
+            try {
+                UserProfileEntity userProfileEntity = practitionerRepositoryService.getClientProfile(userEmailOrId);
+                return ResponseEntity.status(HttpStatus.OK).body(userProfileEntity);
+            }catch (Exception e){
+                logger.error("TransientObjectException: Could not find the profile :"+e.getMessage());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            }
+    }
+
+    @PostMapping(value = "/patient/medicalRecord")
     public ResponseEntity<Object> createMedicalRecord(@RequestBody HealthRecord healthRecord) {
         if (!(healthRecord == null)) {
             try {
@@ -105,7 +119,7 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/patient/consultation")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Consultation consultation) {
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody ConsultationEntity consultation) {
         if (consultation != null) {
             try {
                 ConsultationEntity consultationEntity = practitionerMedicalRecordService.addMedicalConsultation(consultation);
@@ -123,7 +137,7 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/patient/ailment")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Ailment ailment) {
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody AilmentEntity ailment) {
         if (ailment != null) {
             try {
                 AilmentEntity ailmentEntity = practitionerMedicalRecordService.addMedicalAilment(ailment);
@@ -159,7 +173,7 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/patient/surgery")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Surgery surgery) {
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody SurgeryEntity surgery) {
         if (surgery != null) {
             try {
                 SurgeryEntity surgeryEntity = practitionerMedicalRecordService.addMedicalSurgery(surgery);
@@ -177,7 +191,7 @@ public class HealthPractitionerController {
     }
 
     @PostMapping(value = "/patient/prescription")
-    public ResponseEntity<Object> addHealthConsultation(@RequestBody Prescription prescription) {
+    public ResponseEntity<Object> addHealthConsultation(@RequestBody PrescriptionEntity prescription) {
         if (prescription != null) {
             try {
                 PrescriptionEntity prescriptionEntity = practitionerMedicalRecordService.addMedicalPrescription(prescription);
@@ -211,7 +225,7 @@ public class HealthPractitionerController {
         } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
-    @RequestMapping(value = "/patient/MedicalRecords/{patientID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/patient/medicalRecord/{patientID}", method = RequestMethod.GET)
     public ResponseEntity<Object> getMedicalRecord(@PathVariable String patientID){
             if (!patientID.isEmpty()){
                 try {
@@ -235,6 +249,18 @@ public class HealthPractitionerController {
             return ResponseEntity.status(HttpStatus.OK).body(patientEntity);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value="/practitioner/{userIdOrEmail}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPractitioner(@PathVariable String userIdOrEmail){
+        try {
+            PractitionerEntity practitionerEntity = practitionerRepositoryService.getPractitionerEntity(userIdOrEmail);
+            return ResponseEntity.status(HttpStatus.OK).body(practitionerEntity);
+        } catch (Exception e) {
+            logger.error("Could not get PractitionerEntity == "+ e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Could not get PractitionerEntity Error" +e.getMessage());
         }
     }
 }

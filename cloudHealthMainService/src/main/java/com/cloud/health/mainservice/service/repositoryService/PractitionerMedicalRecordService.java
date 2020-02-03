@@ -65,29 +65,15 @@ public class PractitionerMedicalRecordService {
         return medicalRecordRepository.save(medicalRecordEntity);
     }
 
-    public ConsultationEntity addMedicalConsultation(Consultation consultation) {
-        ConsultationEntity consultationEntity = new ConsultationEntity();
-        consultationEntity.setMedicalRecord(getMedicalRecord(consultation.getUserId()));
-        consultationEntity.setRecordId(getMedicalRecord(consultation.getUserId()).getRecordId());
-        consultationEntity.setType(consultation.getType());
-        consultationEntity.setDescrption(consultation.getDescription());
-        consultationEntity.setCreated(Date.valueOf(LocalDate.now()));
-        consultationEntity = consultationRepository.save(consultationEntity);
+    public ConsultationEntity addMedicalConsultation(ConsultationEntity consultation) {
+        ConsultationEntity consultationEntity = consultationRepository.save(consultation);
         consultationEntity.setMedicalRecord(null);
         return consultationEntity;
     }
 
-    public AilmentEntity addMedicalAilment(Ailment ailment) {
-        AilmentEntity ailmentEntity = new AilmentEntity();
-        ailmentEntity.setMedicalRecord(getMedicalRecord(ailment.getUserId()));
-        ailmentEntity.setCreated(Date.valueOf(LocalDate.now()));
-        ailmentEntity.setDescription(ailment.getDescription());
-        ailmentEntity.setRecordId(getMedicalRecord(ailment.getUserId()).getRecordId());
-        ailmentEntity.setType(ailment.getType());
-        ailmentEntity.setAilmentId(0);
-        ailmentEntity = ailmentRepository.save(ailmentEntity);
+    public AilmentEntity addMedicalAilment(AilmentEntity ailment) {
+        AilmentEntity ailmentEntity = ailmentRepository.save(ailment);
         ailmentEntity.setMedicalRecord(null);
-
         return ailmentEntity;
     }
 
@@ -97,35 +83,22 @@ public class PractitionerMedicalRecordService {
         medicalFileEntity.setCreated(Date.valueOf(LocalDate.now()));
         medicalFileEntity.setDescrption(medicalFile.getDescription());
         medicalFileEntity.setFileUrl(fileName);
-        medicalFileEntity.setMedicalRecord(getMedicalRecord(medicalFile.getUserId()));
+        medicalFileEntity.setMedicalRecord(medicalFile.getMedicalRecord());
         medicalFileEntity.setRecordType(medicalFile.getRecordType());
-        medicalFileEntity.setRecordId(getMedicalRecord(medicalFile.getUserId()).getRecordId());
+        medicalFileEntity.setRecordId(medicalFile.getMedicalRecord().getRecordId());
         medicalFileEntity = medicalFileRepository.save(medicalFileEntity);
         medicalFileEntity.setMedicalRecord(null);
         return medicalFileEntity;
     }
 
-    public SurgeryEntity addMedicalSurgery(Surgery surgery) {
-        SurgeryEntity surgeryEntity = new SurgeryEntity();
-        surgeryEntity.setCreated(Date.valueOf(LocalDate.now()));
-        surgeryEntity.setDescrption(surgery.getDescription());
-        surgeryEntity.setMedicalRecord(getMedicalRecord(surgery.getUserId()));
-        surgeryEntity.setType(surgery.getType());
-        surgeryEntity.setRecordId(getMedicalRecord(surgery.getUserId()).getRecordId());
-        surgeryEntity = surgeryRepository.save(surgeryEntity);
+    public SurgeryEntity addMedicalSurgery(SurgeryEntity surgery) {
+        SurgeryEntity surgeryEntity = surgeryRepository.save(surgery);
         surgeryEntity.setMedicalRecord(null);
-
         return surgeryEntity;
     }
 
-    public PrescriptionEntity addMedicalPrescription(Prescription prescription) {
-        PrescriptionEntity prescriptionEntity = new PrescriptionEntity();
-        prescriptionEntity.setCreated(Date.valueOf(LocalDate.now()));
-        prescriptionEntity.setDescrption(prescription.getDescription());
-        prescriptionEntity.setMedication(prescription.getMedication());
-        prescriptionEntity.setMedicalRecord(getMedicalRecord(prescription.getUserId()));
-        prescriptionEntity.setRecordId(getMedicalRecord(prescription.getUserId()).getRecordId());
-        prescriptionEntity = prescriptionRepository.save(prescriptionEntity);
+    public PrescriptionEntity addMedicalPrescription(PrescriptionEntity prescription) {
+        PrescriptionEntity prescriptionEntity = prescriptionRepository.save(prescription);
         prescriptionEntity.setMedicalRecord(null);
 
         return prescriptionEntity;
@@ -135,7 +108,10 @@ public class PractitionerMedicalRecordService {
         PatientEntity patientEntity = new PatientEntity();
         patientEntity.setUser(userId);
         patientEntity.setUserByUser(practitionerRepositoryService.getClientInfo(userId));
-        return patientRepository.save(patientEntity);
+        if (!patientRepository.findByUser(userId).isPresent()) {
+            return patientRepository.save(patientEntity);
+        }else
+            return patientRepository.findByUser(userId).orElse(new PatientEntity());
     }
 
     private PractitionerEntity getPractitionerEntity(String practitionerId) {
@@ -143,11 +119,10 @@ public class PractitionerMedicalRecordService {
     }
 
     private MedicalRecordEntity getMedicalRecord(String userId) {
-        MedicalRecordEntity medicalRecordEntity = medicalRecordRepository.findByPatientId(
+
+        return medicalRecordRepository.findByPatientId(
                 Objects.requireNonNull(patientRepository.findByUser(userId).orElse(null)).getPatientId()
         ).orElse(null);
-
-        return medicalRecordEntity;
     }
 
     public List<MedicalRecordEntity> getListMedicalRecord(String userIdOrEmail) {

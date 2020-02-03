@@ -1,5 +1,6 @@
 package com.cloud.health.mainservice.repository;
 
+import com.cloud.health.mainservice.model.entity.UserEntity;
 import com.cloud.health.mainservice.model.entity.UserProfileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Project: cloudHealthMainService
  */
 public interface ClientProfileRepository extends JpaRepository<UserProfileEntity, Integer> {
+
+    UserProfileEntity findByOwner(UserEntity userId);
 }

@@ -12,7 +12,7 @@
 <AnchorPane fx:id="profileHeaderAndTab" prefHeight="400.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.PatientProfileController">
    <children>
       <Separator layoutY="46.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
-      <JFXButton fx:id="newProfile" buttonType="RAISED" layoutX="13.0" layoutY="3.0" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="New" AnchorPane.leftAnchor="13.0">
+      <JFXButton fx:id="newProfile" buttonType="RAISED" layoutX="13.0" layoutY="3.0" onAction="#setNewProfile" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="New" AnchorPane.leftAnchor="13.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -20,9 +20,9 @@
             <FontAwesomeIconView fill="#171003" fontSmoothingType="LCD" glyphName="PLUS_SQUARE" size="20" />
          </graphic>
       </JFXButton>
-      <TextField fx:id="searchTxtField" layoutX="246.0" layoutY="7.0" prefHeight="25.0" prefWidth="316.0" promptText="Username/Email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="246.0" />
+      <TextField fx:id="searchTxtField" layoutX="246.0" layoutY="7.0" onKeyPressed="#searchProfile" prefHeight="25.0" prefWidth="316.0" promptText="Username/Email" style="-fx-background-radius: 15;" AnchorPane.leftAnchor="246.0" />
       <FontAwesomeIconView fill="#0909eb" glyphName="SEARCH" layoutX="539.0" layoutY="24.0" size="15" AnchorPane.leftAnchor="539.0" />
-      <JFXButton fx:id="editProfile" buttonType="RAISED" layoutX="114.0" layoutY="2.0" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="Edit" AnchorPane.leftAnchor="114.0">
+      <JFXButton fx:id="editProfile" buttonType="RAISED" layoutX="114.0" layoutY="2.0" onAction="#setEnableProfileEdit" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #f49d06;" text="Edit" AnchorPane.leftAnchor="114.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

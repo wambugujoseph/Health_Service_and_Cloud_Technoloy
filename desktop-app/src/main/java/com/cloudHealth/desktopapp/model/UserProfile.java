@@ -1,5 +1,7 @@
 package com.cloudHealth.desktopapp.model;
 
+import lombok.Data;
+
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
@@ -8,6 +10,7 @@ package com.cloudHealth.desktopapp.model;
  * Time: 3:35 AM
  * Project: cloudHealthMainService
  */
+@Data
 public class UserProfile {
 
     private int profileId;
@@ -15,7 +18,7 @@ public class UserProfile {
     private String specialNeeds;
     private String complication;
     private String insuranceInformation;
-    private String ownerId;
+    private User owner;
 
     public UserProfile() {
     }
@@ -25,63 +28,17 @@ public class UserProfile {
         this.specialNeeds = userProfile.getSpecialNeeds();
         this.complication = userProfile.getComplication();
         this.insuranceInformation = userProfile.getInsuranceInformation();
-        this.ownerId = userProfile.getOwnerId();
+        this.owner = userProfile.getOwner();
     }
 
-    public UserProfile(int profileId, String bloodGroup, String specialNeeds, String complication, String insuranceInformation, String ownerId) {
+    public UserProfile(int profileId, String bloodGroup, String specialNeeds, String complication, String insuranceInformation, User ownerId) {
         this.profileId = profileId;
         this.bloodGroup = bloodGroup;
         this.specialNeeds = specialNeeds;
         this.complication = complication;
         this.insuranceInformation = insuranceInformation;
-        this.ownerId = ownerId;
+        this.owner = ownerId;
     }
 
-    public int getProfileId() {
-        return profileId;
-    }
 
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
-
-    public String getSpecialNeeds() {
-        return specialNeeds;
-    }
-
-    public void setSpecialNeeds(String specialNeeds) {
-        this.specialNeeds = specialNeeds;
-    }
-
-    public String getComplication() {
-        return complication;
-    }
-
-    public void setComplication(String complication) {
-        this.complication = complication;
-    }
-
-    public String getInsuranceInformation() {
-        return insuranceInformation;
-    }
-
-    public void setInsuranceInformation(String insuranceInformation) {
-        this.insuranceInformation = insuranceInformation;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
-    }
 }

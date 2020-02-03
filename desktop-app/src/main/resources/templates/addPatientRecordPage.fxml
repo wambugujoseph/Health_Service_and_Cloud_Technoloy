@@ -35,7 +35,7 @@
             </children></AnchorPane>
         <JFXTabPane layoutX="1.0" layoutY="34.0" prefHeight="623.0" prefWidth="1025.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <tabs>
-                <Tab text="Consultation">
+                <Tab fx:id="consultationTab" text="Consultation And Progress Notes">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="635.0" prefWidth="1025.0" style="-fx-background-color: #ffffff;">
                      <children>
@@ -70,7 +70,7 @@
                               <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="consultationUploadBtn" layoutX="857.0" layoutY="518.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                        <JFXButton fx:id="consultationUploadBtn" layoutX="857.0" layoutY="518.0" onAction="#uploadConsultationAndProgressNotes" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
                            <graphic>
                               <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
                            </graphic>
@@ -80,7 +80,7 @@
                      </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Document File">
+                <Tab fx:id="filesTab" text="Patient Medical Files">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
@@ -91,13 +91,16 @@
                            </font>
                         </JFXTextField>
                         <FontAwesomeIconView fill="#0067ce" glyphName="CALENDAR_CHECK_ALT" layoutX="423.0" layoutY="101.0" size="30" />
-                        <CheckBox fx:id="renameFileCheckBox" layoutX="423.0" layoutY="220.0" mnemonicParsing="false" text="Rename the file">
+                        <CheckBox fx:id="renameFileCheckBox" layoutX="423.0" layoutY="220.0" mnemonicParsing="false" onAction="#renameFileCheckBoxEvent" text="Rename the file">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </CheckBox>
-                        <JFXTextField fx:id="fileLocationUri" layoutX="423.0" layoutY="168.0" prefHeight="25.0" prefWidth="398.0" style="-fx-border-color: black; -fx-border-width: 0.5 0.5 0 0.5;" />
-                        <Button fx:id="chooseFileBtn" layoutX="821.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 0.5;" text="..." />
+                        <JFXTextField fx:id="fileLocationUri" layoutX="423.0" layoutY="168.0" prefHeight="25.0" prefWidth="398.0" promptText="Select a file" style="-fx-border-color: black; -fx-border-width: 0.5 0.5 0 0.5;">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="12.0" />
+                           </font></JFXTextField>
+                        <Button fx:id="chooseFileBtn" layoutX="821.0" layoutY="168.0" mnemonicParsing="false" onAction="#medicalFileChooser" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 0.5;" text="..." />
                         <Label layoutX="424.0" layoutY="145.0" prefHeight="17.0" prefWidth="132.0" text="Choose a file to upload">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -129,7 +132,7 @@
                               <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="fileUploadBtn" layoutX="911.0" layoutY="531.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                        <JFXButton fx:id="fileUploadBtn" layoutX="911.0" layoutY="531.0" onAction="#uploadMedicalFile" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
                            <graphic>
                               <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
                            </graphic>
@@ -138,7 +141,7 @@
                      </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Surgery">
+                <Tab fx:id="surgeryTab" text="Surgery">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
@@ -173,7 +176,7 @@
                               <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="surgeryUploadBtn" layoutX="845.0" layoutY="516.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                        <JFXButton fx:id="surgeryUploadBtn" layoutX="845.0" layoutY="516.0" onAction="#uploadSurgeryEvent" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
                            <graphic>
                               <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
                            </graphic>
@@ -183,7 +186,7 @@
                      </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Ailment">
+                <Tab fx:id="ailmentTab" text="Ailment">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
@@ -218,7 +221,7 @@
                               <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="ailmentUploadBtn" layoutX="860.0" layoutY="498.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                        <JFXButton fx:id="ailmentUploadBtn" layoutX="860.0" layoutY="498.0" onAction="#uploadAilmentEvent" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
                            <graphic>
                               <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
                            </graphic>
@@ -228,11 +231,11 @@
                      </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="prescriptionPatientDetailsPane" text="Prescription">
+                <Tab fx:id="prescripionTab" text="Prescription and Medications">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1025.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <AnchorPane prefHeight="585.0" prefWidth="310.0" style="-fx-border-color: #EBEBEB; -fx-border-width: 0 0.5 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+                        <AnchorPane fx:id="prespPatientDetailsPane" prefHeight="585.0" prefWidth="310.0" style="-fx-border-color: #EBEBEB; -fx-border-width: 0 0.5 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
                         <JFXTextArea fx:id="prescriptionDescription" layoutX="369.0" layoutY="264.0" prefHeight="210.0" prefWidth="575.0" style="-fx-border-color: GREEN; -fx-border-width: 0.5 0.5 0  0.5;">
                            <font>
                               <Font size="14.0" />
@@ -248,7 +251,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="371.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prescription Type" wrappingWidth="226.13671875">
+                        <Text layoutX="371.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prescription Type or Medication" wrappingWidth="226.13671875">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -263,7 +266,7 @@
                               <FontAwesomeIconView fill="#f2efef" glyphName="ERASER" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="prescriptionUploadBtn" layoutX="864.0" layoutY="495.0" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
+                        <JFXButton fx:id="prescriptionUploadBtn" layoutX="864.0" layoutY="495.0" onAction="#uploadPrescription" style="-fx-background-color: #0067CE;" text="Upload" textFill="#f2eded">
                            <graphic>
                               <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD_UPLOAD" size="20" />
                            </graphic>

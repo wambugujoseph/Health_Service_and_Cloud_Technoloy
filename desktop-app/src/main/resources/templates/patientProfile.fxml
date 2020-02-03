@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="775.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.PatientProfileController">
+<AnchorPane fx:id="profileInfoHolderAnchorPane" prefHeight="775.0" prefWidth="1005.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.PatientProfileController">
    <children>
       <AnchorPane layoutX="14.0" layoutY="62.0" style="-fx-border-color: grey;">
          <children>
@@ -22,32 +22,50 @@
                </viewport></ImageView>
          </children>
       </AnchorPane>
-      <JFXTextField fx:id="clientID" focusColor="#1ce737" layoutX="408.0" layoutY="57.0" prefHeight="25.0" prefWidth="279.0" />
-      <JFXTextField fx:id="firstName" focusColor="#1ce737" layoutX="408.0" layoutY="101.0" prefHeight="25.0" prefWidth="279.0" />
+      <JFXTextField fx:id="clientID" focusColor="#1ce737" layoutX="408.0" layoutY="57.0" prefHeight="25.0" prefWidth="279.0" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="firstName" focusColor="#1ce737" layoutX="408.0" layoutY="101.0" prefHeight="25.0" prefWidth="279.0" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="105.0" prefHeight="25.0" prefWidth="119.0" text="First Name :" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="surName" focusColor="#1ce737" layoutX="408.0" layoutY="142.0" prefHeight="25.0" prefWidth="279.0" />
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="142.0" prefHeight="25.0" prefWidth="119.0" text="Sur Name :" textAlignment="CENTER">
+      <JFXTextField fx:id="surName" focusColor="#1ce737" layoutX="408.0" layoutY="142.0" prefHeight="25.0" prefWidth="279.0" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="142.0" prefHeight="25.0" prefWidth="119.0" text="Sir Name :" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="lastName" focusColor="#1ce737" layoutX="408.0" layoutY="183.0" prefHeight="25.0" prefWidth="279.0" />
+      <JFXTextField fx:id="lastName" focusColor="#1ce737" layoutX="408.0" layoutY="183.0" prefHeight="25.0" prefWidth="279.0" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="185.0" prefHeight="25.0" prefWidth="119.0" text="Last Name :" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="email" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="224.0" prefHeight="25.0" prefWidth="279.0" promptText="email@me.com" />
+      <JFXTextField fx:id="email" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="224.0" prefHeight="25.0" prefWidth="279.0" promptText="email@me.com" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="224.0" prefHeight="25.0" prefWidth="119.0" text="Email :" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="phoneNumber" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="267.0" prefHeight="25.0" prefWidth="279.0" promptText="0712345678" />
+      <JFXTextField fx:id="phoneNumber" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="267.0" prefHeight="25.0" prefWidth="279.0" promptText="0712345678" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="273.0" layoutY="268.0" prefHeight="25.0" prefWidth="119.0" text="Phone Number :" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -63,7 +81,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="nationality" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="350.0" prefHeight="25.0" prefWidth="279.0" promptText="Kenyan" />
+      <JFXTextField fx:id="nationality" focusColor="#1ce737" labelFloat="true" layoutX="408.0" layoutY="350.0" prefHeight="25.0" prefWidth="279.0" promptText="Kenyan" unFocusColor="#171717">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Separator layoutX="275.0" layoutY="39.0" prefHeight="3.0" prefWidth="537.0" />
       <Label alignment="CENTER" layoutX="459.0" layoutY="27.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #fff;" text="Bio Information" textFill="#080bd3">
          <font>
@@ -102,10 +123,22 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="medicalInsurance" focusColor="#1ce737" layoutX="159.0" layoutY="663.0" prefHeight="68.0" prefWidth="503.0" />
-      <JFXTextArea fx:id="healthComplication" focusColor="#1ce737" layoutX="158.0" layoutY="571.0" prefHeight="68.0" prefWidth="503.0" />
-      <JFXTextArea fx:id="specialNeeds" focusColor="#1ce737" layoutX="158.0" layoutY="489.0" prefHeight="68.0" prefWidth="503.0" />
-      <JFXTextField fx:id="bloodGroup" focusColor="#1ce737" layoutX="159.0" layoutY="445.0" prefHeight="25.0" prefWidth="503.0" />
+      <JFXTextArea fx:id="medicalInsurance" focusColor="#1ce737" layoutX="159.0" layoutY="663.0" prefHeight="68.0" prefWidth="503.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextArea>
+      <JFXTextArea fx:id="healthComplication" focusColor="#1ce737" layoutX="158.0" layoutY="571.0" prefHeight="68.0" prefWidth="503.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextArea>
+      <JFXTextArea fx:id="specialNeeds" focusColor="#1ce737" layoutX="158.0" layoutY="489.0" prefHeight="68.0" prefWidth="503.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextArea>
+      <JFXTextField fx:id="bloodGroup" focusColor="#1ce737" layoutX="159.0" layoutY="445.0" prefHeight="25.0" prefWidth="503.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></JFXTextField>
       <Separator layoutX="810.0" layoutY="39.0" orientation="VERTICAL" prefHeight="701.0" prefWidth="0.0" />
       <Pane layoutX="817.0" layoutY="52.0" prefHeight="723.0" prefWidth="212.0" />
       <Separator layoutX="816.0" layoutY="39.0" prefHeight="3.0" prefWidth="259.0" AnchorPane.leftAnchor="816.0" AnchorPane.rightAnchor="1.0" />
