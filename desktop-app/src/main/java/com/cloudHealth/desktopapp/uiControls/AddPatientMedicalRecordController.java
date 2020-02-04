@@ -5,6 +5,7 @@ import com.cloudHealth.desktopapp.service.AuthorizeUserService;
 import com.cloudHealth.desktopapp.service.MedicalRecordServiceImpl;
 import com.cloudHealth.desktopapp.service.PatientProfileServiceImpl;
 import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
+import com.cloudHealth.desktopapp.util.FileUtil;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -33,6 +34,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -154,6 +156,7 @@ public class AddPatientMedicalRecordController implements Initializable {
     private AuthorizeUserService authorizeUserService;
 
     private Resource patientDetailsHolderAnchorPane;
+    private User client;
     private ApplicationContext ac;
     private MedicalRecord medicalRecord;
     private AnchorPane anchorPane = new AnchorPane();
@@ -277,16 +280,26 @@ public class AddPatientMedicalRecordController implements Initializable {
 
         if (!(fileLocationUri.getText().isEmpty() && fileType.getText().isEmpty() && fileDescription.getText().isEmpty())) {
             File file = new File(fileLocationUri.getText());
+
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            FileSystemResource fileSystemResource = new FileSystemResource(file);
+            FileSystemResource fileSystemResource;
+
+            if (!(newFileName.getText().isEmpty())){
+                fileSystemResource =  new FileSystemResource(FileUtil.renameFile(file,newFileName.getText()));
+            }else
+                fileSystemResource = new FileSystemResource(file);
+
             body.add("file", fileSystemResource);
             body.add("description", fileDescription.getText());
             body.add("recordType", fileType.getText());
-            body.add("medicalRecord", this.medicalRecord);
-            body.add("userId", "");
+            body.add("medicalRecordId", this.medicalRecord.getRecordId());
+            body.add("userId", this.client.getUserId());
             MedicalFile medicalFile1 = medicalRecordService.uploadMedicalFile(body);
+            //logger.info("" + medicalFile1.toString());
 
-            logger.info("" + medicalFile1.toString());
+            if (medicalFile1.getRecordId() == this.medicalRecord.getRecordId()){
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, "File successfully uploaded", "CONFIRMATION", null, null).show();
+            }
 
         } else
             uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, "Fields empty. All fields should be filled", "ERROR", "Missing Information", null).show();
@@ -304,8 +317,8 @@ public class AddPatientMedicalRecordController implements Initializable {
     }
 
     private void setPatientInfo(Patient patient){
-        User client = patient.getUserByUser();
-//        logger.info("UserName"+ user.getFirstName());;
+        client = patient.getUserByUser();
+        //logger.info("UserName"+ user.getFirstName());;
         try {
             URL url = this.patientDetailsHolderAnchorPane.getURL();
             FXMLLoader fxmlLoader = new FXMLLoader(url);

@@ -149,8 +149,8 @@ public class FindPatientMedicalRecordController implements Initializable {
                 if (!medicalRecordSearch.getText().isEmpty()) {
                     String userIdOrEmail = medicalRecordSearch.getText();
                     MedicalRecord[] medicalRecords = medicalRecordService.getAllPatientMedicalRecords(userIdOrEmail);
+                    populatedDrawerContent(medicalRecords);
                     for (MedicalRecord medicalRecord : medicalRecords) {
-                        populatedDrawerContent(medicalRecord);
                         displayMedicalRecord(medicalRecord);
                     }
                 }
@@ -158,13 +158,18 @@ public class FindPatientMedicalRecordController implements Initializable {
         });
     }
 
-    private void populatedDrawerContent(MedicalRecord medicalRecord) {
+    private void populatedDrawerContent(MedicalRecord[] medicalRecords) {
         JFXListView listView = new JFXListView();
-        ObservableList<String> list = FXCollections.observableArrayList(medicalRecord.getCreated().toLocalDate().toString());
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (MedicalRecord medicalRecord : medicalRecords) {
+            list.add(medicalRecord.getCreated().toString()+ ", Record Id = "+medicalRecord.getRecordId() +" \n"+ medicalRecord.getDescription()+
+                    " \nPractitioner Id = "+medicalRecord.getPractitionerId());
+        }
         listView.setItems(list);
         listView.setVerticalGap(5.0);
         listView.setBorder(Border.EMPTY);
         listView.prefWidth(medicalRecordDrawer.getWidth());
+
         medicalRecordDrawer.setSidePane(listView);
     }
 

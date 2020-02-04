@@ -65,6 +65,11 @@ public class PractitionerRepositoryService {
      */
     public UserProfileEntity addClientProfile(UserProfile userProfile){
         UserProfileEntity userProfileEntity =  getCompleteUserProfile(userProfile);
+        try {
+            clientProfileRepository.deleteByOwner(userProfileEntity.getOwner());
+        } catch (Exception e) {
+            logger.info("User does not exist : "+e.getMessage());
+        }
         return clientProfileRepository.save(userProfileEntity);
     }
 

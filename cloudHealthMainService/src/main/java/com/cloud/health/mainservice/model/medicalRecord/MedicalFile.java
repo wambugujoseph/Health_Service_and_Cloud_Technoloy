@@ -1,6 +1,5 @@
 package com.cloud.health.mainservice.model.medicalRecord;
 
-import com.cloud.health.mainservice.model.entity.MedicalRecordEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -18,14 +17,14 @@ public class MedicalFile {
     private String recordType;
     private String description;
     private MultipartFile file;
-    private MedicalRecordEntity medicalRecord;
+    private String medicalRecordId;
 
-    public MedicalRecordEntity getMedicalRecord() {
-        return medicalRecord;
+    public String getMedicalRecordId() {
+        return medicalRecordId;
     }
 
-    public void setMedicalRecord(MedicalRecordEntity medicalRecord) {
-        this.medicalRecord = medicalRecord;
+    public void setMedicalRecordId(String medicalRecordId) {
+        this.medicalRecordId = medicalRecordId;
     }
 
     public MedicalFile() {

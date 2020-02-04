@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ClientProfileRepository extends JpaRepository<UserProfileEntity, Integer> {
 
     UserProfileEntity findByOwner(UserEntity userId);
+    void deleteByOwner(UserEntity owner);
 }

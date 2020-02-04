@@ -72,6 +72,8 @@ public class PatientProfileController implements Initializable {
 
     Logger logger = LoggerFactory.getLogger(PatientProfileController.class);
 
+    private int profileId = 0;
+    private UserProfile userProfile;
     private final Resource profileHeaderAndTabPane;
     private final ApplicationContext ac;
     PatientProfileController(@Value("classpath:/templates/profileHeaderTabPane.fxml") Resource profileHeaderAndTabPane,
@@ -97,14 +99,14 @@ public class PatientProfileController implements Initializable {
                     dob.getValue().toString(), getGender(),nationality.getText());
 
             if (!bloodGroup.getText().isEmpty() || !specialNeeds.getText().isEmpty() || !healthComplication.getText().isEmpty() || !medicalInsurance.getText().isEmpty()){
-                profile = new Profile(0,bloodGroup.getText(), specialNeeds.getText(), healthComplication.getText(), medicalInsurance.getText(), clientID.getText());
+                profile = new Profile(this.profileId,bloodGroup.getText(), specialNeeds.getText(), healthComplication.getText(), medicalInsurance.getText(), clientID.getText());
                 boolean uploaded = patientProfileService.createProfile(user, profile);
 
                 if(uploaded) {
                     setNewProfile();
                     uiAlertsAndPopUp.showAlert(Alert.AlertType.CONFIRMATION, "Uploaded successfully", "Confirmation", null, null).show();
                 }else
-                    uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,"Error 500 Internal Server Error. The patient profile already exist","Server Error ",null, null).show();
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,"User Bio Information updated. The patient profile already existed","Server Error ",null, null).show();
             }else
                 uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,"At least one field on \"Medical Information\" should have data","Error",null, null).show();
         }else {
@@ -118,8 +120,8 @@ public class PatientProfileController implements Initializable {
             if (!(searchTxtField.getText().isEmpty() || searchTxtField.getText().equalsIgnoreCase(" "))){
                 try {
                     String userIdOrEmail = searchTxtField.getText();
-                    UserProfile userProfile =  patientProfileService.getUserProfile(userIdOrEmail);
-                    User user =  userProfile.getOwner();
+                     this.userProfile =  patientProfileService.getUserProfile(userIdOrEmail);
+                    User user =  this.userProfile.getOwner();
                     this.clientID.setText(user.getUserId());
                     this.firstName.setText(user.getFirstName());
                     this.lastName.setText(user.getMiddleName());
@@ -132,10 +134,10 @@ public class PatientProfileController implements Initializable {
                         this.genderFemale.setSelected(true);
                     else
                         this.genderMale.setSelected(true);
-                    this.bloodGroup.setText(userProfile.getBloodGroup());
-                    this.specialNeeds.setText(userProfile.getSpecialNeeds());
-                    this.healthComplication.setText(userProfile.getComplication());
-                    this.medicalInsurance.setText(userProfile.getInsuranceInformation());
+                    this.bloodGroup.setText(this.userProfile.getBloodGroup());
+                    this.specialNeeds.setText(this.userProfile.getSpecialNeeds());
+                    this.healthComplication.setText(this.userProfile.getComplication());
+                    this.medicalInsurance.setText(this.userProfile.getInsuranceInformation());
                     // after display disable the anchorPane
                     disableAllTextField();
                 } catch (Exception e) {
@@ -150,6 +152,7 @@ public class PatientProfileController implements Initializable {
     public void setEnableProfileEdit(){
         // after display enabled the textFields
         enableAllTextField();
+        this.profileId = this.userProfile.getProfileId();
     }
 
     @FXML

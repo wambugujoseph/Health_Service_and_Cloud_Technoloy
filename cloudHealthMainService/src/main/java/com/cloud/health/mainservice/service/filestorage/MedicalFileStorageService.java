@@ -43,8 +43,15 @@ public class MedicalFileStorageService implements FileStorage {
             StringBuilder fileName =  new StringBuilder();
             String name = file.getOriginalFilename();
             int endIndex = Objects.requireNonNull(name).lastIndexOf(".");
-            String modifiedName = name.replace(name.substring(0,endIndex),"MEDICAL-FILE-"+ LocalDateTime.now().toString())
-                    .replaceAll(":","-");
+            String newFileName = file.getName().replace(name.substring(name.lastIndexOf("."),name.length()-1),"");
+            String modifiedName;
+            if (file.getName().contains("--renamed")) {
+                modifiedName = name.replace(name.substring(0,endIndex),newFileName+"MEDICAL-FILE-"+ LocalDateTime.now().toString())
+                        .replaceAll(":","-");
+            }else {
+                modifiedName = name.replace(name.substring(0,endIndex),"MEDICAL-FILE-"+ LocalDateTime.now().toString())
+                        .replaceAll(":","-");
+            }
             Path fileNamePath = Paths.get(getMedicalFileStorage(), modifiedName);
             fileName.append(modifiedName);
             Files.write(fileNamePath, file.getBytes());

@@ -18,5 +18,5 @@ public class UploadMedicalFile {
     private String recordType;
     private String description;
     private MultipartFile file;
-    private MedicalRecord medicalRecord;
+    private String medicalRecordId;
 }

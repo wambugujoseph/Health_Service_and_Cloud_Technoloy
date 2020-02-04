@@ -83,9 +83,11 @@ public class PractitionerMedicalRecordService {
         medicalFileEntity.setCreated(Date.valueOf(LocalDate.now()));
         medicalFileEntity.setDescrption(medicalFile.getDescription());
         medicalFileEntity.setFileUrl(fileName);
-        medicalFileEntity.setMedicalRecord(medicalFile.getMedicalRecord());
+        medicalFileEntity.setMedicalRecord(
+                medicalRecordRepository.findByRecordId(
+                        Integer.parseInt(medicalFile.getMedicalRecordId())).orElse(new MedicalRecordEntity()));
         medicalFileEntity.setRecordType(medicalFile.getRecordType());
-        medicalFileEntity.setRecordId(medicalFile.getMedicalRecord().getRecordId());
+        medicalFileEntity.setRecordId(Integer.parseInt(medicalFile.getMedicalRecordId()));
         medicalFileEntity = medicalFileRepository.save(medicalFileEntity);
         medicalFileEntity.setMedicalRecord(null);
         return medicalFileEntity;
