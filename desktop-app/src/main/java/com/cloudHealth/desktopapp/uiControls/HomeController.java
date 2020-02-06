@@ -64,19 +64,23 @@ public class HomeController implements Initializable {
     JFXButton btnLogOut = btnLogOut = new JFXButton("Sign Out");
     JFXButton your_profileButton = new JFXButton("Your Profile");
 
-    private final Resource profilePage, profileHeaderAndTabPane, getPatientRecordPage, addPatientRecordPage;
+    private final Resource profilePage, profileHeaderAndTabPane, getPatientRecordPage, addPatientRecordPage, mngtPractitionerAdd,mngtHealthUnitAdd;
     private final ApplicationContext ac;
     HomeController(
             @Value("classpath:/templates/patientProfile.fxml") Resource resource,
             @Value("classpath:/templates/profileHeaderTabPane.fxml") Resource profileHeaderAndTabPane,
             @Value("classpath:/templates/getPatientRecordPage.fxml") Resource getPatientRecordPage,
             @Value("classpath:/templates/addPatientRecordPage.fxml") Resource addPatientRecordPage,
+            @Value("classpath:/templates/practitioner.fxml") Resource mngtPractitionerAdd,
+            @Value("classpath:/templates/healthUnit.fxml") Resource mngtHealthUnitAdd,
             ApplicationContext ac) {
         this.ac = ac;
         this.profilePage = resource;
         this.profileHeaderAndTabPane = profileHeaderAndTabPane;
         this.getPatientRecordPage = getPatientRecordPage;
         this.addPatientRecordPage = addPatientRecordPage;
+        this.mngtPractitionerAdd = mngtPractitionerAdd;
+        this.mngtHealthUnitAdd = mngtHealthUnitAdd;
     }
 
         @Override
@@ -111,20 +115,66 @@ public class HomeController implements Initializable {
                     }
                 }else if(activitySelected.equalsIgnoreCase("Add Records")){
                     try {
-                        URL addPatientRecordURL = this.addPatientRecordPage.getURL();
-                        FXMLLoader fxmlLoader = new FXMLLoader(addPatientRecordURL);
-                        fxmlLoader.setControllerFactory(ac::getBean);
-                        AnchorPane addPatientRecordAnchorPane = fxmlLoader.load();
-                        addPatientRecordAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
-                        pageTitle.setText("Add Patient Records");
-                        clearActivityArea();
-                        activityAreaAnchorPane.getChildren().add(addPatientRecordAnchorPane);
+                        setAddRecordsUi();
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if (activitySelected.equalsIgnoreCase("Practitioner")){
+                    try{
+                        setMngtPractitionerAdd();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                } else if(activitySelected.equalsIgnoreCase("Health Unit")) {
+                    try{
+                        setMngtHealthUnitAdd();
+                    }catch(Exception e){
                         e.printStackTrace();
                     }
                 }
             }
         });
+    }
+
+    private void setAddRecordsUi() throws IOException {
+        URL addPatientRecordURL = this.addPatientRecordPage.getURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(addPatientRecordURL);
+        fxmlLoader.setControllerFactory(ac::getBean);
+        AnchorPane addPatientRecordAnchorPane = fxmlLoader.load();
+        addPatientRecordAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
+        pageTitle.setText("Add Patient Records");
+        clearActivityArea();
+        activityAreaAnchorPane.getChildren().add(addPatientRecordAnchorPane);
+    }
+
+    private void setMngtPractitionerAdd(){
+        try {
+            URL mngtPractitionerAddURL = this.mngtPractitionerAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(mngtPractitionerAddURL);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            AnchorPane mgntPractitionerAnchorPane = fxmlLoader.load();
+            mgntPractitionerAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
+            pageTitle.setText("Management Practitioner");
+            clearActivityArea();
+            activityAreaAnchorPane.getChildren().add(mgntPractitionerAnchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setMngtHealthUnitAdd(){
+        try {
+            URL mngtHealthUnitAddURL = this.mngtHealthUnitAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(mngtHealthUnitAddURL);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            AnchorPane mngtHealthUnitAddAnchorPane = fxmlLoader.load();
+            mngtHealthUnitAddAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
+            pageTitle.setText("Management Health Unit");
+            clearActivityArea();
+            activityAreaAnchorPane.getChildren().add(mngtHealthUnitAddAnchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setGetPatientRecordActivityUI() throws IOException {

@@ -15,16 +15,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -92,6 +93,23 @@ public class FindPatientMedicalRecordController implements Initializable {
     @FXML private VBox ailmentVBoxView;
     @FXML private VBox prescriptionVBoxView;
     @FXML private VBox surgeryVBoxView;
+    @FXML private Label patientRealTimeName;
+    @FXML private Label patientRealTimeEmail;
+    @FXML private Label patientRealTimePhone;
+    @FXML private Label patientRealTimeId;
+    @FXML private AnchorPane realTimeDisplayAnchor;
+    @FXML private JFXButton realtimeRefreshBtn;
+    @FXML private JFXButton realTimeStopBtn;
+    @FXML private TableView<TempRealTimeData> realTimeRecordTable;
+    @FXML private TableColumn<TempRealTimeData, Integer> count;
+    @FXML private TableColumn<TempRealTimeData, String> id;
+    @FXML private TableColumn<TempRealTimeData, String> patientId;
+    @FXML private TableColumn<TempRealTimeData, String> recordType;
+    @FXML private TableColumn<TempRealTimeData, String> dateTime;
+    @FXML private TableColumn<TempRealTimeData, GeoLocation> latitude;
+    @FXML private TableColumn<TempRealTimeData, GeoLocation> longitude;
+    @FXML private TableColumn<TempRealTimeData, String> value;
+    @FXML private VBox medicalFileVboxView;
 
 
 
@@ -99,9 +117,12 @@ public class FindPatientMedicalRecordController implements Initializable {
     private MedicalRecordServiceImpl medicalRecordService;
     @Autowired
     private PatientProfileServiceImpl patientProfileService;
-    private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay, surgeryContentDisplay;
-    private ApplicationContext ac;
 
+    private JFXListView listView = new JFXListView();
+    private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay, surgeryContentDisplay,medicalFileDisplay,realTimeDisplay;
+    private ApplicationContext ac;
+    private MedicalRecord[] medicalRecords;
+    Logger logger = LoggerFactory.getLogger(FindPatientMedicalRecordController.class);
 
     private Collection<MedicalRecord> medicalRecordCollection = new ArrayList<>();
 
@@ -109,11 +130,15 @@ public class FindPatientMedicalRecordController implements Initializable {
                                        @Value("${classpath:/templates/helperLayout/consultationDisplay.fxml}") Resource consultationContentDisplay,
                                        @Value("${classpath:/templates/helperLayout/prescriptionDisplay.fxml}") Resource prescriptionContentDisplay,
                                        @Value("${classpath:/templates/helperLayout/surgeryDisplay.fxml}") Resource surgeryContentDisplay,
+                                       @Value("${classpath:/templates/helperLayout/medicalFileDisplay.fxml}") Resource medicalFileDisplay,
+                                       @Value("${classpath:/templates/helperLayout/realtimeRecord.fxml}") Resource realTimeDisplay,
                                        ApplicationContext ac) {
         this.consultationContentDisplay = consultationContentDisplay;
         this.ailmentContentDisplay = ailmentContentDisplay;
         this.prescriptionContentDisplay = prescriptionContentDisplay;
         this.surgeryContentDisplay = surgeryContentDisplay;
+        this.medicalFileDisplay = medicalFileDisplay;
+        this.realTimeDisplay = realTimeDisplay;
         this.ac = ac;
 
     }
@@ -140,17 +165,25 @@ public class FindPatientMedicalRecordController implements Initializable {
         backArrow.setRate(-1);
         patientRecordDrawerOpenClose(backArrow);
         setMedicalRecordSearch();
-
+        drawerListVieEventListener();
     }
 
-    public void setMedicalRecordSearch() {
+    private void drawerListVieEventListener(){
+        this.listView.setOnMouseClicked(event -> chooseDifferentMedicalRecord() );
+        this.listView.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)){
+                chooseDifferentMedicalRecord();
+            }
+        });
+    }
+    private void setMedicalRecordSearch() {
         medicalRecordSearch.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
                 if (!medicalRecordSearch.getText().isEmpty()) {
                     String userIdOrEmail = medicalRecordSearch.getText();
-                    MedicalRecord[] medicalRecords = medicalRecordService.getAllPatientMedicalRecords(userIdOrEmail);
-                    populatedDrawerContent(medicalRecords);
-                    for (MedicalRecord medicalRecord : medicalRecords) {
+                   this.medicalRecords = medicalRecordService.getAllPatientMedicalRecords(userIdOrEmail);
+                    populatedDrawerContent(this.medicalRecords);
+                    for (MedicalRecord medicalRecord : this.medicalRecords) {
                         displayMedicalRecord(medicalRecord);
                     }
                 }
@@ -158,19 +191,48 @@ public class FindPatientMedicalRecordController implements Initializable {
         });
     }
 
+    private void chooseDifferentMedicalRecord() {
+        String selectedItemText = listView.getSelectionModel().getSelectedItem().toString();
+        //logger.info("The selected item text is :" + selectedItemText);
+        for (MedicalRecord medicalRecord: this.medicalRecords){
+            //check if the selected listItem contain setMedical id
+            if (selectedItemText.contains(medicalRecord.getRecordId()+"")){
+                //display the selected record
+                try {
+
+                    consultationVBoxView.getChildren().setAll(new Text(""));
+                    consultationVBoxView.getChildren().remove(0);
+                    ailmentVBoxView.getChildren().setAll(new Text(""));
+                    ailmentVBoxView.getChildren().remove(0);
+                    prescriptionVBoxView.getChildren().setAll(new Text(""));
+                    prescriptionVBoxView.getChildren().remove(0);
+                    surgeryVBoxView.getChildren().setAll(new Text(""));
+                    surgeryVBoxView.getChildren().remove(0);
+                    medicalFileVboxView.getChildren().setAll(new Text(""));
+                    medicalFileVboxView.getChildren().remove(0);
+                } catch (IndexOutOfBoundsException e) {
+                   logger.info("chooseDifferentMedicalRecord method IndexOutOfBoundsException "+e.getMessage());
+                }
+                displayMedicalRecord(medicalRecord);
+                //logger.info("Record id"+ medicalRecord.getRecordId());
+            }
+        }
+
+    }
+
     private void populatedDrawerContent(MedicalRecord[] medicalRecords) {
-        JFXListView listView = new JFXListView();
+
         ObservableList<String> list = FXCollections.observableArrayList();
         for (MedicalRecord medicalRecord : medicalRecords) {
             list.add(medicalRecord.getCreated().toString()+ ", Record Id = "+medicalRecord.getRecordId() +" \n"+ medicalRecord.getDescription()+
                     " \nPractitioner Id = "+medicalRecord.getPractitionerId());
         }
-        listView.setItems(list);
-        listView.setVerticalGap(5.0);
-        listView.setBorder(Border.EMPTY);
-        listView.prefWidth(medicalRecordDrawer.getWidth());
+        this.listView.setItems(list);
+        this.listView.setVerticalGap(5.0);
+        this.listView.setBorder(Border.EMPTY);
+        this.listView.prefWidth(medicalRecordDrawer.getWidth());
 
-        medicalRecordDrawer.setSidePane(listView);
+        medicalRecordDrawer.setSidePane(this.listView);
     }
 
     private void displayMedicalRecord(MedicalRecord medicalRecord){
@@ -183,8 +245,12 @@ public class FindPatientMedicalRecordController implements Initializable {
         displayMedicalPrescription(prescriptions);
         Collection<Surgery> surgeries = medicalRecord.getSurgeries();
         displayMedicalSurgery(surgeries);
+        Collection<MedicalFile> medicalFiles = medicalRecord.getMedicalFiles();
+        //logger.info("Size ==== "+medicalFiles.size());
+        displayMedicalFile(medicalFiles);
 
         displayPatientDetails(medicalRecord.getPatientId());
+        displayRealTimeRecord();
 
     }
 
@@ -207,7 +273,6 @@ public class FindPatientMedicalRecordController implements Initializable {
     private void displayMedicalAilment(Collection<Ailment> ailments){
 
         ObservableList<AnchorPane> ailmentAnchorPanes = FXCollections.observableArrayList();
-
         for (Ailment ailment: ailments) {
             AnchorPane displayAnchorPane = getAilmentDisplayHolder();
             Label dateLabel = (Label) displayAnchorPane.lookup("#ailmentDateLabel");
@@ -256,6 +321,23 @@ public class FindPatientMedicalRecordController implements Initializable {
 
     }
 
+    private void displayMedicalFile(Collection<MedicalFile> medicalFiles){
+        ObservableList<AnchorPane> medicalFileAnchorPanes = FXCollections.observableArrayList();
+        for (MedicalFile medicalFile : medicalFiles) {
+            AnchorPane displayAnchorPane = getFileDisplayHolder();
+            Label dateLabel = (Label) displayAnchorPane.lookup("#medicalFileDateLabel");
+            Text fileTypeTextDisplay = (Text) displayAnchorPane.lookup("#fileTypeDisplay");
+            Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#fileDescriptionDisplay");
+            Label fileType = (Label) displayAnchorPane.lookup("#fileName");
+            dateLabel.setText(medicalFile.getCreated().toString());
+            fileTypeTextDisplay.setText(medicalFile.getRecordType());
+            descriptionTxtDisplay.setText(medicalFile.getDescrption());
+            fileType.setText(medicalFile.getFileUrl());
+            medicalFileAnchorPanes.add(displayAnchorPane);
+        }
+        medicalFileVboxView.getChildren().addAll(medicalFileAnchorPanes);
+    }
+
     private void displayPatientDetails(int patientId) {
         Platform.runLater(() -> {
             Patient patient = patientProfileService.getPatient(patientId);
@@ -284,7 +366,47 @@ public class FindPatientMedicalRecordController implements Initializable {
             patientSurgeryID.setText(user.getUserId());
             PatientPrescriptionID.setText(user.getUserId());
             patientAilmentID.setText(user.getUserId());
+
+            patientRealTimeName.setText(name);
+            patientRealTimeEmail.setText(user.getEmail());
+            patientRealTimePhone.setText(user.getPhoneNumber());
+            patientRealTimeId.setText(user.getUserId());
         });
+
+    }
+
+    private void displayRealTimeRecord(){
+        //get the records
+        RealTimeData[] realTimeDataList = medicalRecordService.getRealTimeRecord(this.medicalRecords[0].getPatientId()+"");
+        //display the records
+        ObservableList<TempRealTimeData> data = FXCollections.observableArrayList();
+        int i =1;
+        for(RealTimeData realTimeData : realTimeDataList){
+            TempRealTimeData tempRealTimeData = new TempRealTimeData();
+            tempRealTimeData.setCount(i);
+            tempRealTimeData.setDateTime(realTimeData.getCreated().toString());
+            tempRealTimeData.setId(realTimeData.getRealTimeId()+"");
+            tempRealTimeData.setPatientId(realTimeData.getPatientId()+"");
+            tempRealTimeData.setRecordType(realTimeData.getRecordType());
+            tempRealTimeData.setValue(realTimeData.getValue());
+            tempRealTimeData.setLatitude(realTimeData.getGeoLocationByLocationId().getLatitude()+"");
+            tempRealTimeData.setLongitude(realTimeData.getGeoLocationByLocationId().getLongitude()+"");
+
+            data.add(tempRealTimeData);
+            i++;
+        }
+
+        this.count.setCellValueFactory(new PropertyValueFactory<>("count"));
+        this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        this.patientId.setCellValueFactory(new PropertyValueFactory<>("patientId"));
+        this.recordType.setCellValueFactory(new PropertyValueFactory<>("recordType"));
+        this.dateTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+        this.latitude.setCellValueFactory(new PropertyValueFactory<>("latitude"));
+        this.longitude.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        this.value.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+        this.realTimeRecordTable.setItems(null);
+        this.realTimeRecordTable.setItems(data);
 
     }
 
@@ -344,5 +466,18 @@ public class FindPatientMedicalRecordController implements Initializable {
         return new AnchorPane();
     }
 
+    private AnchorPane getFileDisplayHolder(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.medicalFileDisplay.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            return anchorPane;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new AnchorPane();
+    }
 
 }

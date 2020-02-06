@@ -1,10 +1,13 @@
 package com.cloud.health.mainservice.service.repositoryService;
 
 import com.cloud.health.mainservice.model.entity.*;
-import com.cloud.health.mainservice.model.medicalRecord.*;
+import com.cloud.health.mainservice.model.medicalRecord.HealthRecord;
+import com.cloud.health.mainservice.model.medicalRecord.MedicalFile;
 import com.cloud.health.mainservice.repository.HealthPractitionerRepository;
 import com.cloud.health.mainservice.repository.medicalRecord.*;
 import com.cloud.health.mainservice.service.filestorage.MedicalFileStorageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +53,10 @@ public class PractitionerMedicalRecordService {
     private PrescriptionRepository prescriptionRepository;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private RealTimeHealthDataRepository realTimeHealthDataRepository;
+
+    Logger logger = LoggerFactory.getLogger(PractitionerMedicalRecordService.class);
 
     public MedicalRecordEntity createMedicalRecord(HealthRecord healthRecord) {
         MedicalRecordEntity medicalRecordEntity = new MedicalRecordEntity();
@@ -196,6 +203,17 @@ public class PractitionerMedicalRecordService {
             System.out.println(e.getMessage());
         }
         return new ArrayList<>();
+    }
+
+    public List<RealTimeDataEntity> getListRealTimeData(int patientId){
+        List<RealTimeDataEntity> realTimeDataEntities;
+        try{
+            realTimeDataEntities = realTimeHealthDataRepository.findAllByPatientId(patientId);
+            return realTimeDataEntities;
+        }catch (Exception e){
+            logger.error("  Error in getting RealTime Record : " +e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
 }

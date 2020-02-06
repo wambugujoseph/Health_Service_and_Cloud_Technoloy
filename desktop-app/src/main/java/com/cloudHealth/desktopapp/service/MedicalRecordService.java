@@ -3,6 +3,8 @@ package com.cloudHealth.desktopapp.service;
 import com.cloudHealth.desktopapp.model.*;
 import org.springframework.util.MultiValueMap;
 
+import java.util.List;
+
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -23,4 +25,5 @@ public interface MedicalRecordService {
      Ailment uploadAilment(Ailment ailment);
      Prescription uploadPrescriptionAndMedication(Prescription prescription);
      MedicalFile uploadMedicalFile(MultiValueMap<String, Object> body);
+     RealTimeData[] getRealTimeRecord(String patientId);
 }

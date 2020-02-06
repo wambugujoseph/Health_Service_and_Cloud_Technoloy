@@ -26,4 +26,5 @@ public class Constant {
     public static final String MEDICAL_AILMENT = MAIN_SERVICE_BASE_URL+"/patient/ailment";
     public static final String MEDICAL_PRESCRIPTION = MAIN_SERVICE_BASE_URL+"/patient/prescription";
     public static final String MEDICAL_FILE = MAIN_SERVICE_BASE_URL+"/patient/medicalFile";
+    public static final String MEDICAL_REALTIME_DATE = MAIN_SERVICE_BASE_URL+"/patient/realTimeRecord/";
 }

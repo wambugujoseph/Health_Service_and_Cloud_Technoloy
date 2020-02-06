@@ -51,7 +51,7 @@ public class HomeControllerHelper {
                 "20", true);
         TreeItem healthUnit =getTreeItem(getActivitySmallText("Health Unit"), new MaterialDesignIconView(MaterialDesignIcon.AMBULANCE),
                 "20",true);
-        managementRootItem.getChildren().addAll(practitioner,healthUnit);
+        managementRootItem.getChildren().addAll(healthUnit,practitioner);
         root.getChildren().addAll(accountRootItem,patientRootItem,managementRootItem);
 
         return root;

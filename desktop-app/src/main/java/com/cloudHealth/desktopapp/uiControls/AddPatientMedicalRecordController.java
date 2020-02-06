@@ -296,7 +296,6 @@ public class AddPatientMedicalRecordController implements Initializable {
             body.add("userId", this.client.getUserId());
             MedicalFile medicalFile1 = medicalRecordService.uploadMedicalFile(body);
             //logger.info("" + medicalFile1.toString());
-
             if (medicalFile1.getRecordId() == this.medicalRecord.getRecordId()){
                 uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, "File successfully uploaded", "CONFIRMATION", null, null).show();
             }
@@ -304,9 +303,6 @@ public class AddPatientMedicalRecordController implements Initializable {
         } else
             uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, "Fields empty. All fields should be filled", "ERROR", "Missing Information", null).show();
     }
-
-//    private
-
 
     @FXML
     public void medicalFileChooser(){

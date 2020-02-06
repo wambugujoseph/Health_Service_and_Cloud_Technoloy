@@ -3,6 +3,8 @@ package com.cloud.health.mainservice.repository.medicalRecord;
 import com.cloud.health.mainservice.model.entity.RealTimeDataEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
@@ -13,4 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface RealTimeHealthDataRepository extends JpaRepository<RealTimeDataEntity,Integer> {
+
+    List<RealTimeDataEntity> findAllByPatientId(int patientId);
 }

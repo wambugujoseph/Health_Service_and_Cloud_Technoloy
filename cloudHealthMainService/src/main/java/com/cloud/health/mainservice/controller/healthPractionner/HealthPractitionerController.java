@@ -263,4 +263,16 @@ public class HealthPractitionerController {
                     .body("Could not get PractitionerEntity Error" +e.getMessage());
         }
     }
+
+    @RequestMapping(value = "patient/realTimeRecord/{patientId}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPatientRealTimeRecord(@PathVariable String patientId){
+        try {
+            int id = Integer.parseInt(patientId);
+            List<RealTimeDataEntity> realTimeDataEntities = practitionerMedicalRecordService.getListRealTimeData(id);
+            return ResponseEntity.status(HttpStatus.OK).body(realTimeDataEntities);
+        }catch (Exception e){
+            logger.error("Cannot convert string to integer : "+ e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }

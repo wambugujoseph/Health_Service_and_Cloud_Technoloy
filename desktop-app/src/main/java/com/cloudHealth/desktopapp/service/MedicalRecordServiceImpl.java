@@ -3,18 +3,17 @@ package com.cloudHealth.desktopapp.service;
 import com.cloudHealth.desktopapp.model.*;
 import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
 import javafx.scene.control.Alert;
-import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.cloudHealth.desktopapp.config.Constant.*;
 
@@ -175,5 +174,21 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             logger.error("Failed to Upload Medical File == "+ e.getMessage());
         }
         return new MedicalFile();
+    }
+
+    @Override
+    public RealTimeData[] getRealTimeRecord(String patientId) {
+        try {
+            ResponseEntity<RealTimeData[]> response;
+            HttpEntity<String> requestBody = new HttpEntity<>(requestHttpHeaders.getHTTPRequestHeaders());
+            response = restTemplate
+                    .exchange(MEDICAL_REALTIME_DATE+patientId, HttpMethod.GET, requestBody, RealTimeData[].class);
+            if (response.getStatusCode().equals(HttpStatus.OK)){
+                return response.getBody();
+            }
+        } catch (Exception e) {
+            logger.error("Failed to Get Realtime patient info == "+ e.getMessage());
+        }
+        return null;
     }
 }
