@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="1087.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="1087.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.PractitionerController">
    <children>
       <Label layoutX="341.0" layoutY="69.0" prefHeight="17.0" prefWidth="95.0" text="ID :">
          <font>
@@ -53,10 +53,10 @@
          </font></Label>
       <AnchorPane layoutX="39.0" layoutY="69.0" prefHeight="236.0" prefWidth="236.0" style="-fx-border-color: #c0c0c0;">
          <children>
-            <ImageView fitHeight="236.0" fitWidth="236.0" layoutX="18.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fx:id="profileImage" fitHeight="236.0" fitWidth="236.0" layoutX="18.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <JFXButton layoutX="86.0" layoutY="332.0" prefHeight="33.0" prefWidth="144.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Choose Profile Photo" textFill="#f5f6f8" />
+      <JFXButton fx:id="profilechooseBtn" layoutX="86.0" layoutY="332.0" prefHeight="33.0" prefWidth="144.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Choose Profile Photo" textFill="#f5f6f8" />
       <Separator layoutX="341.0" layoutY="427.0" prefHeight="0.0" prefWidth="430.0" />
       <Label layoutX="341.0" layoutY="441.0" prefHeight="17.0" prefWidth="95.0" text="Practitioner ID : ">
          <font>
@@ -74,7 +74,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="337.0" layoutY="602.0" prefHeight="17.0" prefWidth="104.0" text="Health Unit Name :">
+      <Label layoutX="330.0" layoutY="602.0" prefHeight="17.0" prefWidth="111.0" text="Health Unit Name :">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
@@ -82,38 +82,38 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <JFXTextField layoutX="445.0" layoutY="65.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="103.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="144.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="185.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="226.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="265.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="392.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="437.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="477.0" prefHeight="25.0" prefWidth="265.0" promptText="Doctor" />
-      <JFXTextField layoutX="445.0" layoutY="517.0" prefHeight="25.0" prefWidth="265.0" promptText="Dental, Labour" />
-      <JFXTextField layoutX="445.0" layoutY="553.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextField layoutX="445.0" layoutY="598.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXTextArea layoutX="436.0" layoutY="641.0" prefHeight="83.0" prefWidth="297.0">
+      <JFXTextField fx:id="id" layoutX="445.0" layoutY="65.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="fName" layoutX="445.0" layoutY="103.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="mName" layoutX="445.0" layoutY="144.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="sirName" layoutX="445.0" layoutY="185.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="email" layoutX="445.0" layoutY="226.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="phoneNo" layoutX="445.0" layoutY="265.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="nationality" layoutX="445.0" layoutY="392.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="prctitionerId" layoutX="445.0" layoutY="437.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="title" layoutX="445.0" layoutY="477.0" prefHeight="25.0" prefWidth="265.0" promptText="Doctor" />
+      <JFXTextField fx:id="skills" layoutX="445.0" layoutY="517.0" prefHeight="25.0" prefWidth="265.0" promptText="Dental, Labour" />
+      <JFXTextField fx:id="healthUnitID" layoutX="445.0" layoutY="553.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextField fx:id="healthUnitName" layoutX="445.0" layoutY="598.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXTextArea fx:id="description" layoutX="436.0" layoutY="641.0" prefHeight="83.0" prefWidth="297.0">
          <font>
             <Font size="13.0" />
          </font></JFXTextArea>
-      <JFXDatePicker layoutX="445.0" layoutY="307.0" prefHeight="25.0" prefWidth="265.0" />
-      <JFXComboBox layoutX="445.0" layoutY="353.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXDatePicker fx:id="dob" layoutX="445.0" layoutY="307.0" prefHeight="25.0" prefWidth="265.0" />
+      <JFXComboBox fx:id="gender" layoutX="445.0" layoutY="353.0" prefHeight="25.0" prefWidth="265.0" />
       <Label alignment="CENTER" layoutX="823.0" layoutY="82.0" prefHeight="17.0" prefWidth="111.0" text="Authorisations" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="823.0" layoutY="124.0" prefHeight="25.0" prefWidth="198.0" promptText="RoLes" />
-      <JFXTextArea editable="false" layoutX="823.0" layoutY="168.0" prefHeight="60.0" prefWidth="198.0" />
-      <TextField alignment="CENTER" layoutX="267.0" layoutY="6.0" prefHeight="33.0" prefWidth="329.0" promptText="UserId/email" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #c0c0c0;" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="6.0" />
-      <JFXButton layoutX="848.0" layoutY="6.0" prefHeight="33.0" prefWidth="86.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Upload" textFill="WHITE" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="6.0">
+      <JFXComboBox fx:id="role" layoutX="823.0" layoutY="124.0" prefHeight="25.0" prefWidth="198.0" promptText="RoLes" />
+      <JFXTextArea fx:id="roleSelected" editable="false" layoutX="823.0" layoutY="168.0" prefHeight="60.0" prefWidth="198.0" />
+      <TextField fx:id="practitionerSearch" alignment="CENTER" layoutX="267.0" layoutY="6.0" prefHeight="33.0" prefWidth="329.0" promptText="UserId/email" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #c0c0c0;" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="6.0" />
+      <JFXButton fx:id="uploadBtn" layoutX="848.0" layoutY="6.0" prefHeight="33.0" prefWidth="86.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Upload" textFill="WHITE" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="6.0">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="CLOUD_UPLOAD" size="25" />
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="685.0" layoutY="6.0" prefHeight="34.0" prefWidth="86.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="685.0" AnchorPane.topAnchor="6.0">
+      <JFXButton fx:id="editBtn" layoutX="685.0" layoutY="6.0" prefHeight="34.0" prefWidth="86.0" style="-fx-background-color: #3258a4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="685.0" AnchorPane.topAnchor="6.0">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="25" />
          </graphic>

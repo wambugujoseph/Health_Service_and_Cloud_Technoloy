@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-//@RequestMapping(API_V_1)
 public class OauthSeverResourceController {
 
     @Autowired

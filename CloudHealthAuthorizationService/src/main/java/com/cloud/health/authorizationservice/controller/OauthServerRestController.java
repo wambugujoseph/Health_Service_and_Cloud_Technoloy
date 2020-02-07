@@ -25,7 +25,6 @@ import static com.cloud.health.authorizationservice.util.ApplicationConstants.AP
  */
 
 @RestController
-//@RequestMapping(API_V_1)
 public class OauthServerRestController {
 
     @Autowired
