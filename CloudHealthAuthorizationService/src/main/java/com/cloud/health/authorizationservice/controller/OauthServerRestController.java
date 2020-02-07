@@ -1,11 +1,8 @@
 package com.cloud.health.authorizationservice.controller;
-
-import com.cloud.health.authorizationservice.model.OauthClientDetails;
 import com.cloud.health.authorizationservice.model.TempOauthClient;
 import com.cloud.health.authorizationservice.model.TempUser;
 import com.cloud.health.authorizationservice.model.User;
 import com.cloud.health.authorizationservice.service.OauthClientDetailsServiceImpl;
-import com.cloud.health.authorizationservice.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
-import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
+
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -34,6 +31,11 @@ public class OauthServerRestController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<Object> registerUser(@RequestBody TempUser tempUser) {
+        if (!tempUser.getEmail().equals("") && !tempUser.getPassword().equals("") && !tempUser.getPhoneNumber().equals("") &&
+                !tempUser.getUsername().equals("") && !tempUser.getUserId().equals("")) {
+            if (!tempUser.getEmail().isEmpty() && !tempUser.getPassword().isEmpty() && !tempUser.getPhoneNumber().isEmpty() &&
+                    !tempUser.getUsername().isEmpty()) {
+
             try {
                 User user = userServiceImpl.saveUser(tempUser);
                 user.setPassword(null);
