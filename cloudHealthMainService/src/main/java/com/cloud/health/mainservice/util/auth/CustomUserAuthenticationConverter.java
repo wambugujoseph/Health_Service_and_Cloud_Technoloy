@@ -12,6 +12,15 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Monday
+ * Date: 12/23/2019
+ * Time: 1:23 PM
+ * Project: cloudHealthMainService
+ */
+
 public class CustomUserAuthenticationConverter implements UserAuthenticationConverter {
 
 

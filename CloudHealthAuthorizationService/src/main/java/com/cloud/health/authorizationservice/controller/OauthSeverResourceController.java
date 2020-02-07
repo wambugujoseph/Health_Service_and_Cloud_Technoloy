@@ -7,10 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.cloud.health.authorizationservice.util.ApplicationConstants.API_V_1;
+
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
 
 @Controller
-//@RequestMapping(API_V_1)
 public class OauthSeverResourceController {
 
     @Autowired

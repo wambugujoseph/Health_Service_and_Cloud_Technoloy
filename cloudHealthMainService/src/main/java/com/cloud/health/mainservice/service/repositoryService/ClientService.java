@@ -116,7 +116,7 @@ public class ClientService {
             assert client != null;
             personalDoctorEntity.setDoctorTo(client.getUserId());
             //Creating notification message for the personal health practitioner
-            notifications.createPersonalDrRequestNotification(client, practitioner.getUserInfo(),
+            notifications.createPersonalDrRequestNotification(client, practitioner.getUser(),
                     token, practitioner.getPractitionerId(), client.getUserId());
 
             return personalDoctorRepository.save(personalDoctorEntity);

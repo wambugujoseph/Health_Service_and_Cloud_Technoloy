@@ -17,6 +17,15 @@ public class MedicalFile {
     private String recordType;
     private String description;
     private MultipartFile file;
+    private String medicalRecordId;
+
+    public String getMedicalRecordId() {
+        return medicalRecordId;
+    }
+
+    public void setMedicalRecordId(String medicalRecordId) {
+        this.medicalRecordId = medicalRecordId;
+    }
 
     public MedicalFile() {
     }

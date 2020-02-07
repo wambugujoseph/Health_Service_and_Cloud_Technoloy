@@ -35,20 +35,21 @@ public class UserResourceController {
     private UserAuthenticationDetails userAuthenticationDetails;
 
     @RequestMapping(value = "/username")
-    public String getUserName(){
-        return userAuthenticationDetails.getUserEmail();
+    public String getUserName() {
+        return "++++--->>" + userAuthenticationDetails.getUserEmail().getEmail();
     }
-    @GetMapping(value = "/userinfo/{id}")
-    public UserEntity getUserDetail(@PathVariable String id){
+
+    @GetMapping(value = "/userInfo/{id}")
+    public UserEntity getUserDetail(@PathVariable String id) {
         return clientService.getUserInfo(id);
     }
 
-    @PostMapping(value = "client/access-contract")
-    public ResponseEntity<Object> createAccessSContract(@RequestBody AccessContract accessContract){
-        if (accessContract != null){
+    @PostMapping(value = "client/accessContract")
+    public ResponseEntity<Object> createAccessSContract(@RequestBody AccessContract accessContract) {
+        if (accessContract != null) {
             try {
                 AccessContractEntity accessContractEntity = clientService.addAccessContract(accessContract);
-                if (accessContractEntity != null){
+                if (accessContractEntity != null) {
                     return ResponseEntity.status(HttpStatus.CREATED).body(accessContractEntity);
                 }
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
@@ -61,17 +62,17 @@ public class UserResourceController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PutMapping("/client/accept/access-contract/{token}/{contractId}")
-    public ResponseEntity<Object> acceptAccessContract(@PathVariable String token, @PathVariable Integer contractId){
-         AccessContractEntity accessContractEntity = clientService.acceptMedicalRecordAccessContract(token, contractId);
-         if (!(accessContractEntity == null))
-             return ResponseEntity.status(HttpStatus.CREATED).body(accessContractEntity);
-         else
+    @PutMapping("/client/accept/accessContract/{token}/{contractId}")
+    public ResponseEntity<Object> acceptAccessContract(@PathVariable String token, @PathVariable Integer contractId) {
+        AccessContractEntity accessContractEntity = clientService.acceptMedicalRecordAccessContract(token, contractId);
+        if (!(accessContractEntity == null))
+            return ResponseEntity.status(HttpStatus.CREATED).body(accessContractEntity);
+        else
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(INVALID_REQUEST_OBJECT);
     }
 
-    @PostMapping(value = "client/personal-health-practitioner")
-    public ResponseEntity<Object> setPersonalHealthPractitioner(@RequestBody PersonalHealthPractitioner personalHealthPractitioner){
+    @PostMapping(value = "client/personalHealthPractitioner")
+    public ResponseEntity<Object> setPersonalHealthPractitioner(@RequestBody PersonalHealthPractitioner personalHealthPractitioner) {
 
         if (personalHealthPractitioner != null) {
             PersonalDoctorEntity doctorEntity = clientService.addPersonalHealthPractitioner(personalHealthPractitioner);
@@ -81,8 +82,8 @@ public class UserResourceController {
     }
 
     @PostMapping(value = "/client/real-time")
-    public ResponseEntity<Object> addRealTimeHealthData(@RequestBody RealTimeHealthData realTimeHealthData){
-        if (realTimeHealthData != null){
+    public ResponseEntity<Object> addRealTimeHealthData(@RequestBody RealTimeHealthData realTimeHealthData) {
+        if (realTimeHealthData != null) {
             RealTimeDataEntity realTimeDataEntity;
             try {
                 realTimeDataEntity = clientService.addRealTimeHealthData(realTimeHealthData);
@@ -91,7 +92,7 @@ public class UserResourceController {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
             }
-        }else
+        } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
     }
 

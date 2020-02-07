@@ -3,9 +3,8 @@ package com.cloud.health.authorizationservice.model;
 /**
  * Created by Kibe Joseph Wambugu
  * User: Joseph
- * Day: Tuesday
- * Date: 12/17/2019
- * Time: 8:58 PM
+ * Day: Friday
+ * Date: 12/20/2019
  * Project: CloudHealthAuthorizationService
  */
 

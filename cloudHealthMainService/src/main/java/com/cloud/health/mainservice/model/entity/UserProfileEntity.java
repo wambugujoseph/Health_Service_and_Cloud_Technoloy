@@ -19,7 +19,7 @@ public class UserProfileEntity {
     private String specialNeeds;
     private String complication;
     private String insuranceInformation;
-    private UserEntity userByOwner;
+    private UserEntity owner;
 
     @Id
     @Column(name = "profile_id")
@@ -90,12 +90,12 @@ public class UserProfileEntity {
 
     @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "user_id", nullable = false)
-    public UserEntity getUserByOwner() {
-        return userByOwner;
+    public UserEntity getOwner() {
+        return owner;
     }
 
-    public void setUserByOwner(UserEntity userByOwner) {
-        this.userByOwner = userByOwner;
+    public void setOwner(UserEntity userByOwner) {
+        this.owner = userByOwner;
     }
 
 }

@@ -25,11 +25,11 @@ public class MedicalRecordEntity {
     private Integer healthUnitId;
     private PatientEntity patient;
     private PractitionerEntity healthPractitioner;
-    private Collection<PrescriptionEntity> prescriptionsByRecordId;
-    private Collection<AilmentEntity> ailmentsByRecordId;
-    private Collection<ConsultationEntity> consultationsByRecordId;
-    private Collection<SurgeryEntity> surgeriesByRecordId;
-    private Collection<MedicalFileEntity> medicalFilesByRecordId;
+    private Collection<PrescriptionEntity> prescriptions;
+    private Collection<AilmentEntity> ailments;
+    private Collection<ConsultationEntity> consultations;
+    private Collection<SurgeryEntity> surgeries;
+    private Collection<MedicalFileEntity> medicalFiles;
 
 
     @Id
@@ -78,22 +78,22 @@ public class MedicalRecordEntity {
         return Objects.hash(recordId, created, description);
     }
 
-    @OneToMany(mappedBy = "medicalRecordByRecordId")
-    public Collection<AilmentEntity> getAilmentsByRecordId() {
-        return ailmentsByRecordId;
+    @OneToMany(mappedBy = "medicalRecord")
+    public Collection<AilmentEntity> getAilments() {
+        return ailments;
     }
 
-    public void setAilmentsByRecordId(Collection<AilmentEntity> ailmentsByRecordId) {
-        this.ailmentsByRecordId = ailmentsByRecordId;
+    public void setAilments(Collection<AilmentEntity> ailmentsByRecordId) {
+        this.ailments = ailmentsByRecordId;
     }
 
-    @OneToMany(mappedBy = "medicalRecordByRecordId")
-    public Collection<ConsultationEntity> getConsultationsByRecordId() {
-        return consultationsByRecordId;
+    @OneToMany(mappedBy = "medicalRecord")
+    public Collection<ConsultationEntity> getConsultations() {
+        return consultations;
     }
 
-    public void setConsultationsByRecordId(Collection<ConsultationEntity> consultationsByRecordId) {
-        this.consultationsByRecordId = consultationsByRecordId;
+    public void setConsultations(Collection<ConsultationEntity> consultationsByRecordId) {
+        this.consultations = consultationsByRecordId;
     }
 
     @ManyToOne
@@ -106,22 +106,22 @@ public class MedicalRecordEntity {
         this.healthPractitioner = practitionerByPractionnerId;
     }
 
-    @OneToMany(mappedBy = "medicalRecordByRecordId")
-    public Collection<PrescriptionEntity> getPrescriptionsByRecordId() {
-        return prescriptionsByRecordId;
+    @OneToMany(mappedBy = "medicalRecord")
+    public Collection<PrescriptionEntity> getPrescriptions() {
+        return prescriptions;
     }
 
-    public void setPrescriptionsByRecordId(Collection<PrescriptionEntity> prescriptionsByRecordId) {
-        this.prescriptionsByRecordId = prescriptionsByRecordId;
+    public void setPrescriptions(Collection<PrescriptionEntity> prescriptionsByRecordId) {
+        this.prescriptions = prescriptionsByRecordId;
     }
 
-    @OneToMany(mappedBy = "medicalRecordByRecordId")
-    public Collection<SurgeryEntity> getSurgeriesByRecordId() {
-        return surgeriesByRecordId;
+    @OneToMany(mappedBy = "medicalRecord")
+    public Collection<SurgeryEntity> getSurgeries() {
+        return surgeries;
     }
 
-    public void setSurgeriesByRecordId(Collection<SurgeryEntity> surgeriesByRecordId) {
-        this.surgeriesByRecordId = surgeriesByRecordId;
+    public void setSurgeries(Collection<SurgeryEntity> surgeriesByRecordId) {
+        this.surgeries = surgeriesByRecordId;
     }
 
     @Basic
@@ -154,13 +154,13 @@ public class MedicalRecordEntity {
         this.healthUnitId = healthUnitId;
     }
 
-    @OneToMany(mappedBy = "medicalRecordByRecordId")
-    public Collection<MedicalFileEntity> getMedicalFilesByRecordId() {
-        return medicalFilesByRecordId;
+    @OneToMany(mappedBy = "medicalRecord")
+    public Collection<MedicalFileEntity> getMedicalFiles() {
+        return medicalFiles;
     }
 
-    public void setMedicalFilesByRecordId(Collection<MedicalFileEntity> medicalFilesByRecordId) {
-        this.medicalFilesByRecordId = medicalFilesByRecordId;
+    public void setMedicalFiles(Collection<MedicalFileEntity> medicalFilesByRecordId) {
+        this.medicalFiles = medicalFilesByRecordId;
     }
 
     @ManyToOne

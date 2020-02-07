@@ -20,7 +20,7 @@ public class SurgeryEntity {
     private Date created;
     private String type;
     private String descrption;
-    private MedicalRecordEntity medicalRecordByRecordId;
+    private MedicalRecordEntity medicalRecord;
 
     @Id
     @Column(name = "surgery_id")
@@ -92,11 +92,11 @@ public class SurgeryEntity {
 
     @ManyToOne
     @JoinColumn(name = "record_id", referencedColumnName = "record_id", nullable = false)
-    public MedicalRecordEntity getMedicalRecordByRecordId() {
-        return medicalRecordByRecordId;
+    public MedicalRecordEntity getMedicalRecord() {
+        return medicalRecord;
     }
 
-    public void setMedicalRecordByRecordId(MedicalRecordEntity medicalRecordByRecordId) {
-        this.medicalRecordByRecordId = medicalRecordByRecordId;
+    public void setMedicalRecord(MedicalRecordEntity medicalRecordByRecordId) {
+        this.medicalRecord = medicalRecordByRecordId;
     }
 }

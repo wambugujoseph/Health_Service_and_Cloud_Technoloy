@@ -23,6 +23,14 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 import javax.sql.DataSource;
 
+/**
+ * Created by Kibe Joseph Wambugu
+ * User: Joseph
+ * Day: Friday
+ * Date: 12/20/2019
+ * Project: CloudHealthAuthorizationService
+ */
+
 @Configuration
 
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
@@ -41,6 +49,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private ClientDetailsService clientDetailsService;
+
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -89,6 +98,8 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         if (checkUserScopes)
             endpoints.requestFactory(requestFactory());
     }
+
+
 
 
 }
