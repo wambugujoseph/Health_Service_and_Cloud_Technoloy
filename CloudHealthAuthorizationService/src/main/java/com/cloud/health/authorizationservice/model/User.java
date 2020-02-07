@@ -16,6 +16,7 @@ public class User implements Serializable {
 
     public User(User user) {
         this.username = user.getUsername();
+        this.userId = user.getUserId();
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.phoneNumber = user.getPhoneNumber();
@@ -32,6 +33,8 @@ public class User implements Serializable {
 
     @Column(name = "username")
     private String username;
+    @Column(name = "user_id")
+    private String userId;
     @Column(name = "password")
     private String password;
     @Column(name = "email")

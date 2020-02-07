@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     public User saveUser(TempUser tempUser) {
         user.setPassword("{bcrypt}" + bCryptPasswordEncoder.encode(tempUser.getPassword()));
         user.setUsername(tempUser.getUsername());
+        user.setUserId(tempUser.getUserId());
         user.setEmail(tempUser.getEmail());
         user.setPhoneNumber(tempUser.getPhoneNumber());
         user.setAccountNonExpired(true);

@@ -14,6 +14,16 @@ public class TempUser {
     private String email;
     private String phoneNumber;
     private String password;
+    private String userId;
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
 
     public TempUser() {
     }

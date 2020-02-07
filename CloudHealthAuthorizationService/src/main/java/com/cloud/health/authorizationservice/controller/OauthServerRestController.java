@@ -28,7 +28,7 @@ public class OauthServerRestController {
     @PostMapping(value = "/register")
     public ResponseEntity<Object> registerUser(@RequestBody TempUser tempUser) {
         if (!tempUser.getEmail().equals("") && !tempUser.getPassword().equals("") && !tempUser.getPhoneNumber().equals("") &&
-        !tempUser.getUsername().equals("")) {
+        !tempUser.getUsername().equals("") && !tempUser.getUserId().equals("")) {
             try {
                 User user = userServiceImpl.saveUser(tempUser);
                 user.setPassword(null);
