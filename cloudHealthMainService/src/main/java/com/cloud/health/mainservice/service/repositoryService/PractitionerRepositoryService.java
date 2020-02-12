@@ -129,7 +129,7 @@ public class PractitionerRepositoryService {
         return userProfile;
     }
 
-    private UserEntity getCompleteUserObject(User user, String profileUrl) {
+    public UserEntity getCompleteUserObject(User user, String profileUrl) {
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setMiddleName(user.getMiddleName());

@@ -16,5 +16,6 @@ import java.util.Optional;
 
 public interface HealthUnitRepository extends JpaRepository<HealthUnitEntity, Integer> {
     Optional<HealthUnitEntity> findByHealthUnitNameLike(String healthUnitName);
+    Optional<HealthUnitEntity> findByHealthUnitId(int id);
 
 }

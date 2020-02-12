@@ -47,9 +47,9 @@
                </graphic>
             </Button>
             <FontAwesomeIconView fx:id="userAccountICaret" fill="WHITE" glyphName="CARET_DOWN" layoutX="1130.428572177887" layoutY="28.0" AnchorPane.rightAnchor="18.714284896850586" AnchorPane.topAnchor="17.714285850524902" />
-            <Label fx:id="pageTitle" layoutX="642.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" textAlignment="CENTER" textFill="#1b07b2" AnchorPane.leftAnchor="642.0" AnchorPane.rightAnchor="410.0">
+            <Label fx:id="pageTitle" layoutX="642.0" layoutY="6.0" prefHeight="35.0" prefWidth="104.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="642.0" AnchorPane.rightAnchor="410.0">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
          </children>

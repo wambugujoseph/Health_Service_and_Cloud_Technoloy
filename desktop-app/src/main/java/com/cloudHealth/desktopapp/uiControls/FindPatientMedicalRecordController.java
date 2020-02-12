@@ -117,6 +117,8 @@ public class FindPatientMedicalRecordController implements Initializable {
     private MedicalRecordServiceImpl medicalRecordService;
     @Autowired
     private PatientProfileServiceImpl patientProfileService;
+    @Autowired
+    private HomeController homeController;
 
     private JFXListView listView = new JFXListView();
     private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay, surgeryContentDisplay,medicalFileDisplay,realTimeDisplay;
@@ -146,6 +148,7 @@ public class FindPatientMedicalRecordController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         eventActionEvents();
+        startNewMedicalRecord();
     }
 
     private void patientRecordDrawerOpenClose(HamburgerBackArrowBasicTransition backArrow) {
@@ -159,6 +162,25 @@ public class FindPatientMedicalRecordController implements Initializable {
                 medicalRecordDrawer.open();
         });
     }
+
+    private void startNewMedicalRecord(){
+        newMedicalRecordConsultation.setOnAction(event -> newMedicalRecordStarter());
+        newMedicalRecordAilment.setOnAction(event -> newMedicalRecordStarter());
+        newMedicalRecordFile.setOnAction(event -> newMedicalRecordStarter());
+        newMedicalRecordAilment.setOnAction(event -> newMedicalRecordStarter());
+        newMedicalRecordPrescription.setOnAction(event -> newMedicalRecordStarter());
+        newMedicalRecordSurgery.setOnAction(event -> newMedicalRecordStarter());
+
+    }
+
+    private void newMedicalRecordStarter() {
+        try {
+            homeController.setAddRecordsUi();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void eventActionEvents() {
         HamburgerBackArrowBasicTransition backArrow = new HamburgerBackArrowBasicTransition(medicalRecordHamburger);

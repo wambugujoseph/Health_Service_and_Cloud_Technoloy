@@ -1,5 +1,6 @@
 package com.cloudHealth.desktopapp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 /**

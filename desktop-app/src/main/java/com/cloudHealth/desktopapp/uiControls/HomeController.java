@@ -2,6 +2,7 @@ package com.cloudHealth.desktopapp.uiControls;
 
 import com.cloudHealth.desktopapp.service.AuthorizeUserService;
 import com.cloudHealth.desktopapp.uiControls.uiHelper.HomeControllerHelper;
+import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
 import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -28,6 +29,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.context.support.UiApplicationContextUtils;
 import sun.reflect.generics.tree.Tree;
 
 import javax.swing.*;
@@ -60,11 +62,13 @@ public class HomeController implements Initializable {
     private HomeControllerHelper homeControllerHelper;
     @Autowired
     private AuthorizeUserService authorizeUserService;
+    @Autowired
+    private UiAlertsAndPopUp uiAlertsAndPopUp;
 
     JFXButton btnLogOut = btnLogOut = new JFXButton("Sign Out");
     JFXButton your_profileButton = new JFXButton("Your Profile");
 
-    private final Resource profilePage, profileHeaderAndTabPane, getPatientRecordPage, addPatientRecordPage, mngtPractitionerAdd,mngtHealthUnitAdd;
+    private final Resource profilePage, profileHeaderAndTabPane, getPatientRecordPage, addPatientRecordPage, mngtPractitionerAdd,mngtHealthUnitAdd, homePage;
     private final ApplicationContext ac;
     HomeController(
             @Value("classpath:/templates/patientProfile.fxml") Resource resource,
@@ -73,6 +77,7 @@ public class HomeController implements Initializable {
             @Value("classpath:/templates/addPatientRecordPage.fxml") Resource addPatientRecordPage,
             @Value("classpath:/templates/practitioner.fxml") Resource mngtPractitionerAdd,
             @Value("classpath:/templates/healthUnit.fxml") Resource mngtHealthUnitAdd,
+            @Value("classpath:/templates/welcomePage.fxml") Resource homePage,
             ApplicationContext ac) {
         this.ac = ac;
         this.profilePage = resource;
@@ -81,6 +86,7 @@ public class HomeController implements Initializable {
         this.addPatientRecordPage = addPatientRecordPage;
         this.mngtPractitionerAdd = mngtPractitionerAdd;
         this.mngtHealthUnitAdd = mngtHealthUnitAdd;
+        this.homePage = homePage;
     }
 
         @Override
@@ -89,6 +95,7 @@ public class HomeController implements Initializable {
         //Starter Method Calls
         setUserAccountIcon();
         setActivityTreeView();
+        setHomePage();
 
 
     }
@@ -131,17 +138,41 @@ public class HomeController implements Initializable {
                     }catch(Exception e){
                         e.printStackTrace();
                     }
+                }else if (activitySelected.equalsIgnoreCase("Activities")){
+                    try{
+                        setHomePage();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         });
     }
 
-    private void setAddRecordsUi() throws IOException {
+    private void setHomePage() {
+        try {
+            URL homePageURL = this.homePage.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(homePageURL);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            AnchorPane homePageAnchorPane = fxmlLoader.load();
+            homePageAnchorPane.prefWidthProperty().bind(activityAreaAnchorPane.widthProperty());
+            homePageAnchorPane.prefHeightProperty().bind(activityAreaAnchorPane.heightProperty());
+            pageTitle.setText("Welcome To Smart Health Record Cloud");
+            clearActivityArea();
+            activityAreaAnchorPane.getChildren().add(homePageAnchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, e.getMessage(),"Error",null, null).show();
+        }
+    }
+
+    public void setAddRecordsUi() throws IOException {
         URL addPatientRecordURL = this.addPatientRecordPage.getURL();
         FXMLLoader fxmlLoader = new FXMLLoader(addPatientRecordURL);
         fxmlLoader.setControllerFactory(ac::getBean);
         AnchorPane addPatientRecordAnchorPane = fxmlLoader.load();
-        addPatientRecordAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
+        addPatientRecordAnchorPane.prefWidthProperty().bind(activityAreaAnchorPane.widthProperty());
+        addPatientRecordAnchorPane.prefHeightProperty().bind(activityAreaAnchorPane.heightProperty());
         pageTitle.setText("Add Patient Records");
         clearActivityArea();
         activityAreaAnchorPane.getChildren().add(addPatientRecordAnchorPane);
@@ -153,23 +184,24 @@ public class HomeController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(mngtPractitionerAddURL);
             fxmlLoader.setControllerFactory(ac::getBean);
             AnchorPane mgntPractitionerAnchorPane = fxmlLoader.load();
-            mgntPractitionerAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
-            pageTitle.setText("Management Practitioner");
+            mgntPractitionerAnchorPane.prefWidthProperty().bind(activityAreaAnchorPane.widthProperty());
+            mgntPractitionerAnchorPane.prefHeightProperty().bind(activityAreaAnchorPane.heightProperty());
+            pageTitle.setText("Management");
             clearActivityArea();
             activityAreaAnchorPane.getChildren().add(mgntPractitionerAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     private void setMngtHealthUnitAdd(){
         try {
             URL mngtHealthUnitAddURL = this.mngtHealthUnitAdd.getURL();
             FXMLLoader fxmlLoader = new FXMLLoader(mngtHealthUnitAddURL);
             fxmlLoader.setControllerFactory(ac::getBean);
             AnchorPane mngtHealthUnitAddAnchorPane = fxmlLoader.load();
-            mngtHealthUnitAddAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
-            pageTitle.setText("Management Health Unit");
+            mngtHealthUnitAddAnchorPane.prefWidthProperty().bind(activityAreaAnchorPane.widthProperty());
+            mngtHealthUnitAddAnchorPane.prefHeightProperty().bind(activityAreaAnchorPane.heightProperty());
+            pageTitle.setText("Management ");
             clearActivityArea();
             activityAreaAnchorPane.getChildren().add(mngtHealthUnitAddAnchorPane);
         } catch (IOException e) {
@@ -182,8 +214,9 @@ public class HomeController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getPatientRecordPageURL);
         fxmlLoader.setControllerFactory(ac::getBean);
         AnchorPane getPatientRecordAnchorPane = fxmlLoader.load();
-        pageTitle.setText("Patient Cloud Medical Record Access ");
-        getPatientRecordAnchorPane.setPrefSize(activityAreaAnchorPane.getWidth(), activityAreaAnchorPane.getHeight());
+        pageTitle.setText("Medical Record Access ");
+        getPatientRecordAnchorPane.prefHeightProperty().bind(activityAreaAnchorPane.heightProperty());
+        getPatientRecordAnchorPane.prefWidthProperty().bind(activityAreaAnchorPane.widthProperty());
         clearActivityArea();
         activityAreaAnchorPane.getChildren().add(getPatientRecordAnchorPane);
     }

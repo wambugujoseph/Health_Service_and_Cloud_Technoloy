@@ -1,6 +1,9 @@
 package com.cloudHealth.desktopapp.config;
 
+import com.cloudHealth.desktopapp.StageLauncher;
 import com.cloudHealth.desktopapp.service.AuthorizeUserService;
+import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -21,6 +24,8 @@ import java.io.IOException;
 public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestInterceptor {
 
     private AuthorizeUserService authorizeUserService = new AuthorizeUserService();
+    @Autowired
+    private StageLauncher stageLauncher;
 
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest,
@@ -31,7 +36,7 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
         response.getHeaders().add("Authorization","Bearer "+ authorizeUserService.getUserAccessToken());
         //invoke open Login page if unauthorised
         if (response.getStatusCode().equals(HttpStatus.UNAUTHORIZED)){
-            System.out.println("Unauthorised ++++++++++++++++++++++");
+            stageLauncher.LaunchLoginPage(new Stage());
         }
         return response;
     }

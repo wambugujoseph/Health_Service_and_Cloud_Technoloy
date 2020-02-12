@@ -2,15 +2,26 @@ package com.cloud.health.mainservice.service.repositoryService;
 
 import com.cloud.health.mainservice.model.HealthPractitioner;
 import com.cloud.health.mainservice.model.HealthUnit;
+import com.cloud.health.mainservice.model.User;
 import com.cloud.health.mainservice.model.entity.GeoLocationEntity;
 import com.cloud.health.mainservice.model.entity.HealthUnitEntity;
 import com.cloud.health.mainservice.model.entity.PractitionerEntity;
+import com.cloud.health.mainservice.model.entity.UserEntity;
+import com.cloud.health.mainservice.repository.ClientRepository;
 import com.cloud.health.mainservice.repository.GeoLocationRepository;
 import com.cloud.health.mainservice.repository.HealthPractitionerRepository;
 import com.cloud.health.mainservice.repository.HealthUnitRepository;
+import com.cloud.health.mainservice.service.filestorage.ProfileFileStorageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -32,6 +43,16 @@ public class SuperUserRepositoryService {
     private HealthPractitionerRepository practitionerRepository;
     @Autowired
     private PractitionerRepositoryService practitionerRepositoryService;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private HealthPractitionerRepository healthPractitionerRepository;
+    @Autowired
+    private ProfileFileStorageService profileFileStorageService;
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    Logger logger = LoggerFactory.getLogger(SuperUserRepositoryService.class);
 
     /**
      * addHealthUnit Method
@@ -51,6 +72,17 @@ public class SuperUserRepositoryService {
         }
     }
 
+    public HealthUnitEntity geTHealthUnit(String healthUnitId){
+        try {
+            int id = Integer.parseInt(healthUnitId);
+            return healthUnitRepository.findById(id).orElse(new HealthUnitEntity());
+        } catch (NumberFormatException e) {
+            logger.error("Failed to get Health unit using the provided id");
+            e.printStackTrace();
+            return new HealthUnitEntity();
+        }
+    }
+
     /**
      * @param healthPractitioner
      * @return practitionerEntity
@@ -67,6 +99,38 @@ public class SuperUserRepositoryService {
         practitionerEntity.setHealthUnitId(healthUnitEntity.getHealthUnitId());
         return practitionerRepository.save(practitionerEntity);
     }
+
+    public ResponseEntity<Object> addPractitioner(String practitioner, String user,MultipartFile file) throws ParseException {
+        try {
+            //save Practitioner Profile
+            String fileName = profileFileStorageService.store(file);
+            //save user
+            PractitionerEntity practitionerEntity;
+            //logger.info("user "+user);
+            //logger.info("practitioner "+practitioner);
+            User castedUser = objectMapper.readValue(user, User.class);
+            UserEntity userEntity = practitionerRepositoryService.getCompleteUserObject(castedUser,fileName);
+            practitionerEntity = objectMapper.readValue(practitioner, PractitionerEntity.class);
+            UserEntity tempUserEntity =  clientRepository.save(userEntity);
+            if(tempUserEntity.getEmail().equalsIgnoreCase(userEntity.getEmail())){
+                practitionerEntity.setHealthUnit(
+                        healthUnitRepository.findByHealthUnitId(practitionerEntity.getHealthUnitId()).orElse(new HealthUnitEntity()));
+                practitionerEntity.setUser(tempUserEntity);
+                PractitionerEntity practitionerEntity1 = healthPractitionerRepository.save(practitionerEntity);
+                return ResponseEntity.status(HttpStatus.CREATED).body(practitionerEntity1);
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new PractitionerEntity());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(""+e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new PractitionerEntity());
+        }
+    }
+
+    public PractitionerEntity getPractitioner(String userIdOrPractitionerId){
+       return healthPractitionerRepository.findByPractitionerIdOrUserId(userIdOrPractitionerId, userIdOrPractitionerId).orElse(new PractitionerEntity());
+    }
+
 
     /**
      * @param iD unique identifier of GeoLocation stored in the database

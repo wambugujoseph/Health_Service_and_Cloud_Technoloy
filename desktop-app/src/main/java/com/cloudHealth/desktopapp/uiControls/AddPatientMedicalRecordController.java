@@ -323,7 +323,7 @@ public class AddPatientMedicalRecordController implements Initializable {
 
             MaterialDesignIconView icon = new MaterialDesignIconView(MaterialDesignIcon.VERIFIED);
             icon.setStyle("-fx-background-color: #00AE00");
-            icon.setStroke(Paint.valueOf("#00AE00"));
+            icon.setFill(Paint.valueOf("#000080"));
             icon.setSize("60");
             Alert alert = uiAlertsAndPopUp.showAlert(Alert.AlertType.CONFIRMATION, "Would you like to start new Medical Record", "Confirmation",
                     "Client is Available", icon);

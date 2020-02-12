@@ -6,6 +6,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.scene.control.TreeItem;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import org.springframework.stereotype.Component;
 
@@ -59,6 +60,7 @@ public class HomeControllerHelper {
 
     private TreeItem getTreeItem(Text title, FontAwesomeIconView fontAwesomeIconView, String fontSize, boolean isExpanded){
         TreeItem  treeItem = new TreeItem();
+        fontAwesomeIconView.setFill(Paint.valueOf("#000087"));
         treeItem.setValue(title);
         treeItem.setExpanded(isExpanded);
         fontAwesomeIconView.setSize(fontSize);
@@ -68,6 +70,7 @@ public class HomeControllerHelper {
 
     private TreeItem getTreeItem(Text title, MaterialDesignIconView materialDesignIconView, String fontSize,Boolean isExpanded){
         TreeItem  treeItem = new TreeItem();
+        materialDesignIconView.setFill(Paint.valueOf("#000087"));
         treeItem.setValue(title);
         treeItem.setExpanded(isExpanded);
         materialDesignIconView.setSize(fontSize);

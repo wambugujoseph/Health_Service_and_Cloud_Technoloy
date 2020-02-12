@@ -43,13 +43,16 @@ public class ProfileFileStorageService implements FileStorage {
         try {
             init();
             StringBuilder fileName =  new StringBuilder();
+
             String name = file.getOriginalFilename();
+            //System.out.println(""+name);
             int endIndex = Objects.requireNonNull(name).lastIndexOf(".");
             String modifiedName = name.replace(name.substring(0,endIndex),"PROFILE-PIC-"+ LocalDateTime.now().toString())
                     .replaceAll(":","-");
             Path fileNamePath = Paths.get(getProfileImageStorage(), modifiedName);
             fileName.append(modifiedName);
             Files.write(fileNamePath, file.getBytes());
+            //System.out.println(modifiedName);
             return modifiedName;
         } catch (IOException e) {
             e.printStackTrace();

@@ -68,7 +68,7 @@ public class StageLauncher implements ApplicationListener<StageReadyEvent> {
             stage.setTitle(this.applicationTitle);
             stage.show();
 
-            if (authorizeUserService.checkIsUserTokenExpired()){
+            if (/*false*/authorizeUserService.checkIsUserTokenExpired()){
                 LaunchLoginPage(stage);
             }
         } catch (IOException e) {
@@ -76,7 +76,7 @@ public class StageLauncher implements ApplicationListener<StageReadyEvent> {
         }
     }
 
-    private void LaunchLoginPage(Stage mainStage) throws IOException {
+    public void LaunchLoginPage(Stage mainStage) throws IOException {
         URL loginPageURL = this.loginPage.getURL();
         FXMLLoader fxmlLoader = new FXMLLoader(loginPageURL);
         fxmlLoader.setControllerFactory(ac::getBean);

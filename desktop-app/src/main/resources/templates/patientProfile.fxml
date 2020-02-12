@@ -103,7 +103,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="dob" defaultColor="#1ce737" layoutX="408.0" layoutY="309.0" prefHeight="25.0" prefWidth="279.0" />
+      <JFXDatePicker fx:id="dob" layoutX="408.0" layoutY="309.0" prefHeight="25.0" prefWidth="279.0" />
       <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="448.0" prefHeight="17.0" prefWidth="126.0" text="Blood Group :">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -160,6 +160,6 @@
       </Label>
       <JFXRadioButton fx:id="genderMale" layoutX="416.0" layoutY="395.0" text="Male" />
       <JFXRadioButton fx:id="genderFemale" layoutX="528.0" layoutY="395.0" text="Female" />
-      <JFXButton layoutX="67.0" layoutY="338.0" prefHeight="33.0" prefWidth="158.0" style="-fx-background-color: #1371e4; -fx-background-radius: 15; -fx-border-radius: 15;" text="Choose Profile Photo" textFill="#f5f7f8" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="338.0" />
+      <JFXButton layoutX="67.0" layoutY="338.0" prefHeight="33.0" prefWidth="158.0" style="-fx-background-color: #8082D9; -fx-background-radius: 15; -fx-border-radius: 15;" text="Choose Profile Photo" textFill="#f5f7f8" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="338.0" />
    </children>
 </AnchorPane>

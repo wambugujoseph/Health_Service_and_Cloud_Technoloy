@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="635.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1088.0" style="-fx-background-color: #8A8AFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="#000064" fontSmoothingType="LCD" layoutX="29.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pilloting Your Path to Smarter Health Records in The Cloud" wrappingWidth="704.13671875" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="125.203125">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Text>
+            <Text layoutX="38.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Efficiency in Medical Record Sharing, Security &amp; General Productitvity in Medical Follow Ups" wrappingWidth="494.13671875" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="317.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <AnchorPane layoutX="698.0" layoutY="-64.0" prefHeight="200.0" prefWidth="237.0" AnchorPane.leftAnchor="698.0" AnchorPane.topAnchor="-64.0">
+               <children>
+                  <FontAwesomeIconView fill="#f5f0f0" glyphName="CLOUD" layoutY="195.57142639160156" size="200" wrappingWidth="236.8571424484253" AnchorPane.bottomAnchor="24.428573608398438" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.14285755157470703" AnchorPane.topAnchor="7.5714263916015625" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="448.0" layoutY="301.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="301.0">
+               <children>
+                  <FontAwesomeIconView fill="#f8f7f7" glyphName="CLOUD" layoutX="35.0" layoutY="188.0" size="200" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="876.0" layoutY="489.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-75.0" AnchorPane.rightAnchor="-38.0">
+               <children>
+                  <FontAwesomeIconView fill="#f8f7f7" glyphName="CLOUD" layoutX="35.0" layoutY="188.0" size="200" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="407.0" layoutY="505.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-75.0" AnchorPane.leftAnchor="407.0">
+               <children>
+                  <FontAwesomeIconView fill="#f8f7f7" glyphName="CLOUD" layoutX="35.0" layoutY="188.0" size="200" AnchorPane.bottomAnchor="0.5223236083984375" AnchorPane.leftAnchor="35.0" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="689.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0">
+               <image>
+                  <Image url="@IMG2.jpg" />
+               </image>
+            </ImageView>
+            <Line endX="100.0" layoutX="587.112060546875" layoutY="289.0" startX="-551.5560302734375" AnchorPane.rightAnchor="400.387939453125" />
+         </children>
+         <effect>
+            <Glow />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>
