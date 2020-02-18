@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">EMR</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_profile">Profile</string>
+    <string name="test_string">Simple steps creating computer virus.
+NB: there is no specific procedure on how to create a virus but there exist some common steps or processes that lead to successful virus creation.
+1.	Determine what operating system you are going to attack.
+The operating system selected may include, Windows, Linux, Mac OS, Android etc. windows is mostly preferred because of it vulnerabilities, also old operating systems are targeted due to lack of latest updates hence making the vulnerable.
+2.	Decide how you want it to spread.
+The means of spreading viruses are, web scripts, installable computer programs (.exe, .BAT etc.) or macro (programs attached on spreadsheet documents).
+3.	Determine the weak spot that you want to target.
+The week spot may include programs, system files, unsecure network etc. This stage requires a lot of research.
+4.	Decide what you want your virus to do.
+This is the action that the virus should performs once inside the computer system which may be deleting files (worst case) or displaying massage on the screen.
+5.	Choose a language.
+A programming language is the one of the tool used in writing the virus example of language include C, C++, JAVA etc. The language used must have support on the activities that the virus is intended to perform.
+</string>
+</resources>

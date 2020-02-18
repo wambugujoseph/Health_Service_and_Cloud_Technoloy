@@ -74,7 +74,7 @@
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="675.0" style="-fx-background-color: #fff;">
                                  <children>
-                                    <VBox fx:id="consultationVBoxView" layoutX="52.0" layoutY="48.0" prefHeight="535.0" prefWidth="741.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="45.0" />
+                                    <VBox fx:id="consultationVBoxView" layoutX="52.0" layoutY="48.0" onMouseReleased="#getObj" prefHeight="535.0" prefWidth="741.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="45.0" />
                                     <JFXButton fx:id="newConsultation" layoutX="166.0" layoutY="5.0" prefHeight="35.0" prefWidth="226.0" ripplerFill="#bfbcbc" text=" ">
                                        <graphic>
                                           <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="New Consultation Record" textAlignment="CENTER" wrappingWidth="168.59375">

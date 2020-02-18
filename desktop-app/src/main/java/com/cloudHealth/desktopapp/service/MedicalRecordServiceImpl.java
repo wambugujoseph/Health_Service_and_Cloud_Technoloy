@@ -51,11 +51,10 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             }
                 return null;
         } catch (Exception e) {
-           if (e.getMessage().contains("500")){
-               uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,"Could not find the record relating to that email or ID",
-                       "ERROR", "500! InternalServer Error",null).show();
-           }
-           e.printStackTrace();
+
+           uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,"Could not find the record relating to that email or ID",
+                   "ERROR", null,null).show();
+          logger.error(e.getMessage());
             return null;
         }
 
@@ -105,7 +104,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
                 return response.getBody();
             }
         } catch (Exception e) {
-            logger.error("Failed to uploade medical consultation == "+ e.getMessage());
+            logger.error("Failed to uploaded medical consultation == "+ e.getMessage());
         }
         return new Consultation();
     }

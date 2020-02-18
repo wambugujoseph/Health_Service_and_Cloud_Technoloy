@@ -38,7 +38,6 @@ public class StageLauncher implements ApplicationListener<StageReadyEvent> {
     private final ApplicationContext ac;
     public static Stage stageLogin;
 
-
     StageLauncher(
             @Value("${spring.application.ui.title}") String applicationTitle,
             @Value("classpath:/templates/home.fxml") Resource resource,

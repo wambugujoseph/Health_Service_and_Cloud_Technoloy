@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="718.0" style="-fx-background-color: #ffffff; -fx-border-color: none" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.uiHelper.ConsultationDisplayController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="718.0" style="-fx-background-color: #ffffff; -fx-border-color: none" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cloudHealth.desktopapp.uiControls.uiHelper.ConsultationDisplayController">
    <children>
-      <AnchorPane layoutX="71.0" layoutY="40.0" prefHeight="127.0" prefWidth="625.0" style="-fx-border-color: #f4f4f4; -fx-background-color: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
+      <AnchorPane layoutX="71.0" layoutY="66.0" prefHeight="127.0" prefWidth="625.0" style="-fx-border-color: #f4f4f4; -fx-background-color: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
          <effect>
             <DropShadow color="#aea8a8" height="27.0" radius="13.25" width="28.0" />
          </effect>
@@ -39,7 +39,7 @@
                         <MaterialDesignIconView fill="WHITE" glyphName="DELETE" size="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="editBtn" contentDisplay="CENTER" layoutX="569.0" layoutY="41.0" style="-fx-background-color: #0067CE;" text=" " AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="10.0">
+                  <JFXButton fx:id="editBtn" contentDisplay="CENTER" layoutX="569.0" layoutY="41.0" onAction="#editConsultation" style="-fx-background-color: #0067CE;" text=" " AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="10.0">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" wrappingWidth="15.0" />
                      </graphic>
@@ -49,5 +49,19 @@
          </children>
       </AnchorPane>
       <Label fx:id="dateLabel" layoutX="71.0" prefHeight="28.0" prefWidth="233.0" style="-fx-background-color: #ffffff" textFill="#141313" />
+      <Label layoutX="71.0" layoutY="36.0" prefHeight="17.0" prefWidth="60.0" text="Patient Id:" />
+      <Label fx:id="patientId" layoutX="131.0" layoutY="36.0" prefHeight="17.0" prefWidth="147.0" text="Label">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="290.0" layoutY="36.0" prefHeight="17.0" prefWidth="60.0" text="Record Id:" />
+      <Label fx:id="recordId" layoutX="350.0" layoutY="36.0" prefHeight="17.0" prefWidth="147.0" text="Label" />
+      <Label layoutX="505.0" layoutY="36.0" text="Serial no:" />
+      <Label fx:id="consultationId" layoutX="557.0" layoutY="37.0" prefHeight="17.0" prefWidth="133.0" text="Label">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -3,11 +3,10 @@ package com.cloudHealth.desktopapp.uiControls;
 import com.cloudHealth.desktopapp.model.*;
 import com.cloudHealth.desktopapp.service.MedicalRecordServiceImpl;
 import com.cloudHealth.desktopapp.service.PatientProfileServiceImpl;
+import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
+import com.cloudHealth.desktopapp.util.FileUtil;
 import com.cloudHealth.desktopapp.util.StringFormatter;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -21,22 +20,28 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Created by Kibe Joseph Wambugu
@@ -110,6 +115,11 @@ public class FindPatientMedicalRecordController implements Initializable {
     @FXML private TableColumn<TempRealTimeData, GeoLocation> longitude;
     @FXML private TableColumn<TempRealTimeData, String> value;
     @FXML private VBox medicalFileVboxView;
+    @FXML private StackPane consultationStackPane;
+    @FXML private StackPane medicalFilesStackPane;
+    @FXML private StackPane ailmentStackpane;
+    @FXML private StackPane prscriptionStackPane;
+    @FXML private StackPane surgeryStackPane;
 
 
 
@@ -119,11 +129,17 @@ public class FindPatientMedicalRecordController implements Initializable {
     private PatientProfileServiceImpl patientProfileService;
     @Autowired
     private HomeController homeController;
+    @Autowired
+    private UiAlertsAndPopUp uiAlertsAndPopUp;
 
     private JFXListView listView = new JFXListView();
-    private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay, surgeryContentDisplay,medicalFileDisplay,realTimeDisplay;
+    private Resource consultationContentDisplay, ailmentContentDisplay, prescriptionContentDisplay,
+            surgeryContentDisplay,medicalFileDisplay,realTimeDisplay, newConsultationRecord, newMedicalFileAdd,newAilmentAdd, newPrescriptionAdd,
+            newSurgeryAdd;
     private ApplicationContext ac;
     private MedicalRecord[] medicalRecords;
+    private int medicalRecordId = 0;
+    private JFXDialog dialog;
     Logger logger = LoggerFactory.getLogger(FindPatientMedicalRecordController.class);
 
     private Collection<MedicalRecord> medicalRecordCollection = new ArrayList<>();
@@ -134,6 +150,11 @@ public class FindPatientMedicalRecordController implements Initializable {
                                        @Value("${classpath:/templates/helperLayout/surgeryDisplay.fxml}") Resource surgeryContentDisplay,
                                        @Value("${classpath:/templates/helperLayout/medicalFileDisplay.fxml}") Resource medicalFileDisplay,
                                        @Value("${classpath:/templates/helperLayout/realtimeRecord.fxml}") Resource realTimeDisplay,
+                                       @Value("${classpath:/templates/helperLayout/newConsultation.fxml}") Resource newConsultationRecord,
+                                       @Value("${classpath:/templates/helperLayout/newMedicalFile.fxml}") Resource newMedicalFileAdd,
+                                       @Value("${classpath:/templates/helperLayout/newAilment.fxml}") Resource newAilmentAdd,
+                                       @Value("${classpath:/templates/helperLayout/newPrescription.fxml}") Resource newPrescriptionAdd,
+                                       @Value("${classpath:/templates/helperLayout/newSurgery.fxml}") Resource newSurgeryAdd,
                                        ApplicationContext ac) {
         this.consultationContentDisplay = consultationContentDisplay;
         this.ailmentContentDisplay = ailmentContentDisplay;
@@ -141,6 +162,11 @@ public class FindPatientMedicalRecordController implements Initializable {
         this.surgeryContentDisplay = surgeryContentDisplay;
         this.medicalFileDisplay = medicalFileDisplay;
         this.realTimeDisplay = realTimeDisplay;
+        this.newConsultationRecord = newConsultationRecord;
+        this.newMedicalFileAdd = newMedicalFileAdd;
+        this.newAilmentAdd = newAilmentAdd;
+        this.newPrescriptionAdd = newPrescriptionAdd;
+        this.newSurgeryAdd = newSurgeryAdd;
         this.ac = ac;
 
     }
@@ -181,13 +207,13 @@ public class FindPatientMedicalRecordController implements Initializable {
         }
     }
 
-
     private void eventActionEvents() {
         HamburgerBackArrowBasicTransition backArrow = new HamburgerBackArrowBasicTransition(medicalRecordHamburger);
         backArrow.setRate(-1);
         patientRecordDrawerOpenClose(backArrow);
         setMedicalRecordSearch();
         drawerListVieEventListener();
+        newMedicalRecords();
     }
 
     private void drawerListVieEventListener(){
@@ -213,12 +239,45 @@ public class FindPatientMedicalRecordController implements Initializable {
         });
     }
 
+    private void newMedicalRecords(){
+        newConsultation.setOnAction(event -> {
+            if (medicalRecordId != 0) {
+                getNewConsultationRecordEntry();
+            }else
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.WARNING,"No selected Medical Record","Information",null,null).show();
+        });
+        newMedicalFileRecord.setOnAction(event -> {
+            if (medicalRecordId != 0) {
+                getNewMedicalFileEntry();
+            }else
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.WARNING,"No selected Medical Record","Information",null,null).show();
+        });
+        newAilment.setOnAction(event -> {
+            if (medicalRecordId != 0) {
+                getNewAilmentRecordEntry();
+            }else
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.WARNING,"No selected Medical Record","Information",null,null).show();
+        });
+        newPrescription.setOnAction(event -> {
+            if (medicalRecordId != 0) {
+                getNewPrescriptionRecordEntry();
+            }else
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.WARNING,"No selected Medical Record","Information",null,null).show();
+        });
+        newSurgeryRecord.setOnAction(event -> {
+            if (medicalRecordId != 0) {
+                getNewSurgeryRecordEntry();
+            }else
+                uiAlertsAndPopUp.showAlert(Alert.AlertType.WARNING,"No selected Medical Record","Information",null,null).show();
+        });
+    }
     private void chooseDifferentMedicalRecord() {
         String selectedItemText = listView.getSelectionModel().getSelectedItem().toString();
         //logger.info("The selected item text is :" + selectedItemText);
         for (MedicalRecord medicalRecord: this.medicalRecords){
             //check if the selected listItem contain setMedical id
             if (selectedItemText.contains(medicalRecord.getRecordId()+"")){
+                medicalRecordId= medicalRecord.getRecordId();
                 //display the selected record
                 try {
 
@@ -284,9 +343,15 @@ public class FindPatientMedicalRecordController implements Initializable {
             Label dateLabel = (Label) displayAnchorPane.lookup("#dateLabel");
             Text typeTextDisplay = (Text) displayAnchorPane.lookup("#typeDisplay");
             Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#descriptionDisplay");
+            Label patientId =(Label) displayAnchorPane.lookup("#patientId");
+            Label recordId = (Label) displayAnchorPane.lookup("#recordId");
+            Label consultationId = (Label) displayAnchorPane.lookup("#consultationId");
             dateLabel.setText(String.valueOf(consultation.getCreated().toLocalDate()));
             typeTextDisplay.setText(consultation.getType());
             descriptionTxtDisplay.setText(consultation.getDescrption());
+            patientId.setText(this.medicalRecords[0].getRecordId()+"");
+            recordId.setText(consultation.getRecordId()+"");
+            consultationId.setText(consultation.getConsultationId()+"");
             consultationAnchorPanes.add(displayAnchorPane);
         }
         consultationVBoxView.getChildren().addAll(consultationAnchorPanes);
@@ -300,9 +365,9 @@ public class FindPatientMedicalRecordController implements Initializable {
             Label dateLabel = (Label) displayAnchorPane.lookup("#ailmentDateLabel");
             Text typeTextDisplay = (Text) displayAnchorPane.lookup("#ailmentTypeDisplay");
             Text descriptionTxtDisplay = (Text) displayAnchorPane.lookup("#ailmentDescriptionDisplay");
-            dateLabel.setText(String.valueOf(ailment.getCreated().toLocalDate()));
             typeTextDisplay.setText(ailment.getType());
             descriptionTxtDisplay.setText(ailment.getDescription());
+            dateLabel.setText(String.valueOf(ailment.getCreated().toLocalDate()));
             ailmentAnchorPanes.add(displayAnchorPane);
         }
         ailmentVBoxView.getChildren().addAll(ailmentAnchorPanes);
@@ -358,6 +423,11 @@ public class FindPatientMedicalRecordController implements Initializable {
             medicalFileAnchorPanes.add(displayAnchorPane);
         }
         medicalFileVboxView.getChildren().addAll(medicalFileAnchorPanes);
+    }
+
+    @FXML
+    private void getObj(){
+        logger.info("Object clicked ;" +medicalFileVboxView.getChildren().size());
     }
 
     private void displayPatientDetails(int patientId) {
@@ -502,4 +572,302 @@ public class FindPatientMedicalRecordController implements Initializable {
         return new AnchorPane();
     }
 
+    private void getNewConsultationRecordEntry(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.newConsultationRecord.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setBody(anchorPane);
+            dialog = new JFXDialog( consultationStackPane, content, JFXDialog.DialogTransition.TOP);
+            dialog.show();
+            JFXButton closeBtn = (JFXButton) anchorPane.lookup("#close");
+            dialog.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ESCAPE)){
+                    dialog.close();
+                }
+            });
+            closeBtn.setOnAction(e-> dialog.close());
+
+            JFXTextArea description = (JFXTextArea) anchorPane.lookup("#description");
+            JFXTextField type = (JFXTextField) anchorPane.lookup("#type");
+            JFXButton upload = (JFXButton) anchorPane.lookup("#upload");
+
+            upload.setOnAction(event -> {
+                if (!(description.getText().isEmpty() && type.getText().isEmpty())){
+                    Consultation consultation = new Consultation();
+                    if (medicalRecordId !=0) {
+                        consultation.setRecordId(medicalRecordId);
+                        consultation.setType(type.getText());
+                        for (MedicalRecord medicalRecord : medicalRecords) {
+                            if (medicalRecord.getRecordId() == medicalRecordId)
+                                consultation.setMedicalRecord(medicalRecord);
+                        }
+                        consultation.setConsultationId(0);
+                        consultation.setDescrption(description.getText());
+                        consultation.setCreated(Date.valueOf(LocalDate.now()));
+                        try {
+                            Consultation conslt = medicalRecordService.uploadConsultation(consultation);
+                            if (conslt.getRecordId() == medicalRecordId){
+                                uiAlertsAndPopUp.showAlert(
+                                        Alert.AlertType.CONFIRMATION,"Uploaded Successfully","Confirmation",null,null
+                                ).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,e.getMessage(),"Error",null,null).show();
+                        }
+                    }
+                }else
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION,"No selected Medical record","Message",null, null).show();
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getNewMedicalFileEntry(){
+        try {
+            AnchorPane anchorPane;
+            URL newFleUrl = this.newMedicalFileAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(newFleUrl);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setBody(anchorPane);
+            dialog = new JFXDialog( medicalFilesStackPane, content, JFXDialog.DialogTransition.CENTER);
+            dialog.show();
+            JFXButton closeBtn = (JFXButton) anchorPane.lookup("#close");
+            dialog.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ESCAPE)){
+                    dialog.close();
+                }
+            });
+            closeBtn.setOnAction(e-> dialog.close());
+
+            JFXTextArea description = (JFXTextArea) anchorPane.lookup("#description");
+            JFXTextField fileLocation = (JFXTextField) anchorPane.lookup("#fileLocation");
+            Button chooseFileBtn = (Button) anchorPane.lookup("#chooseFile");
+            JFXTextArea fileType = (JFXTextArea) anchorPane.lookup("#type");
+            JFXButton upload = (JFXButton) anchorPane.lookup("#upload");
+
+            chooseFileBtn.setOnAction(event ->{
+                FileChooser fileChooser = new FileChooser();
+                File file = fileChooser.showOpenDialog(chooseFileBtn.getScene().getWindow());
+                fileLocation.setText(file.getPath());
+            });
+
+            upload.setOnAction(event -> {
+                if (!(description.getText().isEmpty() && fileType.getText().isEmpty() && fileLocation.getText().isEmpty())) {
+                    MedicalFile medicalFile = new MedicalFile();
+                    if (medicalRecordId != 0) {
+                        medicalFile.setRecordType(fileType.getText());
+                        for (MedicalRecord medicalRecord : medicalRecords) {
+                            if (medicalRecord.getRecordId() == medicalRecordId)
+                                medicalFile.setMedicalRecord(medicalRecord);
+                        }
+                        File file = new File(fileLocation.getText());
+                        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+                        FileSystemResource fileSystemResource = new FileSystemResource(file);
+
+                        body.add("file", fileSystemResource);
+                        body.add("description", description.getText());
+                        body.add("recordType", fileType.getText());
+                        body.add("medicalRecordId", this.medicalRecordId);
+                       body.add("userId", this.medicalFilePatientID.getText());
+                        try {
+                            MedicalFile medFile = medicalRecordService.uploadMedicalFile(body);
+                            if (medFile.getRecordId() == medicalRecordId) {
+                                uiAlertsAndPopUp.showAlert(
+                                        Alert.AlertType.CONFIRMATION, "Uploaded Successfully", "Confirmation", null, null
+                                ).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR, e.getMessage(), "Error", null, null).show();
+                        }
+                    } else
+                        uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION, "No selected Medical record", "Message", null, null).show();
+                }else
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION, "Empty Fields", "Message", null, null).show();
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getNewAilmentRecordEntry(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.newAilmentAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setBody(anchorPane);
+            dialog = new JFXDialog( ailmentStackpane, content, JFXDialog.DialogTransition.TOP);
+            dialog.show();
+            JFXButton closeBtn = (JFXButton) anchorPane.lookup("#close");
+            dialog.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ESCAPE)){
+                    dialog.close();
+                }
+            });
+            closeBtn.setOnAction(e-> dialog.close());
+
+            JFXTextArea description = (JFXTextArea) anchorPane.lookup("#description");
+            JFXTextField type = (JFXTextField) anchorPane.lookup("#type");
+            JFXButton upload = (JFXButton) anchorPane.lookup("#upload");
+
+            upload.setOnAction(event -> {
+                if (!(description.getText().isEmpty() && type.getText().isEmpty())){
+                    Ailment ailment = new Ailment();
+                    if (medicalRecordId !=0) {
+                        ailment.setRecordId(medicalRecordId);
+                        ailment.setType(type.getText());
+                        for (MedicalRecord medicalRecord : medicalRecords) {
+                            if (medicalRecord.getRecordId() == medicalRecordId)
+                                ailment.setMedicalRecord(medicalRecord);
+                        }
+                        ailment.setAilmentId(0);
+                        ailment.setDescription(description.getText());
+                        ailment.setCreated(Date.valueOf(LocalDate.now()));
+                        try {
+                            Ailment almt = medicalRecordService.uploadAilment(ailment);
+                            if (almt.getRecordId() == medicalRecordId){
+                                uiAlertsAndPopUp.showAlert(
+                                        Alert.AlertType.CONFIRMATION,"Uploaded Successfully","Confirmation",null,null
+                                ).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,e.getMessage(),"Error",null,null).show();
+                        }
+                    }
+                }else
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION,"No selected Medical record","Message",null, null).show();
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getNewPrescriptionRecordEntry(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.newPrescriptionAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setBody(anchorPane);
+            dialog = new JFXDialog( prscriptionStackPane, content, JFXDialog.DialogTransition.BOTTOM);
+            dialog.show();
+            JFXButton closeBtn = (JFXButton) anchorPane.lookup("#close");
+            dialog.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ESCAPE)){
+                    dialog.close();
+                }
+            });
+            closeBtn.setOnAction(e-> dialog.close());
+
+            JFXTextArea description = (JFXTextArea) anchorPane.lookup("#description");
+            JFXTextField type = (JFXTextField) anchorPane.lookup("#type");
+            JFXButton upload = (JFXButton) anchorPane.lookup("#upload");
+
+            upload.setOnAction(event -> {
+                if (!(description.getText().isEmpty() && type.getText().isEmpty())){
+                    Prescription prescription = new Prescription();
+                    if (medicalRecordId !=0) {
+                        prescription.setRecordId(medicalRecordId);
+                        prescription.setMedication(type.getText());
+                        for (MedicalRecord medicalRecord : medicalRecords) {
+                            if (medicalRecord.getRecordId() == medicalRecordId)
+                                prescription.setMedicalRecord(medicalRecord);
+                        }
+                        prescription.setPrecriptionId(0);
+                        prescription.setDescrption(description.getText());
+                        prescription.setCreated(Date.valueOf(LocalDate.now()));
+                        try {
+                            Prescription prescrip = medicalRecordService.uploadPrescriptionAndMedication(prescription);
+                            if (prescrip.getRecordId() == medicalRecordId){
+                                uiAlertsAndPopUp.showAlert(
+                                        Alert.AlertType.CONFIRMATION,"Uploaded Successfully","Confirmation",null,null
+                                ).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,e.getMessage(),"Error",null,null).show();
+                        }
+                    }
+                }else
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION,"No selected Medical record","Message",null, null).show();
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getNewSurgeryRecordEntry(){
+        try {
+            AnchorPane anchorPane;
+            URL url = this.newSurgeryAdd.getURL();
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            fxmlLoader.setControllerFactory(ac::getBean);
+            anchorPane = fxmlLoader.load();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setBody(anchorPane);
+            dialog = new JFXDialog( surgeryStackPane, content, JFXDialog.DialogTransition.BOTTOM);
+            dialog.show();
+            JFXButton closeBtn = (JFXButton) anchorPane.lookup("#close");
+            dialog.setOnKeyPressed(event -> {
+                if (event.getCode().equals(KeyCode.ESCAPE)){
+                    dialog.close();
+                }
+            });
+            closeBtn.setOnAction(e-> dialog.close());
+
+            JFXTextArea description = (JFXTextArea) anchorPane.lookup("#description");
+            JFXTextField type = (JFXTextField) anchorPane.lookup("#type");
+            JFXButton upload = (JFXButton) anchorPane.lookup("#upload");
+
+            upload.setOnAction(event -> {
+                if (!(description.getText().isEmpty() && type.getText().isEmpty())){
+                    Surgery surgery = new Surgery();
+                    if (medicalRecordId !=0) {
+                        surgery.setRecordId(medicalRecordId);
+                        surgery.setType(type.getText());
+                        for (MedicalRecord medicalRecord : medicalRecords) {
+                            if (medicalRecord.getRecordId() == medicalRecordId)
+                                surgery.setMedicalRecord(medicalRecord);
+                        }
+                        surgery.setSurgeryId(0);
+                        surgery.setDescrption(description.getText());
+                        surgery.setCreated(Date.valueOf(LocalDate.now()));
+                        try {
+                            Surgery surg = medicalRecordService.uploadSurgery(surgery);
+                            if (surg.getRecordId() == medicalRecordId){
+                                uiAlertsAndPopUp.showAlert(
+                                        Alert.AlertType.CONFIRMATION,"Uploaded Successfully","Confirmation",null,null
+                                ).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            uiAlertsAndPopUp.showAlert(Alert.AlertType.ERROR,e.getMessage(),"Error",null,null).show();
+                        }
+                    }
+                }else
+                    uiAlertsAndPopUp.showAlert(Alert.AlertType.INFORMATION,"No selected Medical record","Message",null, null).show();
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

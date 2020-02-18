@@ -45,7 +45,7 @@
             </AnchorPane>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images.jpg" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="689.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0">
