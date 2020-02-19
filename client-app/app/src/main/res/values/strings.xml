@@ -17,4 +17,8 @@ This is the action that the virus should performs once inside the computer syste
 5.	Choose a language.
 A programming language is the one of the tool used in writing the virus example of language include C, C++, JAVA etc. The language used must have support on the activities that the virus is intended to perform.
 </string>
+    <string name="records">Records</string>
+    <string name="access_grant">Access Grant</string>
+    <string name="share_record">Share Record</string>
+    <string name="notifications">Notifications</string>
 </resources>
