@@ -4,21 +4,39 @@
     <string name="nav_share">Share</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_profile">Profile</string>
-    <string name="test_string">Simple steps creating computer virus.
-NB: there is no specific procedure on how to create a virus but there exist some common steps or processes that lead to successful virus creation.
-1.	Determine what operating system you are going to attack.
-The operating system selected may include, Windows, Linux, Mac OS, Android etc. windows is mostly preferred because of it vulnerabilities, also old operating systems are targeted due to lack of latest updates hence making the vulnerable.
-2.	Decide how you want it to spread.
-The means of spreading viruses are, web scripts, installable computer programs (.exe, .BAT etc.) or macro (programs attached on spreadsheet documents).
-3.	Determine the weak spot that you want to target.
-The week spot may include programs, system files, unsecure network etc. This stage requires a lot of research.
-4.	Decide what you want your virus to do.
-This is the action that the virus should performs once inside the computer system which may be deleting files (worst case) or displaying massage on the screen.
-5.	Choose a language.
-A programming language is the one of the tool used in writing the virus example of language include C, C++, JAVA etc. The language used must have support on the activities that the virus is intended to perform.
-</string>
     <string name="records">Records</string>
     <string name="access_grant">Access Grant</string>
     <string name="share_record">Share Record</string>
     <string name="notifications">Notifications</string>
+    <string name="name">Name :</string>
+    <string name="id_number">ID Number :</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender :</string>
+    <string name="phone_number">Phone Number :</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="read_it_together">Smart Health Record</string>
+    <string name="skip">Skip</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="booki">Cloud</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string name="smart_health_records">Smart Health Records</string>
+    <string name="mobile_number_hint">Mobile Number</string>
+    <string name="username_hint">Username</string>
+    <string name="id_number_hint">ID Number</string>
 </resources>

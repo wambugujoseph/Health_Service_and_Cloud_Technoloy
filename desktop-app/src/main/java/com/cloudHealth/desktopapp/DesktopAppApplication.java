@@ -13,28 +13,11 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
-//@SpringBootApplication
-public class DesktopAppApplication extends Application {
-    private ConfigurableApplicationContext context;
-
-    @Override
-    public void init() throws Exception {
-
-        this.context = new SpringApplicationBuilder()
-                .sources(BootfulApplication.class)
-                .initializers()
-                .run(getParameters().getRaw().toArray(new String[0]));
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        this.context.publishEvent(new StageReadyEvent(stage));
-    }
-
-    @Override
-    public void stop() throws Exception {
-        this.context.stop();
-        Platform.exit();
+@SpringBootApplication
+public class DesktopAppApplication {
+    public static void main(String[] args) {
+       // SpringApplication.run(BootfulApplication.class, args);
+        Application.launch(BootfulApplication.class, args);
     }
 
 }

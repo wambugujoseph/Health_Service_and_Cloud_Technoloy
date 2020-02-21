@@ -33,6 +33,11 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private void setTabs(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_profile,container,false);
         profileTabLayout = view.findViewById(R.id.profile_fragment_tabs);
