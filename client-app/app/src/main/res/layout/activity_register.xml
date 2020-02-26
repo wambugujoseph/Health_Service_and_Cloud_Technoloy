@@ -47,7 +47,7 @@
                     style="@style/headerText"
                     android:layout_width="339dp"
                     android:layout_height="44dp"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginTop="40dp"
                     android:text="@string/smart_health_records" />
 

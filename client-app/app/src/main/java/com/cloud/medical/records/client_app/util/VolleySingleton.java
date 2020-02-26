@@ -19,7 +19,7 @@ public class VolleySingleton {
         vRequestQueue = getRequestQueue();
     }
 
-    private static synchronized VolleySingleton getInstance(Context context) {
+    public static synchronized VolleySingleton getInstance(Context context) {
         //if Instance is null the initialize new Instance
         if (vInstance == null){
             vInstance = new VolleySingleton(context);

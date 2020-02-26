@@ -25,13 +25,13 @@ import io.jsonwebtoken.UnsupportedJwtException;
 public class JWTAuthUtil {
 
     private static boolean tokenExpired = true;
-    String publicKey;
+    private static String publicKey;
 
     public JWTAuthUtil(String publicKey) {
         this.publicKey = publicKey;
     }
 
-    public String getPublicKey(){
+    public static String getPublicKey(){
         return publicKey;
     }
 
@@ -45,6 +45,7 @@ public class JWTAuthUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public<T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims =extractAllClaims(token);
@@ -52,7 +53,7 @@ public class JWTAuthUtil {
     }
 
 
-    public Claims extractAllClaims(String token){
+    public static Claims extractAllClaims(String token){
         try {
             Claims claims = Jwts.parser().setSigningKey(getPublicKeyFromString(getPublicKey())).parseClaimsJws(token).getBody();
             tokenExpired=false;

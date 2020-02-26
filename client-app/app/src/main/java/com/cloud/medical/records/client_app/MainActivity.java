@@ -1,54 +1,134 @@
 package com.cloud.medical.records.client_app;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.cloud.medical.records.client_app.resource.HomeFragment;
 import com.cloud.medical.records.client_app.resource.NotificationFragment;
 import com.cloud.medical.records.client_app.resource.ProfileFragment;
 import com.cloud.medical.records.client_app.resource.ShareFragment;
+import com.cloud.medical.records.client_app.service.AuthoriseUserService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import io.micrometer.core.instrument.util.IOUtils;
+
+import static com.cloud.medical.records.client_app.model.Constant.ACCESS_TOKEN_FILE;
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNav= findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new HomeFragment())
-                .commit();
+        if (checkIsUserAuthorised()){
+            Intent logInIntent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(logInIntent);
+        }else {
+            setContentView(R.layout.activity_main);
+            BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+            bottomNav.setOnNavigationItemSelectedListener(navListener);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, new HomeFragment())
+                    .commit();
+        }
 
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedFragment = null;
-                    switch (menuItem.getItemId()){
-                        case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
-                            break;
-                        case  R.id.nav_share:
-                            selectedFragment = new ShareFragment();
-                            break;
-                        case R.id.nav_notification:
-                            selectedFragment = new NotificationFragment();
-                            break;
-                        case R.id.nav_profile:
-                            selectedFragment = new ProfileFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, selectedFragment)
-                            .commit();
-                    return true;
+            menuItem -> {
+                Fragment selectedFragment = null;
+                switch (menuItem.getItemId()){
+                    case R.id.nav_home:
+                        selectedFragment = new HomeFragment();
+                        break;
+                    case  R.id.nav_share:
+                        selectedFragment = new ShareFragment();
+                        break;
+                    case R.id.nav_notification:
+                        selectedFragment = new NotificationFragment();
+                        break;
+                    case R.id.nav_profile:
+                        selectedFragment = new ProfileFragment();
+                        break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragments_container, selectedFragment)
+                        .commit();
+                return true;
             };
+
+    /**
+     * Reads private key;
+     * @return private key string
+     */
+    private String getPublicKey(){
+        InputStream inputStream = null;
+        try {
+            inputStream =  getAssets().open("public.txt");
+            return IOUtils.toString(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }finally {
+            if (inputStream != null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public String loadAccessToken(){
+
+        FileInputStream fis = null;
+        try {
+            fis =openFileInput(ACCESS_TOKEN_FILE);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String token;
+
+            while ((token = br.readLine()) != null) {
+                sb.append(token).append("\n");
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "++++++++++++++ Failed";
+    }
+
+    public boolean checkIsUserAuthorised(){
+
+        try {
+            JSONObject jwtObject = new JSONObject(loadAccessToken());
+            AuthoriseUserService authoriseUserService = new AuthoriseUserService(getPublicKey());
+            return authoriseUserService.checkIsUserTokenExpired(jwtObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -47,6 +47,7 @@
 
                 <TextView
                     style="@style/headerText"
+                    android:id="@+id/heading"
                     android:layout_width="252dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
@@ -54,6 +55,7 @@
 
                 <include
                     layout="@layout/layout_login"
+                    android:id="@+id/include_login_layout"
                      />
 
             </LinearLayout>

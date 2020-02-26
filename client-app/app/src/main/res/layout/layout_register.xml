@@ -21,8 +21,11 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/username_txt"
                 style="@style/modifiedEditText"
                 android:inputType="text"
+                android:padding="4dp"
+                android:textSize="12sp"
                 android:maxLines="1"
                 android:hint="@string/username_hint"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -30,8 +33,11 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/phone_number_txt"
                 style="@style/modifiedEditText"
                 android:inputType="text"
+                android:padding="4dp"
+                android:textSize="12sp"
                 android:maxLines="1"
                 android:hint="@string/mobile_number_hint"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -39,8 +45,11 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/email_txt"
                 style="@style/modifiedEditText"
                 android:inputType="textEmailAddress"
+                android:padding="4dp"
+                android:textSize="12sp"
                 android:maxLines="1"
                 android:hint="@string/login_email_hint"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -48,8 +57,11 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/id_number_txt"
                 style="@style/modifiedEditText"
                 android:inputType="text"
+                android:padding="4dp"
+                android:textSize="12sp"
                 android:maxLines="1"
                 android:hint="@string/id_number_hint"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,19 +69,38 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
+                android:id="@+id/password_txt"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
                 android:maxLines="1"
+                android:padding="4dp"
+                android:textSize="12sp"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                android:id="@+id/confirm_password_txt"
+                style="@style/modifiedEditText"
+                android:hint="@string/confirm_password_hint"
+                android:maxLines="1"
+                android:textSize="12sp"
+                android:padding="4dp"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/register_btn"
             style="@style/loginButton"
+            android:layout_height="31dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:text="@string/register"
             android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/sign_in_txt"
             style="@style/parent"
             android:textAlignment="center"
             android:textStyle="bold"

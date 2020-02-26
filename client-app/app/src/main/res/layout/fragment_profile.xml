@@ -15,21 +15,15 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="288dp"
+            android:layout_height="290dp"
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title=" ">
-
-            <!--            <ImageView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="295dp"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                android:src="@drawable/logo" />-->
+            app:title="Profile">
 
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="30dp"
                 android:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
 
