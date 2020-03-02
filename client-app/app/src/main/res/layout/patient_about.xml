@@ -64,7 +64,7 @@
                             android:textSize="14sp"/>
 
                         <TextView
-                            android:id="@+id/name"
+                            android:id="@+id/about_name"
                             style="@style/description"
                             android:textSize="12sp"
                             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                             />
 
                         <TextView
-                            android:id="@+id/id_number"
+                            android:id="@+id/about_id_number"
                             android:layout_height="wrap_content"
                             android:layout_width="332dp"
                             android:layout_marginTop="5dp"
@@ -108,7 +108,7 @@
                         android:textSize="14sp"/>
 
                     <TextView
-                        android:id="@+id/phone_number"
+                        android:id="@+id/about_phone_number"
                         android:layout_height="wrap_content"
                         android:layout_width="285dp"
                         android:layout_marginLeft="10dp"
@@ -129,7 +129,7 @@
                             android:textSize="14sp"/>
 
                         <TextView
-                            android:id="@+id/dob"
+                            android:id="@+id/about_dob"
                             android:layout_height="wrap_content"
                             android:layout_width="332dp"
                             android:layout_marginTop="5dp"
@@ -150,7 +150,7 @@
                             android:textSize="14sp"/>
 
                         <TextView
-                            android:id="@+id/gender"
+                            android:id="@+id/about_gender"
                             android:layout_height="wrap_content"
                             android:layout_width="332dp"
                             android:layout_marginTop="5dp"
@@ -171,7 +171,7 @@
                             android:textSize="14sp"/>
 
                         <TextView
-                            android:id="@+id/age"
+                            android:id="@+id/about_age"
                             android:layout_height="wrap_content"
                             android:layout_width="332dp"
                             android:layout_marginTop="5dp"
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:text="Blood Group >"/>
                     <TextView
-                        android:id="@+id/blood_group"
+                        android:id="@+id/about_blood_group"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -247,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:text="Special Needs >"/>
                     <TextView
-                        android:id="@+id/special_needs"
+                        android:id="@+id/about_special_needs"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:text="Health Complication >"/>
                     <TextView
-                        android:id="@+id/health_complication"
+                        android:id="@+id/about_health_complication"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
                         android:layout_height="wrap_content"
                         android:text="Medical Insurance Information >"/>
                     <TextView
-                        android:id="@+id/insurance"
+                        android:id="@+id/about_insurance"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

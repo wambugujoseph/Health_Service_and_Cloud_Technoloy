@@ -18,26 +18,11 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 
 @SpringBootApplication
-public class BootfulApplication extends Application  {
-    private ConfigurableApplicationContext context;
+public class BootfulApplication  {
 
-    @Override
-    public void init() throws Exception {
-
-        this.context = new SpringApplicationBuilder()
-                .sources(BootfulApplication.class)
-                .initializers()
-                .run(getParameters().getRaw().toArray(new String[0]));
+    public static void main(String[] args) {
+        // SpringApplication.run(BootfulApplication.class, args);
+        Application.launch(DesktopAppApplication.class, args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        this.context.publishEvent(new StageReadyEvent(stage));
-    }
-
-    @Override
-    public void stop() throws Exception {
-        this.context.stop();
-        Platform.exit();
-    }
 }

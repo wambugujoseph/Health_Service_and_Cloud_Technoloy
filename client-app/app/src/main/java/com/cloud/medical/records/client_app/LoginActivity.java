@@ -2,7 +2,6 @@ package com.cloud.medical.records.client_app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //progress bar
         authorizationAlertDialogue = new AppProgressDialog(this);
-        authorizationAlertDialogue.setColor(Color.parseColor("#1515FF"));
 
         textView = findViewById( R.id.open_sign_up);
         login = findViewById(R.id.cirLoginButton);
@@ -142,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(mainActivityIntent);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(LoginActivity.this,"Authorization error: "+e.getMessage(), Toast.LENGTH_LONG).show();
                 }
                 authorizationAlertDialogue.dismiss();
             }else {
@@ -149,13 +148,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }, error -> {
-                Toast.makeText(LoginActivity.this, "Wrong username or password \n", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Wrong username or password \n" +error.networkResponse, Toast.LENGTH_LONG).show();
                 authorizationAlertDialogue.dismiss();
         })
         {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                return authoriseUserService.getLoginAuthorizationHeaders();
+                return resourceHeaders;
             }
 
             @Override

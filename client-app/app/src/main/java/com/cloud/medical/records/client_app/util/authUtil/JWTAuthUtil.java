@@ -25,14 +25,19 @@ import io.jsonwebtoken.UnsupportedJwtException;
 public class JWTAuthUtil {
 
     private static boolean tokenExpired = true;
-    private static String publicKey;
+    public static String PUBLIC_KEY;
+
+    public  static String JWT_ACCESS_TOKEN_OBJECT;
 
     public JWTAuthUtil(String publicKey) {
-        this.publicKey = publicKey;
+        this.PUBLIC_KEY = publicKey;
+    }
+
+    public JWTAuthUtil() {
     }
 
     public static String getPublicKey(){
-        return publicKey;
+        return PUBLIC_KEY;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

@@ -40,4 +40,7 @@
     <string name="username_hint">Username</string>
     <string name="id_number_hint">ID Number</string>
     <string name="confirm_password_hint">Confirm Password</string>
+    <string name="email">Email:</string>
+    <string name="remove">Remove</string>
+    <string name="block">Block</string>
 </resources>

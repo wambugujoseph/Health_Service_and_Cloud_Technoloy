@@ -28,11 +28,12 @@ public class TempUser {
     public TempUser() {
     }
 
-    public TempUser(String username, String email, String phoneNumber, String password) {
+    public TempUser(String username, String email, String phoneNumber, String password, String userId) {
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.userId = userId;
     }
 
     public String getUsername() {

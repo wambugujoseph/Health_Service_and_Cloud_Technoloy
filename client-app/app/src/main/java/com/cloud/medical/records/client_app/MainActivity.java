@@ -11,6 +11,7 @@ import com.cloud.medical.records.client_app.resource.NotificationFragment;
 import com.cloud.medical.records.client_app.resource.ProfileFragment;
 import com.cloud.medical.records.client_app.resource.ShareFragment;
 import com.cloud.medical.records.client_app.service.AuthoriseUserService;
+import com.cloud.medical.records.client_app.util.authUtil.JWTAuthUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         InputStream inputStream = null;
         try {
             inputStream =  getAssets().open("public.txt");
-            return IOUtils.toString(inputStream);
+             JWTAuthUtil.PUBLIC_KEY = IOUtils.toString(inputStream);
+            return JWTAuthUtil.PUBLIC_KEY;
         } catch (IOException e) {
             e.printStackTrace();
             return "";
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String loadAccessToken(){
+    public void loadAccessToken(){
 
         FileInputStream fis = null;
         try {
@@ -105,7 +107,12 @@ public class MainActivity extends AppCompatActivity {
             while ((token = br.readLine()) != null) {
                 sb.append(token).append("\n");
             }
-            return sb.toString();
+
+            //init access token
+            JWTAuthUtil.JWT_ACCESS_TOKEN_OBJECT = sb.toString();
+
+            //Toast.makeText(this,""+JWTAuthUtil.JWT_ACCESS_TOKEN_OBJECT,Toast.LENGTH_LONG).show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -117,13 +124,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        return "++++++++++++++ Failed";
+
     }
 
     public boolean checkIsUserAuthorised(){
 
         try {
-            JSONObject jwtObject = new JSONObject(loadAccessToken());
+            loadAccessToken();
+            JSONObject jwtObject = new JSONObject(JWTAuthUtil.JWT_ACCESS_TOKEN_OBJECT);
             AuthoriseUserService authoriseUserService = new AuthoriseUserService(getPublicKey());
             return authoriseUserService.checkIsUserTokenExpired(jwtObject);
         } catch (JSONException e) {

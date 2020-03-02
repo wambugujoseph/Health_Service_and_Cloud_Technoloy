@@ -2,6 +2,7 @@ package com.cloud.medical.records.client_app.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -44,6 +45,9 @@ public class AppProgressDialog {
         dialog.getWindow().setContentView(relativeLayout, layoutParams);
         dialog.getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        // defaults
+        progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#1515FF"), PorterDuff.Mode.MULTIPLY);
 
 
     }

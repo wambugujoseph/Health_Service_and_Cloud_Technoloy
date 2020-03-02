@@ -69,10 +69,25 @@
 	</dependencies>
 
 	<build>
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+<!--					[...]-->
+					<archive>
+						<manifest>
+							<mainClass>com.cloudHealth.desktopapp.BootfulApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+<!--				[...]-->
 			</plugin>
 		</plugins>
 	</build>

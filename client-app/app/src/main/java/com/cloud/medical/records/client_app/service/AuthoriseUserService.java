@@ -1,7 +1,11 @@
 package com.cloud.medical.records.client_app.service;
 
 
+import android.os.Build;
+import android.util.ArrayMap;
 import android.util.Base64;
+
+import androidx.annotation.RequiresApi;
 
 import com.cloud.medical.records.client_app.model.AccessToken;
 import com.cloud.medical.records.client_app.util.authUtil.JWTAuthUtil;
@@ -18,10 +22,13 @@ import static com.cloud.medical.records.client_app.model.Constant.CLIENT_SECRET;
 
 public class AuthoriseUserService {
 
-    public String publicKey;
+    private String publicKey;
 
     public AuthoriseUserService(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public AuthoriseUserService() {
     }
 
     private JSONObject tokenJSONObject(AccessToken accessToken){
@@ -51,7 +58,7 @@ public class AuthoriseUserService {
     }
 
     public boolean checkIsUserTokenExpired(JSONObject jwtToken){
-        JWTAuthUtil jwtAuthUtil =  new JWTAuthUtil(publicKey);
+        JWTAuthUtil jwtAuthUtil =  new JWTAuthUtil(JWTAuthUtil.PUBLIC_KEY);
         return jwtAuthUtil.isTokenExpired(getUserAccessToken(jwtToken));
     }
 
@@ -61,6 +68,11 @@ public class AuthoriseUserService {
 
         return  Objects.requireNonNull(Objects.requireNonNull(JWTAuthUtil.extractAllClaims(token)).get("email")).toString();
     }
+
+    public  String getUsername(String token){
+        return  Objects.requireNonNull(Objects.requireNonNull(JWTAuthUtil.extractAllClaims(token)).get("username")).toString();
+    }
+
 
 
     private AccessToken jsonObjectToUserAccessTokenConverter(JSONObject jsonObject){
@@ -88,5 +100,22 @@ public class AuthoriseUserService {
 
         return loginAuthHeaders;
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public Map<String, String> getAuthorizationBearerToken(){
+
+        Map<String, String> token = new ArrayMap<>();
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(JWTAuthUtil.JWT_ACCESS_TOKEN_OBJECT);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        assert jsonObject != null;
+        String accessToken = new AuthoriseUserService().getUserAccessToken(jsonObject);
+
+        token.put("Authorization","Bearer "+ accessToken);
+        return token;
     }
 }
