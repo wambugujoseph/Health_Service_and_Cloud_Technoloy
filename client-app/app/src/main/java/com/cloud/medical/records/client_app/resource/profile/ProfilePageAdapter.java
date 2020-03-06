@@ -40,4 +40,6 @@ public class ProfilePageAdapter extends FragmentPagerAdapter {
         fragmentList.add(fragment);
         fragmentListTitle.add(title);
     }
+
+
 }

@@ -9,11 +9,13 @@ import com.cloud.health.mainservice.repository.medicalRecord.PatientRepository;
 import com.cloud.health.mainservice.repository.medicalRecord.RealTimeHealthDataRepository;
 import com.cloud.health.mainservice.service.Notifications;
 import com.cloud.health.mainservice.util.Token;
+import com.cloud.health.mainservice.util.auth.UserAuthenticationDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,6 +48,8 @@ public class ClientService {
     private PatientRepository patientRepository;
     @Autowired
     private RealTimeHealthDataRepository realTimeHealthDataRepository;
+    @Autowired
+    private UserAuthenticationDetails authenticationDetails;
 
     public UserEntity getUserInfo(String userId) {
         return clientRepository.findByUserIdOrEmail(userId, userId).orElse(null);
@@ -72,6 +76,40 @@ public class ClientService {
            // e.printStackTrace();
             return  null;
         }
+    }
+
+    public List<AccessContractEntity> getAccessContractEntities(){
+            String email = authenticationDetails.getUserEmail().getEmail();
+            UserEntity userEntity = getUserInfo(email);
+            return accessGrantsRepository.findByUserByUserId(userEntity);
+    }
+
+    public boolean deleteAccessGrant(String grantedToEmail){
+
+        String userId = getUserInfo(authenticationDetails.getUserEmail().getEmail()).getUserId();
+
+        AccessContractEntity accessContractEntity =
+                accessGrantsRepository.findByUserByUserIdAndUserByGrantedTo(getUserInfo(userId), getUserInfo(grantedToEmail));
+        try {
+            accessGrantsRepository.deleteById(accessContractEntity.getContractId());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public   AccessContractEntity getAccessContractEntity(int id){
+        return accessGrantsRepository.findById(id).orElse(new AccessContractEntity());
+    }
+
+    public AccessContractEntity blockAccessGrant(String grantedToEmail, int state){
+
+        String grantedToId = getUserInfo(grantedToEmail).getUserId();
+        String userId = getUserInfo(authenticationDetails.getUserEmail().getEmail()).getUserId();
+        AccessContractEntity accessContractEntity = accessGrantsRepository.findByUserIdAndGrantedTo(userId,grantedToId);
+        accessContractEntity.setActive(state);
+        return accessGrantsRepository.save(accessContractEntity);
     }
 
     public AccessContractEntity acceptMedicalRecordAccessContract(String token, int accessContractId) {

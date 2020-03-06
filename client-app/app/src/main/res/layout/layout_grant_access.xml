@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/loginCard"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+        android:elevation="5dp"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:background="@color/whiteCardColor"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            style="@style/linearParent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="@dimen/loginViewsMargin">
+
+            <TextView
+                style="@style/headerTextPrimary"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:padding="4dp"
+                android:text="@string/grant"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputEmail"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <EditText
+                    android:id="@+id/grantEmailOrId"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:hint="@string/email_or_id_number_hint"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relationship" />
+
+                <Spinner
+                    android:id="@+id/grantRelationshipSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/others"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/if_others" />
+
+                <EditText
+                    android:id="@+id/grantRelationshipOthers"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:hint="@string/others"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:paddingTop="100dp"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chouse_access_level" />
+
+                <RadioGroup
+                    android:id="@+id/grantLevelRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/grantHigh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/high" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/grantMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/medium" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/grantLow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/low" />
+                </RadioGroup>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+
+                android:background="@android:drawable/screen_background_dark"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Switch
+                    android:id="@+id/grantActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Access Grant Active/Inactive" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

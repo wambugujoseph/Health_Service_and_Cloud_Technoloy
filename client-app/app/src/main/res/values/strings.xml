@@ -43,4 +43,18 @@
     <string name="email">Email:</string>
     <string name="remove">Remove</string>
     <string name="block">Block</string>
+    <string name="medical_records_access_grant">Medical Records Access Grant</string>
+    <string name="grant">Grant</string>
+    <string name="add">Add</string>
+    <string name="email_or_id_number_hint">Email or ID number</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="chouse_access_level">Choose the level of access that you grant this client, as stated in the Smart Medical records access policy</string>
+    <string name="if_others">If others</string>
+    <string name="others">Others</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="delete">Delete</string>
+    <string name="from">From:</string>
 </resources>

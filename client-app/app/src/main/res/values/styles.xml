@@ -57,6 +57,10 @@
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
         <item name="android:background">@color/primaryTextColor</item>
     </style>
+    <style name="grantAccessModifiedEditText" parent="parent">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:background">#fff</item>
+    </style>
 
     <style name="viewParent">
         <item name="android:layout_width">wrap_content</item>

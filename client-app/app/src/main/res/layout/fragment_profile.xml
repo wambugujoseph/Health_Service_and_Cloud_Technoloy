@@ -137,8 +137,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/profile_fragment_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
         android:layout_below="@+id/profile_fragment_tabs"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

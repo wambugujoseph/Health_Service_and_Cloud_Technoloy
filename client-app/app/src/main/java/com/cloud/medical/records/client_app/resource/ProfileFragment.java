@@ -34,11 +34,12 @@ public class ProfileFragment extends Fragment {
     private ViewPager viewPager;
     private TextView clientName, clientEmail;
 
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         setTabs(inflater, container);
         //initialize  view components
         initViewComponents();
@@ -46,11 +47,9 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
-
-
 
     private void setTabs(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         view = inflater.inflate(R.layout.fragment_profile,container,false);

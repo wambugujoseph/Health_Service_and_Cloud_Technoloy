@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#F8F6F6"
     android:id="@+id/access_grant_obj_holder">
 
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_margin="4dp"
         app:cardCornerRadius="2dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,12 +20,11 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/client_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="71dp"
+                android:layout_height="62dp"
                 android:src="@drawable/default_user_profile"
                 app:civ_border_color="#c0c0c0"
-                app:civ_border_width="2dp"
-                />
+                app:civ_border_width="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

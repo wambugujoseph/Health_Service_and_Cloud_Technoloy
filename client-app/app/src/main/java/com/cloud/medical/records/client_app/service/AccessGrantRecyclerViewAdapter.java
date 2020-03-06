@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloud.medical.records.client_app.R;
+import com.cloud.medical.records.client_app.model.AccessContract;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,8 @@ public class AccessGrantRecyclerViewAdapter extends RecyclerView.Adapter<AccessG
     private ArrayList<String> phoneNumber = new ArrayList<>();
     private ArrayList<String> idNumber = new ArrayList<>();
     private ArrayList<String> imageName = new ArrayList<>();
+
+    private AccessContract[] accessContract = null;
 
     public AccessGrantRecyclerViewAdapter(Context mContext, ArrayList<String> name, ArrayList<String> email, ArrayList<String> phoneNumber, ArrayList<String> idNumber, ArrayList<String> imageName) {
         this.mContext = mContext;
@@ -57,6 +60,12 @@ public class AccessGrantRecyclerViewAdapter extends RecyclerView.Adapter<AccessG
 
          // fix the image here;
 
+        //Other text Update
+        holder.name.setText(this.name.get(position));
+        holder.idNumber.setText(this.idNumber.get(position));
+        holder.phoneNumber.setText(this.phoneNumber.get(position));
+        holder.email.setText(this.email.get(position));
+
          //block clients
          holder.block.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -71,13 +80,11 @@ public class AccessGrantRecyclerViewAdapter extends RecyclerView.Adapter<AccessG
 
              }
          });
-
-
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return name.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

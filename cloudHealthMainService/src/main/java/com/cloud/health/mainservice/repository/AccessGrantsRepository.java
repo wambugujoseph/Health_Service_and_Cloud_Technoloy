@@ -1,6 +1,7 @@
 package com.cloud.health.mainservice.repository;
 
 import com.cloud.health.mainservice.model.entity.AccessContractEntity;
+import com.cloud.health.mainservice.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,8 +17,10 @@ import java.util.List;
 
 public interface AccessGrantsRepository extends JpaRepository<AccessContractEntity, Integer> {
 
-   List<AccessContractEntity> findByUserByUserId(String userId);
+   List<AccessContractEntity> findByUserByUserId(UserEntity userEntity);
    AccessContractEntity findByTokenIsContaining(String token);
+   AccessContractEntity findByUserByUserIdAndUserByGrantedTo(UserEntity userId, UserEntity grantedTo);
+   AccessContractEntity findByUserIdAndGrantedTo(String userId, String grantedTo);
 //   @Query("update access_contract SET access_contract.active = t")
 //   boolean activateAccessContract();
 }

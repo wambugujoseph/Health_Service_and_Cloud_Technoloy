@@ -11,6 +11,7 @@ public class Constant {
     private static final String AUTH_SERVER_BASE_URL ="http://192.168.43.133:9191";
 
     public static final String CLIENT_PROFILE_URL = MAIN_SERVICE_BASE_URL+"/clientProfile";
+    public static final String CLIENT_ACCESS_GRANT_URL = MAIN_SERVICE_BASE_URL+"/client/accessContract";
 
     public static final String ACCESS_TOKEN_URL = AUTH_SERVER_BASE_URL+"/oauth/token";
     public static final String REGISTER_URL = AUTH_SERVER_BASE_URL+"/register";

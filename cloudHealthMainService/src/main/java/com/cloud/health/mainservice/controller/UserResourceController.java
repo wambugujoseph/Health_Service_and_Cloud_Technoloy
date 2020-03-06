@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.cloud.health.mainservice.util.Constant.*;
 
 /**
@@ -60,6 +62,41 @@ public class UserResourceController {
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
+    }
+
+    @GetMapping(value = "client/accessContract")
+    public ResponseEntity<Object> getAccessContract(){
+        try {
+            List<AccessContractEntity> userEntities = clientService.getAccessContractEntities();
+            return ResponseEntity.ok().body(userEntities);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping(value = "client/accessContract/{accessEmailOrId}")
+    public ResponseEntity<Object> deleteAccessContract(@PathVariable String accessEmailOrId){
+        try {
+            boolean isDeleted = clientService.deleteAccessGrant(accessEmailOrId);
+            if (isDeleted) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PutMapping(value = "client/accessContract/block/{accessEmailOrId}/{state}")
+    public ResponseEntity<Object> blockAccessContract(@PathVariable String accessEmailOrId, @PathVariable String state){
+        try {
+            int activate = Integer.parseInt(state);
+            AccessContractEntity accessContractEntity =  clientService.blockAccessGrant(accessEmailOrId, activate);
+            return ResponseEntity.status(HttpStatus.OK).body(accessContractEntity);
+        } catch (Exception e) {
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("/client/accept/accessContract/{token}/{contractId}")
