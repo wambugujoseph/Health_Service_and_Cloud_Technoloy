@@ -1,6 +1,7 @@
 package com.cloud.health.mainservice.service.repositoryService;
 
 import com.cloud.health.mainservice.model.AccessContract;
+import com.cloud.health.mainservice.model.CustomPrincipal;
 import com.cloud.health.mainservice.model.PersonalHealthPractitioner;
 import com.cloud.health.mainservice.model.RealTimeHealthData;
 import com.cloud.health.mainservice.model.entity.*;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +52,8 @@ public class ClientService {
     private RealTimeHealthDataRepository realTimeHealthDataRepository;
     @Autowired
     private UserAuthenticationDetails authenticationDetails;
+    @Autowired
+    protected HealthRecNotificationRepository healthRecNotificationRepository;
 
     public UserEntity getUserInfo(String userId) {
         return clientRepository.findByUserIdOrEmail(userId, userId).orElse(null);
@@ -191,6 +195,13 @@ public class ClientService {
             return null;
         }
         return null;
+    }
+
+    public List<HealthRecNotificationsEntity> getAllNotifications(){
+        String email = authenticationDetails.getUserEmail().getEmail();
+
+        UserEntity userEntity= getUserInfo(email);
+        return healthRecNotificationRepository.findAllByUserByNotificationTo(userEntity).orElse(new ArrayList<>());
     }
 
 

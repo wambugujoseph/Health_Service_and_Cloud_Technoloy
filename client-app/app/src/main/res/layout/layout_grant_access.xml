@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/chouse_access_level" />
+                    android:text="@string/choose_access_level" />
 
                 <RadioGroup
                     android:id="@+id/grantLevelRadioGroup"

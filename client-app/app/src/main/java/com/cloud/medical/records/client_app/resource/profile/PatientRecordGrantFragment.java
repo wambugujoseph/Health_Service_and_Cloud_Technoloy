@@ -275,6 +275,7 @@ public class PatientRecordGrantFragment extends Fragment {
                 Toast.makeText(getContext(),"Faield To loade the Access Grant "+error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }){
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                return new AuthoriseUserService().getAuthorizationBearerToken();

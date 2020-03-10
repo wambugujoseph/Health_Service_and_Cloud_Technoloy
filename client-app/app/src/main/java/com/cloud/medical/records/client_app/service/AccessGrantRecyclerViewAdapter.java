@@ -53,11 +53,6 @@ public class AccessGrantRecyclerViewAdapter extends RecyclerView.Adapter<AccessG
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-         holder.name.setText(name.get(position));
-         holder.email.setText(email.get(position));
-         holder.phoneNumber.setText(phoneNumber.get(position));
-         holder.idNumber.setText(idNumber.get(position));
-
          // fix the image here;
 
         //Other text Update

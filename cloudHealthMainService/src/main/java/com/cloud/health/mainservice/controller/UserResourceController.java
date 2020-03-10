@@ -7,6 +7,7 @@ import com.cloud.health.mainservice.model.entity.AccessContractEntity;
 import com.cloud.health.mainservice.model.entity.PersonalDoctorEntity;
 import com.cloud.health.mainservice.model.entity.RealTimeDataEntity;
 import com.cloud.health.mainservice.model.entity.UserEntity;
+import com.cloud.health.mainservice.repository.HealthRecNotificationRepository;
 import com.cloud.health.mainservice.service.repositoryService.ClientService;
 import com.cloud.health.mainservice.util.auth.UserAuthenticationDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,12 @@ public class UserResourceController {
             }
         } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(INVALID_REQUEST_OBJECT);
+    }
+
+    @GetMapping(value = "/client/notifications")
+    public ResponseEntity<Object> getClientNotifications(){
+
+        return  ResponseEntity.ok().body(clientService.getAllNotifications());
     }
 
 

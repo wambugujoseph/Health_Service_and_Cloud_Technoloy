@@ -73,7 +73,7 @@
         <item name="android:textStyle">bold</item>
     </style>
     <style name="actionButtonOne" parent="viewParent">
-        <item name="android:background">#A1B5C4</item>
+        <item name="android:background">#F5F6F7</item>
         <item name="android:textColor">@color/whiteTextColor</item>
         <item name="android:textStyle">normal</item>
     </style>

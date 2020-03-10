@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EMR</string>
+    <string name="app_name">SMRC</string>
     <string name="nav_home">Home</string>
     <string name="nav_share">Share</string>
     <string name="nav_notifications">Notifications</string>
@@ -50,11 +50,17 @@
     <string name="high">High</string>
     <string name="medium">Medium</string>
     <string name="low">Low</string>
-    <string name="chouse_access_level">Choose the level of access that you grant this client, as stated in the Smart Medical records access policy</string>
+    <string name="choose_access_level">Choose the level of access that you grant this client, as stated in the Smart Medical records access policy</string>
     <string name="if_others">If others</string>
     <string name="others">Others</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="delete">Delete</string>
     <string name="from">From:</string>
+    <string name="share_message1">Opening medical records Share allows you medical records to being accessible by any health practitioner registered with smart medical record cloud services. To filter out the practitioner who should access your medical, please providing the practitioner Id or email.</string>
+    <string name="id_or_email">Id Or Email</string>
+    <string name="share_via_access_grant_policy">Share or Close Sharing of other\'s medical records as stated under Access Grant Policy</string>
+    <string name="save">Save</string>
+    <string name="off">OFF</string>
+    <string name="smart_medical_records_cloud">Smart Medical Records Cloud</string>
 </resources>
