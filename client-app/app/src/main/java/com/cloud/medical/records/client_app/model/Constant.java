@@ -13,6 +13,7 @@ public class Constant {
     public static final String CLIENT_PROFILE_URL = MAIN_SERVICE_BASE_URL+"/clientProfile";
     public static final String CLIENT_ACCESS_GRANT_URL = MAIN_SERVICE_BASE_URL+"/client/accessContract";
     public static final String CLIENT_NOTIFICATIONS = MAIN_SERVICE_BASE_URL+"/client/notifications";
+    public static final String CLIENT_PERSONAL_PRACTITIONER = MAIN_SERVICE_BASE_URL+"/client/personalHealthPractitioner";
 
     public static final String ACCESS_TOKEN_URL = AUTH_SERVER_BASE_URL+"/oauth/token";
     public static final String REGISTER_URL = AUTH_SERVER_BASE_URL+"/register";

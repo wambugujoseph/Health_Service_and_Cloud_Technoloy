@@ -63,4 +63,12 @@
     <string name="save">Save</string>
     <string name="off">OFF</string>
     <string name="smart_medical_records_cloud">Smart Medical Records Cloud</string>
+    <string name="medical_record_policy">The policy states the conditions under which your medical records are open for sharing and can be accessed by medical practitioner(s).\n
+Your Records are accessible to different medical practitioners under the following conditions:\n
+•	In case the Emergency Mode is enabled, then medical practitioner(s) can access the records provided.\n
+•	In case the medical Practitioner is the one who created a record(s) initially.\n
+•	 Medical practitioner can also access your medical records if you have agreed him or her to be your personal medical practitioner.\n
+•	Any Medical practitioner can access your medical records if you turn on medical record sharing, but you can also filter out such that your medical records to be accessed by a specific medical practitioner by providing his or her ID or Email on sharing section.\n
+•	The Access Grant Client(s) can also open your medical record sharing in times of critical condition when you have no capability or strength to share the Medical record and therefor they do it on your behalf.\n
+</string>
 </resources>

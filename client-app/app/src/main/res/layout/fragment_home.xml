@@ -108,8 +108,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:layout_marginBottom="4dp"
-                android:textSize="12sp"
-                android:text="Medical record access Policy"
+                android:textSize="13sp"
+                android:text="Medical Record Access Policy"
                 android:textAlignment="center"/>
 
             <View
@@ -122,11 +122,12 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:padding="1dp"
+                    android:text="@string/medical_record_policy"
                     android:lineSpacingExtra="1.5dp"
                     android:textColor="#333131"/>
             </ScrollView>

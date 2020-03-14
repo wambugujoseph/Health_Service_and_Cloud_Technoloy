@@ -153,8 +153,20 @@ public class ClientService {
 
             personalDoctorEntity.setActive(0);
             personalDoctorEntity.setToken(token);
-            assert practitioner != null;
-            personalDoctorEntity.setPractitionerId(practitioner.getPractitionerId());
+
+            try {
+                assert practitioner != null;
+                //add doctor to access contract list
+                personalDoctorEntity.setPractitionerId(practitioner.getPractitionerId());
+                AccessContract accessContract = new AccessContract();
+                accessContract.setAccessLevel("High");
+                accessContract.setGrantedToUserIdOrEmail(personalHealthPractitioner.getPractitionerUserIdOrEmail());
+                accessContract.setRelationship("Personal Medical Practitioner");
+                accessContract.setUserIdOrEmail(personalHealthPractitioner.getClientIdOrEmail());
+                addAccessContract(accessContract);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             assert client != null;
             personalDoctorEntity.setDoctorTo(client.getUserId());
             //Creating notification message for the personal health practitioner
