@@ -3,7 +3,6 @@ package com.cloudHealth.desktopapp;
 
 import com.cloudHealth.desktopapp.util.StageReadyEvent;
 import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;

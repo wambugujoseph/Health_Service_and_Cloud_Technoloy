@@ -21,6 +21,10 @@ spring:
   #dev tools
   devtools:
     add-properties: true
+  application:
+    name: authorization-service
+  transaction:
+    default-timeout: 60s
 
 #logging:
 #  level:
@@ -29,3 +33,7 @@ spring:
 #        type: trace
 
 check-user-scopes: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

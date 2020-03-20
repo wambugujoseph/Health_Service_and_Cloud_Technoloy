@@ -80,19 +80,5 @@
 
 		</plugins>
 	</build>
-<!--			<plugin>-->
-<!--				<artifactId>maven-assembly-plugin</artifactId>-->
-<!--				<version>3.2.0</version>-->
-<!--				<configuration>-->
-<!--&lt;!&ndash;					[...]&ndash;&gt;-->
-<!--					<archive>-->
-<!--						<manifest>-->
-<!--							<mainClass>com.cloudHealth.desktopapp.BootfulApplication</mainClass>-->
-<!--						</manifest>-->
-<!--					</archive>-->
-<!--				</configuration>-->
-<!--&lt;!&ndash;				[...]&ndash;&gt;-->
-<!--			</plugin>-->
-<!--		</plugins>-->
 
 </project>

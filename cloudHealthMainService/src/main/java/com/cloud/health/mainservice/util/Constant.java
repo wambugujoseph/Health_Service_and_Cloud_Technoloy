@@ -10,7 +10,7 @@ package com.cloud.health.mainservice.util;
  */
 public class Constant {
 
-    public static  final String API_V_1 ="api/v1";
+    public static  final String API_V_1 ="/api/v1";
     public static final String BASE_URL ="http://localhost:8080";
     public static final String PROFILE_PIC_STORAGE_LOCATION = "file_store\\profile_pic\\";
     public static final String MEDICAL_FILE_STORAGE_LOCATION= "file_store\\medical_files\\";
