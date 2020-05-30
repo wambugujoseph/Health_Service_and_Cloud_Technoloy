@@ -21,6 +21,7 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
 }
 
 dependencies {
