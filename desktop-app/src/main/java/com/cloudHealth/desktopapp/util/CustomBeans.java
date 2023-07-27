@@ -1,6 +1,7 @@
 package com.cloudHealth.desktopapp.util;
 
 import com.cloudHealth.desktopapp.model.UserAccessToken;
+import com.cloudHealth.desktopapp.service.AuthorizeUserService;
 import com.cloudHealth.desktopapp.util.auth.JwtAuthUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -26,4 +27,5 @@ public class CustomBeans {
     public JwtAuthUtil getJwtAuthUtil(){
         return new JwtAuthUtil();
     }
+
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/colorPrimary" />
+    
+    <item>
+        <bitmap android:src="@drawable/logo" android:gravity="center"/>
+        <color android:color="@color/colorPrimary"/>
+    </item>
+</selector>

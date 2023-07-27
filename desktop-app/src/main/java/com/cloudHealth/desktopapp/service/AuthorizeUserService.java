@@ -1,11 +1,26 @@
 package com.cloudHealth.desktopapp.service;
 
+import com.cloudHealth.desktopapp.StageLauncher;
 import com.cloudHealth.desktopapp.model.UserAccessToken;
+import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
 import com.cloudHealth.desktopapp.util.auth.JwtAuthUtil;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.paint.Paint;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -15,11 +30,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.cloudHealth.desktopapp.config.Constant.*;
 
@@ -38,10 +55,9 @@ public class AuthorizeUserService {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    private UserAccessToken userAccessToken;
+    private StageLauncher stageLauncher;
     @Autowired
     private JwtAuthUtil jwtAuthUtil;
-
 
 
     public Boolean userLogin(String username, String password){
@@ -151,4 +167,22 @@ public class AuthorizeUserService {
         accessToken.setJti(jsonObject.get("jti").toString());
         return accessToken;
     }
+
+    public void unauthorisedNotification(HttpStatus httpStatus){
+        try {
+            if (httpStatus.equals(HttpStatus.UNAUTHORIZED)){
+                System.out.println("++++++++++++++++++++++++++++++++++");
+                FontAwesomeIconView icon = new FontAwesomeIconView(FontAwesomeIcon.WARNING);
+                icon.setFill(Paint.valueOf("#FB7D00"));
+                icon.setSize("50");
+                UiAlertsAndPopUp popUp = new UiAlertsAndPopUp();
+                Alert alert = popUp.showAlert(Alert.AlertType.WARNING, "You were logged out Please Login and try again","Unauthorised",HttpStatus.UNAUTHORIZED+"",icon );
+                alert.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+

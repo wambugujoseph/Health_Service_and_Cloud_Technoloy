@@ -2,6 +2,12 @@ package com.cloudHealth.desktopapp.config;
 
 import com.cloudHealth.desktopapp.StageLauncher;
 import com.cloudHealth.desktopapp.service.AuthorizeUserService;
+import com.cloudHealth.desktopapp.uiControls.uiHelper.UiAlertsAndPopUp;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -25,7 +31,7 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
 
     private AuthorizeUserService authorizeUserService = new AuthorizeUserService();
     @Autowired
-    private StageLauncher stageLauncher;
+    private UiAlertsAndPopUp uiAlertsAndPopUp;
 
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest,
@@ -35,9 +41,8 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
 
         response.getHeaders().add("Authorization","Bearer "+ authorizeUserService.getUserAccessToken());
         //invoke open Login page if unauthorised
-        if (response.getStatusCode().equals(HttpStatus.UNAUTHORIZED)){
-            stageLauncher.LaunchLoginPage(new Stage());
-        }
+
+            authorizeUserService.unauthorisedNotification(response.getStatusCode());
         return response;
     }
 

@@ -13,12 +13,12 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1088.0" style="-fx-background-color: #8A8AFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fill="#000064" fontSmoothingType="LCD" layoutX="29.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pilloting Your Path to Smarter Health Records in The Cloud" wrappingWidth="704.13671875" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="125.203125">
+            <Text fill="#000064" fontSmoothingType="LCD" layoutX="29.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Piloting Your Path to Smarter Health Records to The Cloud" wrappingWidth="704.13671875" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="125.203125">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
             </Text>
-            <Text layoutX="38.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Efficiency in Medical Record Sharing, Security &amp; General Productitvity in Medical Follow Ups" wrappingWidth="494.13671875" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="317.0">
+            <Text layoutX="38.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Efficiency in Medical Record Sharing, Security &amp; General Productivity in Medical Follow Ups" wrappingWidth="494.13671875" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="317.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -45,7 +45,7 @@
             </AnchorPane>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images.jpg" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="689.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0">

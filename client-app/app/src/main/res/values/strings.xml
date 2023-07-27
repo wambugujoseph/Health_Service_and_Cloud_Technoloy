@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">EMR</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_profile">Profile</string>
+    <string name="records">Records</string>
+    <string name="access_grant">Access Grant</string>
+    <string name="share_record">Share Record</string>
+    <string name="notifications">Notifications</string>
+    <string name="name">Name :</string>
+    <string name="id_number">ID Number :</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender :</string>
+    <string name="phone_number">Phone Number :</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="read_it_together">Smart Health Record</string>
+    <string name="skip">Skip</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="booki">Cloud</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string name="smart_health_records">Smart Health Records</string>
+    <string name="mobile_number_hint">Mobile Number</string>
+    <string name="username_hint">Username</string>
+    <string name="id_number_hint">ID Number</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="email">Email:</string>
+    <string name="remove">Remove</string>
+    <string name="block">Block</string>
+</resources>

@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
-//@SpringBootApplication
 public class DesktopAppApplication extends Application {
     private ConfigurableApplicationContext context;
 
